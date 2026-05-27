@@ -1,0 +1,4 @@
+/data2/xintong/aishell3/train/wav_16k/SSB0339/SSB03390225.wav|sil x ie4 x ie4 n i3 k an4 b u2 j ian4 uu uo3 x ian1 sh eng1 sil|107|0
+/data2/xintong/aishell3/train/wav_16k/SSB0339/SSB03390149.wav|sil h uang2 ii i4 sh u1 j i2 ii iu3 sh en2 m e5 sil|107|0
+/data2/xintong/aishell3/train/wav_16k/SSB0339/SSB03390431.wav|sil zh ix4 g uo2 d e5 sh u1 j i2 ii iu3 sh en2 m e5 sil|107|0
+/data2/xintong/aishell3/train/wav_16k/SSB0339/SSB03390105.wav|sil m a3 j i2 j ve2 d e5 uu ui2 vv ve1 b u2 t ai4 h ao3 sil|107|0

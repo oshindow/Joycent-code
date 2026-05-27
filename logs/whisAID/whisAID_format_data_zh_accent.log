@@ -1,0 +1,43 @@
+acc: Changsha spk num: 2
+total utts: 2224
+acc: Guangdong spk num: 45
+total utts: 25165
+acc: Nanchang spk num: 2
+total utts: 2662
+acc: Shanghai spk num: 20
+total utts: 8946
+acc: Sichuan spk num: 39
+total utts: 24548
+acc: Tianjin spk num: 7
+total utts: 8917
+acc: Henan spk num: 20
+total utts: 17642
+acc: Wuhan spk num: 10
+total utts: 5082
+acc: Shanxi spk num: 1
+total utts: 1700
+96886
+skip accent: Changsha for unseen, spk num: 2, utt num: 2224
+seen test num: 100, seen train num: 2124
+accent: Guangdong, spk num: 45, utt num: 25165
+Mandarin_Heavy_Accent_SPK039 217 Mandarin_Heavy_Accent_SPK023 1875
+seen test num: 2150, seen train num: 22579, unseen test num: 100
+skip accent: Nanchang for unseen, spk num: 2, utt num: 2662
+seen test num: 100, seen train num: 2562
+accent: Shanghai, spk num: 20, utt num: 8946
+Shanghai_Dialect_Conversational_Speech_Corpus_G0007 288 Shanghai_Dialect_Conversational_Speech_Corpus_G0217 709
+seen test num: 900, seen train num: 7469, unseen test num: 100
+accent: Sichuan, spk num: 39, utt num: 24548
+Sichuan_Dialect_Conversational_Speech_Corpus_G0067 91 Mandarin_Heavy_Accent_SPK021 1626
+seen test num: 1850, seen train num: 22412, unseen test num: 100
+accent: Tianjin, spk num: 7, utt num: 8917
+Tianjin_Dialect_Speech_Corpus_for_TTS 200 Tianjin_Dialect_Conversational_Speech_Corpus_G0006 2717
+seen test num: 250, seen train num: 7922, unseen test num: 100
+accent: Henan, spk num: 20, utt num: 17642
+Mandarin_Heavy_Accent_SPK038 190 Mandarin_Heavy_Accent_SPK016 3016
+seen test num: 900, seen train num: 16245, unseen test num: 100
+accent: Wuhan, spk num: 10, utt num: 5082
+Wuhan_Dialect_Scripted_Speech_Corpus_G0009 210 Wuhan_Dialect_Scripted_Speech_Corpus_G0011 594
+seen test num: 400, seen train num: 4183, unseen test num: 100
+skip accent: Shanxi for unseen, spk num: 1, utt num: 1700
+seen test num: 50, seen train num: 1650

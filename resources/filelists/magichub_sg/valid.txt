@@ -1,0 +1,16 @@
+/data2/xintong/magichub_singapore/wav_16k/G0004/A0002_S001_0_G0004_segment_0236.wav|sil d an4 n a4 t an2 sil z ou4 sil d ui4 m a3 sil|3
+/data2/xintong/magichub_singapore/wav_16k/G0004/A0002_S002_0_G0004_segment_0057.wav|sil uu uo3 ii ie3 sil b u2 sil zh ix1 sil d ao4 uu uo3 sil zh ix1 d ao4 q ian2 l ong1 j iu4 sh ix4 sh ix4 sil zh en1 d e5 l a1 d an4 sh ix4 h uan2 sil zh u1 g e2 g e2 sil zh e4 g e4 r en2 uu uo3 sil j iu4 sil b u2 sil zh ix1 sil d ao4 sil|3
+/data2/xintong/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0112.wav|sil j ing1 sh en2 zh uang4 t ai4 sil|3
+/data2/xintong/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0223.wav|sil d an4 d an4 sh ix4 ii ie3 b u2 sil c uo4 aa a3 uu uo3 j ve2 d e5 j iu4 sil sh ix4 ii in1 uu ui4 sil|3
+/data2/xintong/magichub_singapore/wav_16k/G0003/A0002_S002_0_G0003_segment_0242.wav|d eng1 sh an1 g uo4 s uo3 ii i3 uu uo3 ii ie3 sil b u2 zh ix1 d ao4 uu uo3 sil h ui4 b u2 h ui4 ii iu3 ii i1 sil x ie1 sil ee e4 sil sh ix2 m e5 zh eng4 zh uang4 sil|2
+/data2/xintong/magichub_singapore/wav_16k/G0003/A0002_S005_0_G0003_segment_0104.wav|sil t a1 sh uo1 b u2 c uo4 sil zh en1 d e5 h en3 h ao4 ch ix1 sil|2
+/data2/xintong/magichub_singapore/wav_16k/G0003/A0002_S003_0_G0003_segment_0224.wav|sil ee en4 sil ee en1 sil|2
+/data2/xintong/magichub_singapore/wav_16k/G0003/A0002_S001_0_G0003_segment_0117.wav|sil m ei2 ii iu3 sil uu uo3 d e5 ii i4 s iy1 sh ix4 sil j iu4 sil j ia4 r u2 sh uo1 sil|2
+/data2/xintong/magichub_singapore/wav_16k/G0002/A0001_S001_0_G0002_segment_0143.wav|l ing4 r en2 sil d an4 ii iu1 sil aa a4 h a1 h a1 aa a1|1
+/data2/xintong/magichub_singapore/wav_16k/G0002/A0001_S001_0_G0002_segment_0183.wav|zh en1 d e5 sil sh ix4 x in1 j ia1 sil p o1 d e5 sil|1
+/data2/xintong/magichub_singapore/wav_16k/G0002/A0001_S005_0_G0002_segment_0293.wav|ee er2 sil q v4 sil d uan4 d ing4 t a1 sil sh ix4 ii i1 g e4 z en3 m e5 ii iang4 d e5 r en2 sil|1
+/data2/xintong/magichub_singapore/wav_16k/G0002/A0001_S001_0_G0002_segment_0145.wav|uu uo3 sil j ve2 d ei3 sil|1
+/data2/xintong/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0046.wav|d ui4 d ui4 sil d ui4|0
+/data2/xintong/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0173.wav|ii ian2 l i4 sil d uo1 l e5 j iu4 sh ix4 sil x ing2 uu ui4 sil sh ang4 l a5 ii ian2 l i4 sil d uo1 l e5 sil x ian4 z ai4 l ao3 sh ix1 b i3 j iao4 sil f ang4 sil s ong1 sil|0
+/data2/xintong/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0238.wav|k an4 d e5 ch u1 uu uo3 m en5 sil|0
+/data2/xintong/magichub_singapore/wav_16k/G0001/A0001_S001_0_G0001_segment_0151.wav|sh en4 zh ix4 sh ix4 x i1 uu uang4 sil ii iu2 q i2 sh ix4 x ian4 z ai4 d e5 j iang3 h ua4 vv v2 x ing2 sil d ong4 aa a4|0

@@ -1,0 +1,16 @@
+tiktoken
+numpy==1.26.4
+tqdm
+tensorboard
+six
+Cython
+einops
+numba
+librosa
+unidecode
+matplotlib
+h5py
+flask
+inflect
+jieba
+kaldiio

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# Build/cache
+build/
+dist/
+.ipynb_checkpoints/
+
+# Large model artifacts
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.bin
+*.safetensors
+
+# Datasets and generated audio
+datasets/
+data/
+outputs/
+out/
+*.wav
+*.flac
+*.mp3
+*.npy
+*.npz
+
+# Runtime logs can be added manually when lightweight and useful
+nohup.out
+
