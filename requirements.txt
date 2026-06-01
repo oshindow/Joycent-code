@@ -17,6 +17,7 @@ librosa
 unidecode
 matplotlib
 h5py
+huggingface_hub
 flask
 inflect
 jieba

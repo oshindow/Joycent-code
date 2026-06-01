@@ -15,7 +15,7 @@ from config import Config
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
  
  
-model_path = "/data2/xintong/whisperAID/exp/whisAID_zh_grl/004/checkpoint-epoch=0006.ckpt"  
+model_path = "/data1/xintong/whisperAID/exp/whisAID_zh_grl/004/checkpoint-epoch=0006.ckpt"  
  
 config = Config()
 config.n_mels = 80

@@ -51,3 +51,5 @@ run4.sh
 
 logs/
 images/
+
+hf*.sh

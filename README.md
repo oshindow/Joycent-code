@@ -59,20 +59,6 @@ PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_medium.p
   --output-dir exp/whisAID
 ```
 
-Checkpoints and TensorBoard logs are written under:
-
-```text
-exp/whisAID/<train-name>/<train-id>/
-exp/whisAID/<train-name>/logs/<train-id>/
-```
-
-Useful variants:
-
-```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh.py --data-root /path/to/data_root
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_small.py --data-root /path/to/data_root
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_medium.py --data-root /path/to/data_root
-```
 
 ### Inference
 
@@ -80,10 +66,26 @@ Evaluate a trained checkpoint on the seen or unseen split:
 
 ```bash
 PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID_inference.py \
-  --checkpoint-path exp/whisAID/whisAID_zh_grl/001/checkpoint-epoch=0006.ckpt \
+  --checkpoint-repo-id walston/whisaid-zh-grl \
   --test-path resources/whisAID/zh_all/test_unseen.csv \
-  --data-root /path/to/data_root \
-  --batch-size 16
+  --data-root /path/to/data_root
+```
+
+The inference wrapper is registered as a Hugging Face `AutoModel`. Minimal code for one wav accent embedding:
+
+```python
+import torch
+from transformers import AutoModel
+from whisper import load_audio, log_mel_spectrogram, pad_or_trim
+from whisAID import WhisAIDConfig
+
+model = AutoModel.from_config(WhisAIDConfig(checkpoint_repo_id="walston/whisaid-zh-grl")).cuda().eval()
+audio = torch.from_numpy(load_audio("/path/to/audio.wav"))
+mel = log_mel_spectrogram(pad_or_trim(audio), n_mels=model.config.n_mels).unsqueeze(0).cuda()
+with torch.no_grad():
+    out = model(input_ids=mel)
+accent_embedding = out.features[0].cpu().numpy()
+accent_id = out.logits.argmax(dim=-1).item()
 ```
 
 The script prints batch accuracy, a classification report, and per-accent silhouette scores when speaker labels are available.
