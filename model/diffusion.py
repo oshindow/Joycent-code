@@ -206,14 +206,14 @@ class GradLogPEstimator2d(BaseModule):
             x = torch.stack([mu, x, s, a], 1)
         
         elif s is not None and a is None:
-            print("concate acc")
-            a = a.unsqueeze(-1).repeat(1, 1, x.shape[-1])
-            x = torch.stack([mu, x, a], 1)
-        
-        elif a is not None and s is None:
-            print("concate spk")
+            # print("concate spk")
             s = s.unsqueeze(-1).repeat(1, 1, x.shape[-1])
             x = torch.stack([mu, x, s], 1)
+        
+        elif a is not None and s is None:
+            # print("concate acc")
+            a = a.unsqueeze(-1).repeat(1, 1, x.shape[-1])
+            x = torch.stack([mu, x, a], 1)
         else:
             # print("Do not concate anyone in decoder")
             x = torch.stack([mu, x], 1)

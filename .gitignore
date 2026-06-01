@@ -38,3 +38,16 @@ out/
 # Runtime logs can be added manually when lightweight and useful
 nohup.out
 
+accent_testsets
+
+*.csv
+*.log
+
+train_joycent_E*.py
+
+run2.sh
+run3.sh
+run4.sh
+
+logs/
+images/

@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 python3 train_joycent_E6.py > train_joycent_E6.log

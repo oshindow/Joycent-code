@@ -1,24 +1,6 @@
 # Joycent Code 🎙️
 
-Joycent Code is a cleaned Grad-TTS / WhisAID workspace for Mandarin accent TTS experiments. This repo keeps code, logs, images, and lightweight text resources only. Large checkpoints, datasets, generated audio, caches, and files over 100 MB are intentionally excluded.
-
-## 📁 Project Layout
-
-```text
-Joycent_code/
-├── training/                 # TTS training entrypoints: E1-E5 only
-├── inference/                # Joycent TTS inference script
-├── whisAID/                  # All whisAID Python scripts
-├── model/                    # Grad-TTS / Conformer model code
-├── text/                     # Text frontend and dictionaries
-├── whisper/                  # Local Whisper modules
-├── hifi-gan/                 # HiFi-GAN helper code
-├── evaluation/               # Speaker/accent evaluation scripts
-├── resources/                # Required dictionaries and filelists
-├── logs/                     # Lightweight copied logs
-├── images/                   # Training curves and generated figures
-└── docs/                     # Older notes kept for reference
-```
+Joycent Code is a cleaned Grad-TTS / WhisAID workspace for Mandarin accent TTS experiments.  
 
 ## ⚙️ Environment
 
@@ -29,15 +11,10 @@ conda create -n joycent python=3.9 -y
 conda activate joycent
 pip install -r requirements.txt
 pip install torch torchaudio tensorboard librosa soundfile flask pyyaml tqdm
+cd model/monotonic_align; mkdir -p model/monotonic_align; python setup.py build_ext --inplace; cd ../..
+git clone https://github.com/open-mmlab/Amphion.git
 ```
-
-Optional external components used by inference/training:
-
-- ParallelWaveGAN vocoder checkpoint and config
-- Amphion NaturalSpeech3 FACodec weights from Hugging Face
-- Pretrained Joycent/Grad-TTS acoustic checkpoints
-
-These model weights are not included in Git because they are large.
+ 
 
 ## 📚 Datasets
 
@@ -57,6 +34,8 @@ resources/filelists/zh_all/train.accents.aishell3.sg
 ```
 
 Update paths inside the filelists to match your local dataset root. Audio/features are not committed.
+
+## Extract accent and speaker features
 
 ## 🚀 TTS Training
 
@@ -175,3 +154,5 @@ git status
 ```
 
 Both `find` commands should return nothing.
+
+

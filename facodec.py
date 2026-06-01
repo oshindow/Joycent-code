@@ -1,7 +1,7 @@
 import sys
 import torch
 # sys.path.append('')
-from ns3_codec import FACodecEncoder, FACodecDecoder
+from Amphion.models.codec.ns3_codec import FACodecEncoder, FACodecDecoder
 from huggingface_hub import hf_hub_download
 
 fa_encoder = FACodecEncoder(
@@ -34,8 +34,8 @@ decoder_ckpt = hf_hub_download(repo_id="amphion/naturalspeech3_facodec", filenam
 fa_encoder.load_state_dict(torch.load(encoder_ckpt))
 fa_decoder.load_state_dict(torch.load(decoder_ckpt))
 
-fa_encoder.to('cuda:6')
-fa_decoder.to('cuda:6')
+fa_encoder.to('cuda:0')
+fa_decoder.to('cuda:0')
 
 fa_encoder.eval()
 fa_decoder.eval()
@@ -47,7 +47,7 @@ import soundfile as sf
 import os
 import numpy as np
 
-with open('resources/filelists/zh_all/valid.accents', 'r', encoding='utf8') as input:
+with open('resources/filelists/zh_all/train.dedup.txt.rmSSB0342.rmSSB1567', 'r', encoding='utf8') as input:
     for line in input:
         wav_path = line.strip().split('|')[0]
         if 'wav_16k' in wav_path:
@@ -59,7 +59,7 @@ with open('resources/filelists/zh_all/valid.accents', 'r', encoding='utf8') as i
         # test_wav_path = "/home/xintong/Speech-Backbones/Grad-TTS/accent_testsets/prompt_spk/female/xintong.wav"
         test_wav = librosa.load(wav_path, sr=16000)[0]
         test_wav = torch.from_numpy(test_wav).float()
-        test_wav = test_wav.unsqueeze(0).unsqueeze(0).to('cuda:6')
+        test_wav = test_wav.unsqueeze(0).unsqueeze(0).to('cuda:0')
 
         with torch.no_grad():
 

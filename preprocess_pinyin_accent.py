@@ -17,54 +17,20 @@ def get_data_lists(text_paths, task='train'):
                 if 'asr_chinese' in line:
                     line = line.replace('train', 'train/')
                 samples.append(line.strip())
+                # print(line)
         return samples
 
     for text_path in text_paths:
-        # print("text paths:", text_paths)
         with open(text_path, 'r', encoding='utf-8-sig') as input:
-            # print(text_path)
             for line in input:
                 samples.append(line.strip())
-                # uid = line.strip().split()[0].strip()
-                # data = line.strip().split()[1:]
-
-                # texts = [item for item in data]
-                
-                # if 'aishell3' in text_path:
-                #     spk = uid[:7]
-                #     filepath = "/data2/xintong/tts_chinese/aishell3/" + task + '/wav_16k/' + spk + '/' + uid + '.wav'
-                
-                # if 'magichub' in text_path:
-                    # spk = uid.split('_')[3]
-                    # filepath = "/data2/xintong/magichub_singapore/clean_data/clean_data/wav_16k/" + spk + '/' + uid  
-                
-                # elif 'latic' in text_path:
-                #     spk = uid[1:5]
-                #     filepath = "/data2/xintong/LATIC/WAVE/WAVE/SPEAKER" + spk + '/SESSION0/' + uid + '.WAV' 
-                
-                # elif 'sichuan' in text_path:
-                #     spk = uid.split('_')[0]
-                #     filepath = "/data1/xintong/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence/WAV/" + spk + '/' + uid  
-                
-                # elif 'heavy' in text_path:
-                #     # print(text_path)
-                #     # spk = uid.split('_')[0]
-                #     filepath = "/data2/xintong/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/" + uid  
-                # elif "aishell1" in text_path:
-                    # filepath = uid
-                    # print(filepath)
-                # samples.append("|".join([filepath, " ".join(texts)]))
-
-    # with open(task + '_data', 'w', encoding="utf8") as output:
-    #     for sample in samples:
-    #         output.write(sample + '\n')
-    
+    # print(samples)
     return samples
 
 
 class WhisperPinyinDataset(torch.utils.data.Dataset):
     def __init__(self, filelist_paths, tokenizer, spk_info_path, config, task='train', pseudo_labels=None, random_seed=1020):
-
+        print("filelist paths:", filelist_paths)
         self.datalist = get_data_lists(filelist_paths, task=task)
          
         self.config = config

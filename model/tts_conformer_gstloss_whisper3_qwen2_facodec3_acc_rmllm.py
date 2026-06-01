@@ -67,7 +67,7 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
         self.acc_projector = torch.nn.Linear(256, 64)
 
     @torch.no_grad()
-    def prompt(self, x, x_lengths, y, y_lengths_ref, y_prompt_spk, llm_embs, spk_embs, acc_embs, n_timesteps, cond=None, temperature=1.0, stoc=False, spk=None, acc=None, length_scale=1.0):
+    def prompt(self, x, x_lengths, spk_embs, acc_embs, n_timesteps, cond=None, temperature=1.0, stoc=False, spk=None, acc=None, length_scale=1.0):
         """
         Generates mel-spectrogram from text. Returns:
             1. encoder outputs
