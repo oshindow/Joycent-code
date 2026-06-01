@@ -4,14 +4,13 @@ accent2id = {'Changsha':1, 'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':
 
 import os
 
-dataset = '/data2/xintong/magichub_singapore/wav_16k'
+dataset = '/path/to/data/magichub_singapore/wav_16k'
 # waves = {'G0001':[], 'G0002':[], 'G0003':[], 'G0004':[]}
 spk2id = {'G0001':288, 'G0002':289, 'G0003':290, 'G0004':291}
 accentid = 12
 
 spk_utt_dict = {}
 
-# output = open('/home/xintong/Speech-Backbones/Grad-TTS/resources/filelists/zh_all/train_sg.txt', 'w', encoding='utf8')
 with open('resources/filelists/magichub_sg/raw.txt', 'r', encoding='utf8') as input:
     for line in input:
         spk = line.strip().split('|')[0].split('_')[3]

@@ -1,18 +1,18 @@
-data1 = ['/data1/xintong/Changsha_Dialect_Conversational_Speech_Corpus',
-         '/data1/xintong/Guangzhou_Cantonese_Conversational_Speech_Corpus',
-         '/data1/xintong/Nanchang_Dialect_Conversational_Speech_Corpus',
-         '/data1/xintong/Shanghai_Dialect_Conversational_Speech_Corpus',
-         '/data1/xintong/Sichuan_Dialect_Conversational_Speech_Corpus',
-         '/data1/xintong/Tianjin_Dialect_Conversational_Speech_Corpus',
-         '/data1/xintong/Zhengzhou_Dialect_Conversational_Speech_Corpus',]
+data1 = ['/path/to/data/Changsha_Dialect_Conversational_Speech_Corpus',
+         '/path/to/data/Guangzhou_Cantonese_Conversational_Speech_Corpus',
+         '/path/to/data/Nanchang_Dialect_Conversational_Speech_Corpus',
+         '/path/to/data/Shanghai_Dialect_Conversational_Speech_Corpus',
+         '/path/to/data/Sichuan_Dialect_Conversational_Speech_Corpus',
+         '/path/to/data/Tianjin_Dialect_Conversational_Speech_Corpus',
+         '/path/to/data/Zhengzhou_Dialect_Conversational_Speech_Corpus',]
 
-data2 = ['/data1/xintong/Guangzhou_Cantonese_Scripted_Speech_Corpus_Daily_Use_Sentence',
-         '/data1/xintong/Guangzhou_Cantonese_Scripted_Speech_Corpus_in_Vehicle',
-         '/data1/xintong/Shanghai_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence',
-         '/data1/xintong/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence',
-         '/data1/xintong/Tianjin_Dialect_Speech_Corpus_for_TTS',
-         '/data1/xintong/Wuhan_Dialect_Scripted_Speech_Corpus',
-         '/data1/xintong/Zhengzhou_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence']
+data2 = ['/path/to/data/Guangzhou_Cantonese_Scripted_Speech_Corpus_Daily_Use_Sentence',
+         '/path/to/data/Guangzhou_Cantonese_Scripted_Speech_Corpus_in_Vehicle',
+         '/path/to/data/Shanghai_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence',
+         '/path/to/data/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence',
+         '/path/to/data/Tianjin_Dialect_Speech_Corpus_for_TTS',
+         '/path/to/data/Wuhan_Dialect_Scripted_Speech_Corpus',
+         '/path/to/data/Zhengzhou_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence']
 
 acc2id = {'Changsha':1, 'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':5, 'Tianjin':6, 'Henan':7, 'Wuhan':8, 'Shanxi': 9}
 
@@ -40,9 +40,9 @@ for dataset in data1:
             spk2id[spk] = spk_idx
             spk_idx += 1
         if spk not in accent_spk_utt_cnt[acc]:
-            accent_spk_utt_cnt[acc][spk] = ["|".join([os.path.join(dataset, 'wav_16k', file), 'sil', str(spk2id[spk]), str(accid)])]
+            accent_spk_utt_cnt[acc][spk] = ["|".join([os.path.join(dataset, 'wav_16k', file), str(spk2id[spk]), str(accid)])]
         else:
-            accent_spk_utt_cnt[acc][spk].append("|".join([os.path.join(dataset, 'wav_16k', file), 'sil', str(spk2id[spk]), str(accid)]))
+            accent_spk_utt_cnt[acc][spk].append("|".join([os.path.join(dataset, 'wav_16k', file), str(spk2id[spk]), str(accid)]))
         # datas.append("|".join([os.path.join(dataset, 'wav_16k', file), 'sil', str(spk2id[spk]), str(accid)]))
     
 
@@ -66,9 +66,9 @@ for dataset in data2:
                     spk2id[spk] = spk_idx
                     spk_idx += 1
                 if spk not in accent_spk_utt_cnt[acc]:
-                    accent_spk_utt_cnt[acc][spk] = ["|".join([os.path.join(dataset, 'WAV', file),'sil', str(spk2id[spk]), str(accid)])]
+                    accent_spk_utt_cnt[acc][spk] = ["|".join([os.path.join(dataset, 'WAV', file), str(spk2id[spk]), str(accid)])]
                 else:
-                    accent_spk_utt_cnt[acc][spk].append("|".join([os.path.join(dataset, 'WAV', file),'sil', str(spk2id[spk]), str(accid)]))
+                    accent_spk_utt_cnt[acc][spk].append("|".join([os.path.join(dataset, 'WAV', file), str(spk2id[spk]), str(accid)]))
                 # datas.append("|".join([os.path.join(dataset, 'WAV', file),'sil', str(spk2id[spk]), str(accid)]))
 
     else:
@@ -80,14 +80,14 @@ for dataset in data2:
                     spk2id[spk] = spk_idx
                     spk_idx += 1
                 if spk not in accent_spk_utt_cnt[acc]:
-                    accent_spk_utt_cnt[acc][spk] = ["|".join([os.path.join(dataset, 'WAV', file.split('_')[0], file),'sil', str(spk2id[spk]), str(accid)])]
+                    accent_spk_utt_cnt[acc][spk] = ["|".join([os.path.join(dataset, 'WAV', file.split('_')[0], file), str(spk2id[spk]), str(accid)])]
                 else:
-                    accent_spk_utt_cnt[acc][spk].append("|".join([os.path.join(dataset, 'WAV', file.split('_')[0], file),'sil', str(spk2id[spk]), str(accid)]))
+                    accent_spk_utt_cnt[acc][spk].append("|".join([os.path.join(dataset, 'WAV', file.split('_')[0], file), str(spk2id[spk]), str(accid)]))
                 # datas.append("|".join([os.path.join(dataset, 'WAV', file.split('_')[0], file),'sil', str(spk2id[spk]), str(accid)]))
      
 spk2acc = {}
 spk2acc_name = {}
-with open('/data2/xintong/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/SPKINFO.txt', 'r') as f:
+with open('/path/to/data/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/SPKINFO.txt', 'r') as f:
     for line in f:
         channel, spk, gen, age, place, res, device = line.strip().split('\t')
         if not place.startswith('CHINA'):
@@ -100,7 +100,7 @@ with open('/data2/xintong/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/SPK
             spk2acc[spk] = accid   
             spk2acc_name[spk] = acc
         # datas.append("|".join(['/data2/xintong/Mandarin_Heavy_Accent_Accent_Conversational_Speech_Corpus/wav_16k/' + spk + '.wav', spk2id[spk], accid]))
-heavy = '/data2/xintong/Mandarin_Heavy_Accent_Conversational_Speech_Corpus'
+heavy = '/path/to/data/Mandarin_Heavy_Accent_Conversational_Speech_Corpus'
 # spk_utt_cnt = {}
 for file in os.listdir(os.path.join(heavy, 'wav_16k')):
     if not file.endswith('.wav'):
@@ -118,9 +118,9 @@ for file in os.listdir(os.path.join(heavy, 'wav_16k')):
         accent_spk_utt_cnt[acc_name] = {}
     
     if spk not in accent_spk_utt_cnt[acc_name]:
-        accent_spk_utt_cnt[acc_name][spk] = ["|".join([os.path.join(heavy, 'wav_16k', file), 'sil', str(spk2id[spk]), str(accid)])]
+        accent_spk_utt_cnt[acc_name][spk] = ["|".join([os.path.join(heavy, 'wav_16k', file), str(spk2id[spk]), str(accid)])]
     else:
-        accent_spk_utt_cnt[acc_name][spk].append("|".join([os.path.join(heavy, 'wav_16k', file), 'sil', str(spk2id[spk]), str(accid)]))
+        accent_spk_utt_cnt[acc_name][spk].append("|".join([os.path.join(heavy, 'wav_16k', file), str(spk2id[spk]), str(accid)]))
     # datas.append("|".join([os.path.join(heavy, 'wav_16k', file), 'sil', str(spk2id[spk]), str(accid)]))
 import librosa
 # print("processing...", dataset)

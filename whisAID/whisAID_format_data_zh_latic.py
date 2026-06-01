@@ -4,19 +4,18 @@ accent2id = {'Changsha':1, 'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':
 
 import os
 
-dataset = '/data2/xintong/LATIC/WAVE/WAVE'
+dataset = '/path/to/data/LATIC/WAVE/WAVE'
 # waves = {'G0001':[], 'G0002':[], 'G0003':[], 'G0004':[]}
 spk2id = {'0010':292, '0011':293, '0012':294, '0013':295}
 accentid = 13
 
 spk_utt_dict = {}
 
-# output = open('/home/xintong/Speech-Backbones/Grad-TTS/resources/filelists/zh_all/train_sg.txt', 'w', encoding='utf8')
-with open('/home/xintong/accented_mdd/dump2/final_labels/latic', 'r', encoding='utf8') as input:
+with open('/path/to/data/accented_mdd/dump2/final_labels/latic', 'r', encoding='utf8') as input:
     for line in input:
         uid, text = line.strip().split('\t') 
         spk = uid[1:5]
-        wavepath = "/data2/xintong/LATIC/WAVE/WAVE/SPEAKER" + spk + '/SESSION0/' + uid + '.WAV' 
+        wavepath = "/path/to/data/LATIC/WAVE/WAVE/SPEAKER" + spk + '/SESSION0/' + uid + '.WAV' 
                 
         spkid = spk2id[spk]
         # wavepath = os.path.join(dataset, spk, line.strip().split('|')[0] + '.wav')

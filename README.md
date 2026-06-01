@@ -4,14 +4,18 @@ Joycent Code is a cleaned Grad-TTS / WhisAID workspace for Mandarin accent TTS e
 
 ## ⚙️ Environment
 
-Tested with Python 3.9 and CUDA-enabled PyTorch.
+Tested with Python 3.10 and CUDA-enabled PyTorch.
 
 ```bash
-conda create -n joycent python=3.9 -y
+conda create -n joycent python=3.10 -y
 conda activate joycent
 pip install -r requirements.txt
-pip install torch torchaudio tensorboard librosa soundfile flask pyyaml tqdm
+pip install tensorboard librosa soundfile flask pyyaml tqdm
+pip install pytorch-lightning==2.4.0 --no-deps
+
+
 cd model/monotonic_align; mkdir -p model/monotonic_align; python setup.py build_ext --inplace; cd ../..
+
 ```
 
 This repo uses Git submodules for third-party code:
@@ -20,46 +24,80 @@ This repo uses Git submodules for third-party code:
 git submodule update --init --recursive
 ```
 
-Fresh clone example:
+## WhisAID
+### Datasets
 
-```bash
-git clone --recurse-submodules https://github.com/oshindow/Joycent_code.git
-cd Joycent_code
+Filelists already exist in `resources/whisAID/zh_all`. They store wav paths relative to the data root; pass the root at runtime with `--data-root`.
+
+Expected CSV format:
+
+```text
+relative_wav_path|speaker_id|accent_id
 ```
 
-If you already cloned without submodules:
+Expected data layout:
 
-```bash
-cd Joycent_code
-git submodule update --init --recursive
+```text
+<data-root>/
+  aishell3/
+  magichub_multiaccent/
+    magichub_singapore/
+    <other MagicHub accent datasets>/
 ```
 
-To update third-party code later:
+### Fine-tuning
+
+Use the Chinese all-accent filelists in `resources/whisAID/zh_all` with an external data root:
 
 ```bash
-git submodule update --remote --merge
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_medium.py \
+  --data-root /path/to/data_root \
+  --train-path resources/whisAID/zh_all/train.csv \
+  --val-path resources/whisAID/zh_all/test_unseen.csv \
+  --train-name whisAID_zh_grl \
+  --train-id 001 \
+  --output-dir exp/whisAID
 ```
 
-The project currently expects these submodule directories at the repo root:
+Checkpoints and TensorBoard logs are written under:
 
-- `Amphion/`
-- `ParallelWaveGAN/`
- 
+```text
+exp/whisAID/<train-name>/<train-id>/
+exp/whisAID/<train-name>/logs/<train-id>/
+```
+
+Useful variants:
+
+```bash
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh.py --data-root /path/to/data_root
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_small.py --data-root /path/to/data_root
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_medium.py --data-root /path/to/data_root
+```
+
+### Inference
+
+Evaluate a trained checkpoint on the seen or unseen split:
+
+```bash
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID_inference.py \
+  --checkpoint-path exp/whisAID/whisAID_zh_grl/001/checkpoint-epoch=0006.ckpt \
+  --test-path resources/whisAID/zh_all/test_unseen.csv \
+  --data-root /path/to/data_root \
+  --batch-size 16
+```
+
+The script prints batch accuracy, a classification report, and per-accent silhouette scores when speaker labels are available.
 
 ## 📚 Datasets
 
-This cleaned repo is organized for two datasets only:
+This repo is organized for two datasets:
 
 - AISHELL-3
 - MagicHub Singapore Mandarin (`magichub_sg`)
 
-Expected filelists:
+Filelists:
 
 ```text
-resources/filelists/aishell3/train.txt
-resources/filelists/aishell3/valid.txt
-resources/filelists/magichub_sg/train.txt
-resources/filelists/magichub_sg/valid.txt
 resources/filelists/zh_all/train.accents.aishell3.sg
 ```
 
@@ -140,15 +178,15 @@ Generated wav files should be written under your configured output directory.
 
 ## 🧪 whisAID
 
-All `whisAID*.py` files are kept in `whisAID/`.
+Training and data-formatting scripts are kept in `whisAID/`. Inference uses `whisAID_inference.py` at the repository root.
 
 Examples:
 
 ```bash
 PYTHONPATH=. python whisAID/whisAID_format_data_zh_aishell3.py
 PYTHONPATH=. python whisAID/whisAID_format_data_zh_sg.py
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh.py
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_inference.py
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh.py --data-root /path/to/data_root
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID_inference.py --checkpoint-path /path/to/checkpoint.ckpt --data-root /path/to/data_root
 ```
 
 ## 📊 Logs and Images

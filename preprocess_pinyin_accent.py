@@ -7,6 +7,13 @@ import numpy as np
 import os
 
 
+def resolve_audio_path(audiofile, data_root):
+    audiofile = os.path.expanduser(audiofile)
+    if os.path.isabs(audiofile) or not data_root:
+        return audiofile
+    return os.path.join(os.path.expanduser(data_root), audiofile)
+
+
 def get_data_lists(text_paths, task='train'):
 
     samples = []
@@ -34,6 +41,7 @@ class WhisperPinyinDataset(torch.utils.data.Dataset):
         self.datalist = get_data_lists(filelist_paths, task=task)
          
         self.config = config
+        self.data_root = getattr(config, "data_root", "")
         random.seed(random_seed)
         random.shuffle(self.datalist)
         self.accent_count = {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0}
@@ -47,11 +55,18 @@ class WhisperPinyinDataset(torch.utils.data.Dataset):
         """
         # print(self.datalist[index])
         # print(self.datalist[index])
-        audiofile, texts, spk, acc = self.datalist[index].split("|")
+        fields = self.datalist[index].split("|")
+        if len(fields) == 3:
+            audiofile, spk, acc = fields
+        elif len(fields) == 4:
+            audiofile, _, spk, acc = fields
+        else:
+            raise ValueError(f"Expected 3 or 4 fields, got {len(fields)}: {self.datalist[index]}")
         
         uid = audiofile.split('/')[-1][:-4]
         if '.mp3' in audiofile:
             audiofile = audiofile.replace('.mp3', '.wav')
+        audiofile = resolve_audio_path(audiofile, self.data_root)
         accent = int(acc)
         spk = int(spk)
         

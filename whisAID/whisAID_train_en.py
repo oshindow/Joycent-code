@@ -23,8 +23,6 @@ from transformers import (
 
 from config_en import Config
  
-import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '4'
  
 import random
 import numpy as np
@@ -335,9 +333,21 @@ if __name__ == '__main__':
     )
     parser.add_argument(
         "--val-path",
-        type=list,
+        nargs="+",
         default=["resources/whisAID/CommonAccent/test_unseen.csv"],
         help="Batch size for training",
+    )
+    parser.add_argument(
+        "--data-root",
+        type=str,
+        default="",
+        help="Root directory prepended to relative wav paths in whisAID csv files",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="exp/whisAID",
+        help="Directory for TensorBoard logs and checkpoints",
     )
     parser.add_argument(
         "--model-name",
@@ -391,8 +401,8 @@ if __name__ == '__main__':
     #model_name = "exp/checkpoint_stage1/checkpoint-epoch=0003.ckpt"
     lang = "zh"
 
-    log_output_dir = "/data1/xintong/whisperAID/exp/" + train_name
-    check_output_dir = "/data1/xintong/whisperAID/exp/" + train_name + '/' + train_id
+    log_output_dir = Path(args.output_dir) / train_name
+    check_output_dir = Path(args.output_dir) / train_name / train_id
     print("train-path:", args.train_path)
     print("check_output_dir:", check_output_dir)
 
@@ -403,7 +413,8 @@ if __name__ == '__main__':
     cfg.num_train_epochs = args.epoch
     cfg.batch_size = args.batch_size
     cfg.train_path = args.train_path
-    cfg.val_path = ["".join(args.val_path)]
+    cfg.val_path = args.val_path
+    cfg.data_root = args.data_root
     cfg.n_mels = args.n_mels
     cfg.learning_rate = args.learning_rate
     cfg.weight_decay = args.weight_decay
@@ -414,13 +425,13 @@ if __name__ == '__main__':
     Path(check_output_dir).mkdir(parents=True, exist_ok=True)
  
     tflogger = TensorBoardLogger(
-        save_dir=log_output_dir,
+        save_dir=str(log_output_dir),
         name="logs",
         version=train_id
     )
 
     checkpoint_callback = ModelCheckpoint(
-        dirpath=f"{check_output_dir}",
+        dirpath=str(check_output_dir),
         filename="checkpoint-{epoch:04d}",
         save_top_k=-1 # all model save
     )

@@ -2,49 +2,42 @@ import torch
 from preprocess_pinyin_accent import WhisperPinyinDataset, WhisperDataCollatorWhithPadding
 from transformers import WhisperTokenizer
 import whisper
-import sys
-# sys.path.insert(0, '/home/xintong/whisper')
-# from utils import error_stats, normlizer
-import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = '7'
-
+import argparse
 from sklearn.metrics import confusion_matrix, classification_report
 # import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.manifold import TSNE
-# from config_en import Config
 from config import Config
 from sklearn.metrics import silhouette_score
 
 
-# from config import Config
-# en
-# (002 medium) 
-# model_path = "/data1/xintong/whisperAID/exp/whisAID_en/002/checkpoint-epoch=0003.ckpt"
-# en grl
-# (002 medium, 003 0.1adv unfrozen, 004 0.05adv unfrozen, 005 0.01adv unfrozen) 
-# model_path = "/data1/xintong/whisperAID/exp/whisAID_zh_grl/065/checkpoint-epoch=0006.ckpt"
-# zh
-# (003 medium) 
-# model_path = "/data1/xintong/whisperAID/exp/whisAID_zh/003/checkpoint-epoch=0005.ckpt"
-# (002 large_v3_turbo) model_path = 
-# (001 small) model_path = 
-# zh grl
-# (004 medium) 
-model_path = "/data2/xintong/whisperAID/exp/whisAID_zh_grl/004/checkpoint-epoch=0006.ckpt"
-# (005 large_v3_turbo) model_path = "/data1/xintong/whisperAID/exp/whisAID_zh_grl/005/checkpoint-epoch=0008.ckpt" 
-# (006 small) model_path = "/data1/xintong/whisperAID/exp/whisAID_zh_grl/065/checkpoint-epoch=0006.ckpt"
-# model_path = "/data1/xintong/whisperAID/exp/whisAID_en/001/checkpoint-epoch=0005.ckpt" # w/o grl
-# print(Config['n_mels'])
+parser = argparse.ArgumentParser(
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter
+)
+parser.add_argument("--checkpoint-path", required=True, help="WhisAID checkpoint to evaluate")
+parser.add_argument(
+    "--test-path",
+    nargs="+",
+    default=["resources/whisAID/zh_all/test_unseen.csv"],
+    help="One or more test CSV filelists",
+)
+parser.add_argument(
+    "--data-root",
+    type=str,
+    default="",
+    help="Root directory prepended to relative wav paths in whisAID csv files",
+)
+parser.add_argument("--batch-size", type=int, default=16, help="Evaluation batch size")
+parser.add_argument("--n-mels", type=int, default=80, help="Number of mel frequency bins")
+parser.add_argument("--device", type=str, default="cuda", help="Device used for inference")
+args = parser.parse_args()
+
+model_path = args.checkpoint_path
 config = Config()
-config.n_mels = 80
-# config.test_path = ["resources/whisAID/CommonAccent/test_seen.csv"]
-# config.test_path = ['resources/whisAID/zh_all/test_seen.csv']
-config.test_path = ['resources/filelists/accent_testsets/seen_text_joycent_e5e160.csv']
-# config.test_path = ['joycent_e1_e346.sg']
-# config.test_path = ['joycent_e2_e31.sg']
-# config.test_path = ['joycent_e3_e279.sg']
+config.n_mels = args.n_mels
+config.test_path = args.test_path
+config.data_root = args.data_root
 
 model = whisper.load_model(model_path, n_accents=config.n_accents, n_speakers=config.n_speakers)
 print(model_path)
@@ -52,7 +45,7 @@ print(model_path)
 spk_info_path = 'dump/aishell3/spk_info_only.txt'
 tokenizer = WhisperTokenizer.from_pretrained("openai/whisper-large-v3-turbo", language="zh", task="transcribe")
 test_dataset = WhisperPinyinDataset(config.test_path, tokenizer, spk_info_path, config, task='test')
-test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=16, collate_fn=WhisperDataCollatorWhithPadding())
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, collate_fn=WhisperDataCollatorWhithPadding())
 
 cer_results = []
 rtfs = []
@@ -66,7 +59,7 @@ all_preds = []
 all_labels = []
 all_feats = []
 spk_label = []
-device = 'cuda'
+device = args.device
 per_accent = {}
 # accent_embs = {'0':[], '1':[], '2':[], '3':[], '4':[], '5':[]}
 for batch in test_loader:
@@ -120,7 +113,7 @@ acc2id = {1: 'Changsha', 2: 'Guangdong',
 
 # acc2id = {'Changsha':1, 'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':5, 'Tianjin':6, 'Henan':7, 'Wuhan':8, 'Shanxi': 9, 'north': 10, 'south': 11, 'singapore': 12}
 if 'en' in model_path:
-    acc2id = {'us': 1, 'canadian': 2, 'australian': 3, 'southasian': 4, 'english': 5, 'southernafrican': 6, 'irish': 7, 'scottish': 8, 'filipino': 9, 'singaporean': 10, 'hongkong': 11, 'malaysian': 12, 'newzealand': 13}
+    full_acc2id = {'us': 1, 'canadian': 2, 'australian': 3, 'southasian': 4, 'english': 5, 'southernafrican': 6, 'irish': 7, 'scottish': 8, 'filipino': 9, 'singaporean': 10, 'hongkong': 11, 'malaysian': 12, 'newzealand': 13}
 else:
     full_acc2id = {'Changsha':1, 'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':5, 'Tianjin':6, 'Henan':7, 'Wuhan':8, 'Shanxi': 9, 'north': 10, 'south': 11, 'singapore': 12}
     # acc2id = {'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':5, 'Tianjin':6, 'Henan':7, 'Wuhan':8, 'Shanxi': 9, 'north': 10, 'south': 11, 'singapore': 12}
@@ -131,7 +124,7 @@ else:
     # acc2id = {'Guangdong':2, 'Shanghai':4, 'Sichuan':5, 'Tianjin':6, 'Wuhan':8, 'north': 10, 'south': 11, 'singapore': 12}
     # acc2id = {'Guangdong':2, 'Henan':7, 'singapore': 12}
 print(np.unique(all_preds))
-used_ids = set(np.unique(all_preds))
+used_ids = set(np.unique(all_preds)) | set(np.unique(all_labels))
 
 acc2id = {
     acc: idx
@@ -167,6 +160,7 @@ print("\nClassification Report:")
 print(classification_report(
     all_labels, 
     all_preds, 
+    labels=list(acc2id.values()),
     target_names=list(acc2id.keys()),
     digits=4
 ))
@@ -182,7 +176,8 @@ for accent, values in per_accent.items():
     # if 
     print("Accent:", accent, "Silhouette:", score)
 
-print("average:", sum(scores) / len(scores))
+if scores:
+    print("average:", sum(scores) / len(scores))
 # # 绘制混淆矩阵
 # def plot_confusion_matrix(labels, preds, class_names):
 #     cm = confusion_matrix(labels, preds)

@@ -2,7 +2,7 @@ import os
 import json
 accent2id = {'Changsha':1, 'Guangdong':2, 'Nanchang':3, 'Shanghai':4, 'Sichuan':5, 'Tianjin':6, 'Henan':7, 'Wuhan':8, 'Shanxi': 9, 'north': 10, 'south': 11, 'singapore': 12}
 
-dataset = '/data2/xintong/aishell3/train/wav_16k'
+dataset = '/path/to/data/train/wav_16k'
 
 spk2accent = json.load(open('resources/spk2accent.json', 'r', encoding='utf8'))
 acc_spk_utt_dict = {}

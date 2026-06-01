@@ -12,6 +12,7 @@ class Config:
     gradient_accumulation_steps = 1
     sample_rate = 16000
     token = 'text'
+    data_root = ''
     datasets = ['aishell3', 'latic', 'magichub', 'sichuan']
     train_path = 'train_data_clean'
     # train_path = ['dump2/aishell3/train/' + token, 'dump2/latic/train/' + token, 'dump2/magichub/train/' + token, 'dump2/sichuan/train/' + token]

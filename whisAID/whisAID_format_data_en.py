@@ -1,7 +1,7 @@
 import os
 import json
 
-commonaccent = '/data1/xintong/commonvoice17/'
+commonaccent = '/path/to/data/commonvoice17/'
 uttid2path = {}
 idx = 0
 for root, dirs, files in os.walk(commonaccent):
