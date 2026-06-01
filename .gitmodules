@@ -1,0 +1,6 @@
+[submodule "Amphion"]
+	path = Amphion
+	url = https://github.com/open-mmlab/Amphion.git
+[submodule "ParallelWaveGAN"]
+	path = ParallelWaveGAN
+	url = https://github.com/oshindow/ParallelWaveGAN.git

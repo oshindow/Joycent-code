@@ -12,8 +12,38 @@ conda activate joycent
 pip install -r requirements.txt
 pip install torch torchaudio tensorboard librosa soundfile flask pyyaml tqdm
 cd model/monotonic_align; mkdir -p model/monotonic_align; python setup.py build_ext --inplace; cd ../..
-git clone https://github.com/open-mmlab/Amphion.git
 ```
+
+This repo uses Git submodules for third-party code:
+
+```bash
+git submodule update --init --recursive
+```
+
+Fresh clone example:
+
+```bash
+git clone --recurse-submodules https://github.com/oshindow/Joycent_code.git
+cd Joycent_code
+```
+
+If you already cloned without submodules:
+
+```bash
+cd Joycent_code
+git submodule update --init --recursive
+```
+
+To update third-party code later:
+
+```bash
+git submodule update --remote --merge
+```
+
+The project currently expects these submodule directories at the repo root:
+
+- `Amphion/`
+- `ParallelWaveGAN/`
  
 
 ## 📚 Datasets
@@ -154,5 +184,3 @@ git status
 ```
 
 Both `find` commands should return nothing.
-
-
