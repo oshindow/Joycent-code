@@ -1,6 +1,7 @@
 # Joycent Code
 
-Joycent Code is an accent-aware Mandarin TTS workspace. It includes TTS training/inference code, a ParallelWaveGAN vocoder setup, and **WhisAID**, a pretrained accent identification model that can produce accent logits and accent embeddings.
+Official implementation of **Joycent**, an accent text-to-speech (TTS) framework, together with the pre-trained accent identification model **WhisAID** and the **ParallelWaveGAN** vocoder.
+
 
 ## Environment
 
@@ -27,6 +28,12 @@ Initialize third-party submodules:
 ```bash
 git submodule update --init --recursive
 ```
+
+## Pretrained Models
+
+| Model | Link | Notes |
+| --- | --- | --- |
+| WhisAID Chinese accent classifier | https://huggingface.co/walston/whisaid-zh-grl | Used by `whisAID_inference.py` with `--checkpoint-repo-id walston/whisaid-zh-grl`. |
 
 ## WhisAID
 
