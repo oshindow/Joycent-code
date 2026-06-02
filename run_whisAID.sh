@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${SCRIPT_DIR}"
 
 PYTHONPATH=. CUDA_VISIBLE_DEVICES=2 python whisAID/whisAID_train_zh_grl_medium.py \
   --data-root /data2/xintong/mandarin_accent \

@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${SCRIPT_DIR}"
+
 # PYTHONPATH=. CUDA_VISIBLE_DEVICES=2 python whisAID_inference.py \
 #   --checkpoint-repo-id walston/whisaid-zh-grl \
 #   --test-path resources/whisAID/zh_all/test_unseen.csv \
 #   --data-root /data2/xintong/mandarin_accent
   
-PYTHONPATH=. python whisAID_eval.py \
+PYTHONPATH=. python whisAID/whisAID_eval.py \
   --checkpoint-repo-id walston/whisaid-zh-grl \
   --test-path resources/whisAID/zh_all/test_unseen.csv \
   --data-root /data2/xintong/mandarin_accent \

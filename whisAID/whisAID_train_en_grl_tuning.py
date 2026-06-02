@@ -8,7 +8,7 @@ import whisper
 from pathlib import Path
 # from utils import error_stats 
 # from data import TextMelSpeakerAccentDataset, TextMelSpeakerAccentBatchCollate
-from preprocess_pinyin_accent import WhisperPinyinDataset, WhisperDataCollatorWhithPadding
+from whisAID.preprocess_pinyin_accent import WhisperPinyinDataset, WhisperDataCollatorWhithPadding
 import pytorch_lightning as pl
 from pytorch_lightning import LightningModule
 from pytorch_lightning import Trainer, seed_everything

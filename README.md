@@ -39,10 +39,9 @@ pip install pytorch-lightning==2.4.0 --no-deps
 Build the monotonic alignment extension:
 
 ```bash
-cd model/monotonic_align
-mkdir -p model/monotonic_align
+cd joycent/model/monotonic_align
 python setup.py build_ext --inplace
-cd ../..
+cd ../../..
 ```
 
 Initialize third-party submodules:
@@ -63,14 +62,25 @@ WhisAID is a Mandarin accent identification model. The released Chinese checkpoi
 
 ### Data
 
-Filelists live in `resources/whisAID/zh_all` and use relative wav paths:
+WhisAID filelists live in `resources/whisAID/zh_all`. Each row contains a relative wav path, speaker id, and accent id:
 
 ```text
 relative_wav_path|speaker_id|accent_id
 ```
 
-Pass the audio root at runtime with `--data-root`.
+The wav path is resolved against `--data-root`, so the CSV files stay machine-independent. For example:
 
+```text
+--data-root /path/to/data
+/path/to/data/
+  aishell3/
+  magichub_multiaccent/
+    magichub_singapore/
+    ...
+```
+
+With this layout, a filelist entry such as `magichub_multiaccent/magichub_singapore/wav_16k/...wav` is loaded from `/path/to/data/magichub_multiaccent/magichub_singapore/wav_16k/...wav`.
+  
 ### Fine-Tuning
 
 ```bash
@@ -86,7 +96,7 @@ Pass the audio root at runtime with `--data-root`.
 For F1, classification report, and reference-speech accent similarity:
 
 ```bash
-PYTHONPATH=. python whisAID_eval.py \
+PYTHONPATH=. python whisAID/whisAID_eval.py \
   --checkpoint-repo-id walston/whisaid-zh-grl \
   --test-path resources/whisAID/zh_all/test_unseen.csv \
   --data-root /path/to/data_root \
@@ -167,10 +177,16 @@ wav|text|spk|acc
 
 The wav field is resolved against `--data-root`, so the repository filelists do not need machine-specific absolute paths. Run from the repository root:
 
-`lengths.json` follows the same convention: keys are relative wav paths that match the filelists, and the training dataset resolves them with `--data-root` when audio needs to be loaded.
+`joycent/lengths.json` follows the same convention: keys are relative wav paths that match the filelists, and the training dataset resolves them with `--data-root` when audio needs to be loaded.
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python train_joycent.py \
+bash run_joycent.sh
+```
+
+For custom paths or hyperparameters, call the training module directly:
+
+```bash
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python joycent/train_joycent.py \
   --data-root /path/to/data_root \
   --train-filelist-path resources/filelists/zh_all/train.txt \
   --valid-filelist-path resources/filelists/zh_all/valid.txt \
@@ -182,20 +198,30 @@ Omit `--pretrained-model` to start from scratch. Other commonly changed options 
 
 ### Inference
 
-Edit paths in `inference_joycent.py`:
-
-- acoustic checkpoint path
-- vocoder checkpoint path
-- mel output directory
-- prompt speaker/audio paths
-
-Then run:
+`infer_joycent.sh` synthesizes from the built-in seen and unseen speaker reference pools by default. Override the checkpoint paths, output directory, speaker split, accent reference, or text list with environment variables:
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python inference_joycent.py
+ACOUSTIC_CHECKPOINT=/path/to/grad.pt \
+VOCODER_CHECKPOINT=/path/to/checkpoint.pkl \
+OUTPUT_DIR=outputs/joycent \
+SPEAKER_SET=all \
+ACCENT_REFERENCE=/path/to/accent_reference.wav \
+ACCENT_NAME=sg \
+CUDA_VISIBLE_DEVICES=0 \
+bash infer_joycent.sh
 ```
 
-Generated wav files are written under the configured output directory.
+Use `SPEAKER_SET=seen` or `SPEAKER_SET=unseen` for a single split. The underlying CLI also accepts custom references and text lists:
+
+```bash
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python joycent/inference_joycent.py \
+  --speaker-reference custom_spk=/path/to/speaker_reference.wav \
+  --accent-reference /path/to/accent_reference.wav \
+  --text-list /path/to/texts.txt \
+  --output-dir outputs/joycent
+```
+
+Each text item can be either `uid|phoneme sequence` or a raw phoneme sequence. Generated wav files are written under the configured output directory.
 
 ## Logs
 

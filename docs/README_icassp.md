@@ -8,7 +8,7 @@ pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1+cu1
 tensorboard
 six
 Cython
-cd model/monotonic_align; mkdir -p model/monotonic_align; python setup.py build_ext --inplace; cd ../..
+cd joycent/model/monotonic_align; python setup.py build_ext --inplace; cd ../../..
 einops
 numba
 librosa
