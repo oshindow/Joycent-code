@@ -2,23 +2,28 @@
 
 Official implementation of **Joycent**, an accent text-to-speech (TTS) framework for Mandarin, together with the pre-trained accent identification model **WhisAID** and the **ParallelWaveGAN** vocoder.
 
-## Results
-WhisAID results 
+## Results and Demo
 
-image/image.png
-## WhisAID Demo
-
-[![Open in Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue)](https://huggingface.co/spaces/walston/whisaid-demo)
-[![Model Repo](https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow)](https://huggingface.co/walston/whisaid-zh-grl)
-
-The demo accepts uploaded audio or microphone recording, predicts the accent name, and shows the full prediction distribution.
-
-<p align="center">
-  <a href="https://huggingface.co/spaces/walston/whisaid-demo">
-    <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="720">
-  </a>
-</p>
-
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>WhisAID Results</h3>
+      <p>Metrics are reported on seen speakers, unseen speakers, generalization gap, and SCSC. Higher is better except for <strong>SCSC↓</strong>.</p>
+      <img src="image/image.png" alt="WhisAID results on seen and unseen speakers" width="100%">
+    </td>
+    <td width="50%" valign="top">
+      <h3>WhisAID Demo</h3>
+      <p>
+        <a href="https://huggingface.co/spaces/walston/whisaid-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open in Spaces"></a>
+        <a href="https://huggingface.co/walston/whisaid-zh-grl"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow" alt="Model Repo"></a>
+      </p>
+      <p>The demo accepts uploaded audio or microphone recording, predicts the accent name, and shows the full prediction distribution.</p>
+      <a href="https://huggingface.co/spaces/walston/whisaid-demo">
+        <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="100%">
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## Environment
 
@@ -55,14 +60,6 @@ git submodule update --init --recursive
 ## WhisAID
 
 WhisAID is a Mandarin accent identification model. The released Chinese checkpoint supports **12 accent labels** and can be used for both classification and accent embedding extraction.
-
-### Results
-
-Metrics are reported on seen speakers, unseen speakers, generalization gap, and SCSC. Higher is better except for **SCSC↓**.
-
-<p align="center">
-  <img src="image/image.png" alt="WhisAID results on seen and unseen speakers" width="720">
-</p>
 
 ### Data
 
