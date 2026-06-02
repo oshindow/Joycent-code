@@ -7,6 +7,7 @@
 # MIT License for more details.
 
 import random
+import os
 import numpy as np
 
 import torch
@@ -24,6 +25,13 @@ sys.path.insert(0, 'hifi-gan')
 from meldataset import mel_spectrogram, mel_spectrogram_align
 import json
 import whisper
+
+def resolve_data_path(path, data_root=""):
+    path = os.path.expanduser(path)
+    if os.path.isabs(path) or not data_root:
+        return path
+    return os.path.join(os.path.expanduser(data_root), path)
+
 
 class TextMelDataset(torch.utils.data.Dataset):
     def __init__(self, filelist_path, cmudict_path, add_blank=True,
@@ -222,9 +230,11 @@ class TextMelSpeakerBatchCollate(object):
 class TextMelSpeakerAccentDataset(torch.utils.data.Dataset):
     def __init__(self, filelist_path, cmudict_path, add_blank=True,
                  n_fft=1024, n_mels=80, sample_rate=22050,
-                 hop_length=256, win_length=1024, f_min=0., f_max=8000, zh_path=None, train=False, whisper_flag=False):
+                 hop_length=256, win_length=1024, f_min=0., f_max=8000, zh_path=None, train=False, whisper_flag=False,
+                 data_root=""):
         super().__init__()
         self.filelist = parse_filelist(filelist_path, split_char='|')
+        self.data_root = data_root
         self.cmudict = cmudict.CMUDict(cmudict_path)
         if zh_path is not None:
             self.zhdict = zhdict.ZHDict(zh_path)
@@ -364,9 +374,11 @@ class TextMelSpeakerAccentBatchCollate(object):
 class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
     def __init__(self, filelist_path, cmudict_path, add_blank=True,
                  n_fft=1024, n_mels=80, sample_rate=22050,
-                 hop_length=256, win_length=1024, f_min=0., f_max=8000, zh_path=None, train=False, whisper_flag=False):
+                 hop_length=256, win_length=1024, f_min=0., f_max=8000, zh_path=None, train=False, whisper_flag=False,
+                 data_root=""):
         super().__init__()
         self.filelist = parse_filelist(filelist_path, split_char='|')
+        self.data_root = data_root
         self.cmudict = cmudict.CMUDict(cmudict_path)
         if zh_path is not None:
             self.zhdict = zhdict.ZHDict(zh_path)
@@ -388,8 +400,20 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
         if train:
             self.lengths_dict = self.get_lengths()
             # a = self.write_lengths()
-            self.lengths = [self.lengths_dict[key[0]] for key in self.filelist]
+            self.lengths = [self.get_length(key[0]) for key in self.filelist]
             self.accents = [int(key[3]) for key in self.filelist ]
+    def resolve_path(self, filepath):
+        return resolve_data_path(filepath, self.data_root)
+
+    def get_length(self, filepath):
+        resolved = self.resolve_path(filepath)
+        if filepath in self.lengths_dict:
+            return self.lengths_dict[filepath]
+        if resolved in self.lengths_dict:
+            return self.lengths_dict[resolved]
+        mel, _ = self.get_mel(resolved, self.whisper_flag)
+        return mel.shape[1]
+
     def get_spk_emb(self, filepath):
         spk_emb_path = filepath.replace('wav_16k', 'facodec_spk')
         # spk_emb_path = spk_emb_path.replace('.wav')
@@ -404,6 +428,7 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
     
     def get_triplet(self, line, whisper):
         filepath, text, speaker, accent = line[0], line[1], line[2], line[3]
+        filepath = self.resolve_path(filepath)
         text = self.get_text(text, add_blank=self.add_blank)
         mel, mel_whisper = self.get_mel(filepath, whisper)
         speaker = self.get_speaker(speaker)

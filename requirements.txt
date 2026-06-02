@@ -25,3 +25,4 @@ kaldiio
 lightning_utilities
 torchmetrics
 transformers==4.46.3
+pyworld

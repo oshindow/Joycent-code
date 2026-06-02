@@ -99,22 +99,7 @@ Or use the helper script:
 ```bash
 bash infer_whisAID.sh
 ```
-
-The script prints batch accuracy, a classification report, and per-accent silhouette scores when speaker labels are available.
-
-### Hugging Face Checkpoint Upload
-
-Upload a local WhisAID checkpoint to the Hugging Face Hub:
-
-```bash
-huggingface-cli login
-PYTHONPATH=. python tools/upload_whisaid_to_hf.py \
-  --repo-id <user-or-org>/whisaid-zh-grl \
-  --checkpoint-path /path/to/checkpoint-epoch=0006.ckpt
-```
-
-Inference can then download the checkpoint with `--checkpoint-repo-id`.
-
+ 
 ### Accent Embedding
 
 WhisAID is registered as a Hugging Face `AutoModel`. Minimal code for one wav accent embedding:
@@ -142,29 +127,70 @@ accent_embedding = out.features[0].cpu().numpy()
 accent_id = out.logits.argmax(dim=-1).item()
 ```
 
-## TTS
+## Joycent
 
-The current TTS entry points are:
+### Feature Preparation
+
+Before Joycent fine-tuning, dump the speaker and accent embeddings used by the training dataset. Both scripts read the same filelist format as training:
 
 ```text
-train_joycent.py
-inference_joycent.py
+wav|text|spk|acc
 ```
+
+The wav path is relative to `--data-root`. Speaker embeddings are written next to the wav tree under `facodec_spk`, and accent embeddings are written under `feat_acc_grl_030326`.
+
+Recommended batched extraction:
+
+```bash
+DATA_ROOT=/path/to/data_root \
+FILELIST=resources/filelists/zh_all/train.txt \
+GPUS=0,1 \
+NUM_WORKERS=2 \
+ACC_BATCH_SIZE=16 \
+bash extract_feature.sh
+```
+
+Use `STAGE=spk` or `STAGE=acc` to run only one embedding type.
+
+```bash
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python dump_spk_embeddings.py \
+  --data-root /path/to/data_root \
+  --filelist-path resources/filelists/zh_all/train.txt
+```
+
+```bash
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python dump_acc_embeddings.py \
+  --data-root /path/to/data_root \
+  --filelist-path resources/filelists/zh_all/train.txt \
+  --checkpoint-repo-id walston/whisaid-zh-grl
+```
+
+Repeat the same commands with `--filelist-path resources/filelists/zh_all/valid.txt` if the validation wavs are not already covered by the training filelist.
+
+The old entry points `facodec.py` and `dump_acc_features.py` are kept as compatibility wrappers, but new runs should use `dump_spk_embeddings.py` and `dump_acc_embeddings.py`.
 
 ### Training
 
-Before training, update the paths and experiment settings near the top of `train_joycent.py`:
+TTS filelists use the same relative-path convention as WhisAID. Each row keeps four fields:
 
-- `train_filelist_path`
-- `valid_filelist_path`
-- `log_dir`
-- `pretrained_model`
+```text
+wav|text|spk|acc
+```
 
-Then run from the repository root:
+The wav field is resolved against `--data-root`, so the repository filelists do not need machine-specific absolute paths. Run from the repository root:
+
+`lengths.json` follows the same convention: keys are relative wav paths that match the filelists, and the training dataset resolves them with `--data-root` when audio needs to be loaded.
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python train_joycent.py
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python train_joycent.py \
+  --data-root /path/to/data_root \
+  --train-filelist-path resources/filelists/zh_all/train.txt \
+  --valid-filelist-path resources/filelists/zh_all/valid.txt \
+  --log-dir logs/joycent \
+  --pretrained-model /path/to/acoustic_checkpoint.pt
 ```
+
+Omit `--pretrained-model` to start from scratch. Other commonly changed options are `--batch-size`, `--learning-rate`, `--n-epochs`, and `--master-port`.
 
 ### Inference
 

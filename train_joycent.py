@@ -10,6 +10,7 @@ import numpy as np
 from tqdm import tqdm
 import time
 import torch
+import argparse
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
@@ -24,9 +25,9 @@ from data_utils import DistributedBucketSampler
 from optimizer import ScheduledOptim
 torch.autograd.set_detect_anomaly(True)
 
-train_filelist_path = 'resources/filelists/zh_all/train.dedup.txt.rmSSB0342.rmSSB1567'
-# train_filelist_path = 'resources/whisAID/zh_all/train.csv'
+train_filelist_path = 'resources/filelists/zh_all/train.txt'
 valid_filelist_path = 'resources/filelists/zh_all/valid.txt'
+data_root = ''
 cmudict_path = params.cmudict_path
 zhdict_path = params.zhdict_path
 add_blank = True
@@ -35,7 +36,7 @@ n_spks = 222  # remove others
 n_accents = 4 # 3 remove others
 spk_emb_dim = params.spk_emb_dim
 
-log_dir = '/data2/xintong/gradtts/logs/joycent_e1'
+log_dir = 'logs/joycent'
 n_epochs = params.n_epochs
 params.batch_size = 32
 out_size = params.out_size
@@ -81,8 +82,6 @@ import torch.multiprocessing as mp
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
-# import sys
-# sys.path.append('/home/xintong/accent_tts_server/ParallelWaveGAN/')
 from ParallelWaveGAN.parallel_wavegan.datasets import (
     AudioDataset,
     AudioSCPDataset,
@@ -97,7 +96,38 @@ n_warm_up_step = 40000
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 
-# os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+def parse_args():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument("--train-filelist-path", default=train_filelist_path)
+    parser.add_argument("--valid-filelist-path", default=valid_filelist_path)
+    parser.add_argument(
+        "--data-root",
+        default=data_root,
+        help="Root directory prepended to relative wav paths in TTS filelists",
+    )
+    parser.add_argument("--log-dir", default=log_dir)
+    parser.add_argument("--pretrained-model", default=pretrained_model)
+    parser.add_argument("--batch-size", type=int, default=params.batch_size)
+    parser.add_argument("--learning-rate", type=float, default=learning_rate)
+    parser.add_argument("--n-epochs", type=int, default=n_epochs)
+    parser.add_argument("--master-port", default="60003")
+    return parser.parse_args()
+
+
+def apply_args(args):
+    global train_filelist_path, valid_filelist_path, data_root
+    global log_dir, pretrained_model, learning_rate, n_epochs
+    train_filelist_path = args.train_filelist_path
+    valid_filelist_path = args.valid_filelist_path
+    data_root = args.data_root
+    log_dir = args.log_dir
+    pretrained_model = args.pretrained_model
+    learning_rate = args.learning_rate
+    n_epochs = args.n_epochs
+    params.batch_size = args.batch_size
+    os.environ['MASTER_PORT'] = args.master_port
 
 def infer_mel_to_audio(dumpdir):
 
@@ -151,22 +181,24 @@ def infer_mel_to_audio(dumpdir):
                 "PCM_16",
             )
 
-def main(params):
+def main(params, runtime_args):
     """Assume Single Node Multi GPUs Training Only"""
     assert torch.cuda.is_available(), "CPU training is not allowed."
 
     n_gpus = torch.cuda.device_count()
     os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '60003'
+    os.makedirs(log_dir, exist_ok=True)
+    os.environ.setdefault('MASTER_PORT', '60003')
 
     print('Total batch size:', params.batch_size)
     params.batch_size = params.batch_size // n_gpus
     print('Batch size per GPU :', params.batch_size)
 
-    mp.spawn(run, nprocs=n_gpus, args=(n_gpus,))
+    mp.spawn(run, nprocs=n_gpus, args=(n_gpus, runtime_args))
 
 
-def run(rank, n_gpus):
+def run(rank, n_gpus, runtime_args):
+    apply_args(argparse.Namespace(**runtime_args))
     dist.init_process_group(
         backend='nccl', init_method='env://', world_size=n_gpus, rank=rank)
     torch.manual_seed(random_seed)
@@ -188,7 +220,8 @@ def run(rank, n_gpus):
         print('Initializing data loaders...')
     train_dataset = TextMelSpeakerAccentQwenDataset(train_filelist_path, cmudict_path, add_blank,
                                           n_fft, n_feats, sample_rate, hop_length,
-                                          win_length, f_min, f_max, zhdict_path, train=True, whisper_flag=True)
+                                          win_length, f_min, f_max, zhdict_path, train=True, whisper_flag=True,
+                                          data_root=data_root)
     batch_collate = TextMelSpeakerAccentQwenBatchCollate()
     train_sampler = DistributedBucketSampler(
         logger,
@@ -205,7 +238,8 @@ def run(rank, n_gpus):
     if rank == 0:
         test_dataset = TextMelSpeakerAccentQwenDataset(valid_filelist_path, cmudict_path, add_blank,
                                             n_fft, n_feats, sample_rate, hop_length,
-                                            win_length, f_min, f_max, zhdict_path, whisper_flag=True)
+                                            win_length, f_min, f_max, zhdict_path, whisper_flag=True,
+                                            data_root=data_root)
         test_sampler = DistributedSampler(dataset=test_dataset, num_replicas=n_gpus,
                                         rank=rank,
                                         shuffle=False)
@@ -265,16 +299,24 @@ def run(rank, n_gpus):
     # net_d = DDP(net_d, device_ids=[rank],find_unused_parameters=True)
     # resume
     try:
+        if not pretrained_model:
+            raise FileNotFoundError("No pretrained model was provided.")
         checkpoint = torch.load(pretrained_model)
         
         # Restore the model and optimizer state
         model.load_state_dict(checkpoint['model'])
-        optimizer.load_state_dict(checkpoint['optim'])
+        optimizer_state = checkpoint.get('optim_main') or checkpoint.get('optim')
+        if optimizer_state is not None:
+            optimizer_main.load_state_dict(optimizer_state)
 
         # Optionally, restore the epoch and loss if needed
         start_epoch = checkpoint['epoch']
         # loss = checkpoint['loss']
-        iteration = optimizer.state_dict()['state'][0]['step'].int().item()
+        iteration = 0
+        if optimizer_main.state_dict()['state']:
+            first_state = next(iter(optimizer_main.state_dict()['state'].values()))
+            step = first_state.get('step', 0)
+            iteration = int(step.item()) if hasattr(step, 'item') else int(step)
         # iteration = 53495 
     except:
         start_epoch = 0
@@ -443,5 +485,7 @@ def run(rank, n_gpus):
 
 
 if __name__ == "__main__":
-    main(params)
+    args = parse_args()
+    apply_args(args)
+    main(params, vars(args))
     
