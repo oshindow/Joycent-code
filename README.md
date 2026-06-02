@@ -1,8 +1,11 @@
 # Joycent Code
 
-Official implementation of **Joycent**, an accent text-to-speech (TTS) framework, together with the pre-trained accent identification model **WhisAID** and the **ParallelWaveGAN** vocoder.
+Official implementation of **Joycent**, an accent text-to-speech (TTS) framework for Mandarin, together with the pre-trained accent identification model **WhisAID** and the **ParallelWaveGAN** vocoder.
 
+## Results
+WhisAID results 
 
+image/image.png
 ## WhisAID Demo
 
 [![Open in Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue)](https://huggingface.co/spaces/walston/whisaid-demo)
@@ -57,17 +60,9 @@ WhisAID is a Mandarin accent identification model. The released Chinese checkpoi
 
 Metrics are reported on seen speakers, unseen speakers, generalization gap, and SCSC. Higher is better except for **SCSC↓**.
 
-| System | Setting | Seen F1↑ | Seen Acc.↑ | Unseen Prec.↑ | Unseen Rec.↑ | Unseen F1↑ | Unseen Acc.↑ | Gap F1↓ | Gap Acc.↓ | SCSC↓ |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| GenAID | Baseline (EN) | **0.78** | 0.62 | 0.63 | 0.56 | 0.55 | 0.56 | 0.23 | **0.06** | 0.079 |
-| WhisAID | EN, λ=0.1 | 0.63 | 0.79 | 0.70 | 0.55 | 0.54 | 0.55 | **0.09** | 0.24 | 0.063 |
-| WhisAID | EN, λ=0.05 | 0.68 | **0.80** | **0.70** | **0.59** | **0.58** | **0.58** | 0.10 | 0.22 | **0.059** |
-| WhisAID | EN, λ=0.01 | 0.64 | 0.79 | 0.69 | 0.56 | 0.55 | 0.56 | **0.09** | 0.23 | 0.066 |
-| WhisAID | EN, w/o GRL | 0.71 | 0.81 | 0.70 | 0.58 | 0.58 | 0.58 | 0.13 | 0.23 | 0.075 |
-| WhisAID | CN, small | 0.91 | 0.91 | 0.58 | 0.50 | 0.50 | 0.61 | 0.41 | 0.30 | 0.181 |
-| WhisAID | CN, medium | **0.93** | **0.93** | **0.60** | **0.58** | **0.57** | **0.64** | **0.36** | **0.29** | 0.158 |
-| WhisAID | CN, large-v3-turbo | 0.87 | 0.90 | 0.56 | 0.48 | 0.49 | 0.59 | 0.38 | 0.31 | **0.102** |
-| WhisAID | CN, w/o GRL | 0.92 | 0.92 | 0.60 | 0.55 | 0.54 | 0.61 | 0.38 | 0.31 | 0.221 |
+<p align="center">
+  <img src="image/image.png" alt="WhisAID results on seen and unseen speakers" width="720">
+</p>
 
 ### Data
 
