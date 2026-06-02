@@ -3,6 +3,20 @@
 Official implementation of **Joycent**, an accent text-to-speech (TTS) framework, together with the pre-trained accent identification model **WhisAID** and the **ParallelWaveGAN** vocoder.
 
 
+## WhisAID Demo
+
+[![Open in Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue)](https://huggingface.co/spaces/walston/whisaid-demo)
+[![Model Repo](https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow)](https://huggingface.co/walston/whisaid-zh-grl)
+
+The demo accepts uploaded audio or microphone recording, predicts the accent name, and shows the full prediction distribution.
+
+<p align="center">
+  <a href="https://huggingface.co/spaces/walston/whisaid-demo">
+    <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="720">
+  </a>
+</p>
+
+
 ## Environment
 
 Tested with Python 3.10 and CUDA-enabled PyTorch.
@@ -37,72 +51,57 @@ git submodule update --init --recursive
 
 ## WhisAID
 
-WhisAID filelists live in `resources/whisAID/zh_all`. They use relative wav paths, so the audio root is supplied at runtime with `--data-root`.
+WhisAID is a Mandarin accent identification model. The released Chinese checkpoint supports **12 accent labels** and can be used for both classification and accent embedding extraction.
 
-CSV format:
+### Results
+
+Metrics are reported on seen speakers, unseen speakers, generalization gap, and SCSC. Higher is better except for **SCSC↓**.
+
+| System | Setting | Seen F1↑ | Seen Acc.↑ | Unseen Prec.↑ | Unseen Rec.↑ | Unseen F1↑ | Unseen Acc.↑ | Gap F1↓ | Gap Acc.↓ | SCSC↓ |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| GenAID | Baseline (EN) | **0.78** | 0.62 | 0.63 | 0.56 | 0.55 | 0.56 | 0.23 | **0.06** | 0.079 |
+| WhisAID | EN, λ=0.1 | 0.63 | 0.79 | 0.70 | 0.55 | 0.54 | 0.55 | **0.09** | 0.24 | 0.063 |
+| WhisAID | EN, λ=0.05 | 0.68 | **0.80** | **0.70** | **0.59** | **0.58** | **0.58** | 0.10 | 0.22 | **0.059** |
+| WhisAID | EN, λ=0.01 | 0.64 | 0.79 | 0.69 | 0.56 | 0.55 | 0.56 | **0.09** | 0.23 | 0.066 |
+| WhisAID | EN, w/o GRL | 0.71 | 0.81 | 0.70 | 0.58 | 0.58 | 0.58 | 0.13 | 0.23 | 0.075 |
+| WhisAID | CN, small | 0.91 | 0.91 | 0.58 | 0.50 | 0.50 | 0.61 | 0.41 | 0.30 | 0.181 |
+| WhisAID | CN, medium | **0.93** | **0.93** | **0.60** | **0.58** | **0.57** | **0.64** | **0.36** | **0.29** | 0.158 |
+| WhisAID | CN, large-v3-turbo | 0.87 | 0.90 | 0.56 | 0.48 | 0.49 | 0.59 | 0.38 | 0.31 | **0.102** |
+| WhisAID | CN, w/o GRL | 0.92 | 0.92 | 0.60 | 0.55 | 0.54 | 0.61 | 0.38 | 0.31 | 0.221 |
+
+### Data
+
+Filelists live in `resources/whisAID/zh_all` and use relative wav paths:
 
 ```text
 relative_wav_path|speaker_id|accent_id
 ```
 
-Expected data layout:
-
-```text
-<data-root>/
-  aishell3/
-  magichub_multiaccent/
-    magichub_singapore/
-    <other MagicHub accent datasets>/
-```
+Pass the audio root at runtime with `--data-root`.
 
 ### Fine-Tuning
 
-Run from the repository root:
-
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID/whisAID_train_zh_grl_medium.py \
-  --data-root /path/to/data_root \
-  --train-path resources/whisAID/zh_all/train.csv \
-  --val-path resources/whisAID/zh_all/test_unseen.csv \
-  --train-name whisAID_zh_grl \
-  --train-id 001 \
-  --output-dir exp/whisAID
+./run_whisAID.sh
 ```
 
-The convenience script uses the `joycent` conda environment and local repository imports:
+### Evaluation
 
 ```bash
-bash run_whisAID.sh
+./infer_whisAID.sh
 ```
 
-Checkpoints and TensorBoard logs are written under:
-
-```text
-<output-dir>/<train-name>/<train-id>/
-<output-dir>/<train-name>/logs/<train-id>/
-```
-
-### Inference
-
-Evaluate a checkpoint on a filelist:
+For F1, classification report, and reference-speech accent similarity:
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python whisAID_inference.py \
+PYTHONPATH=. python whisAID_eval.py \
   --checkpoint-repo-id walston/whisaid-zh-grl \
   --test-path resources/whisAID/zh_all/test_unseen.csv \
   --data-root /path/to/data_root \
-  --batch-size 16
+  --target-reference-audio /path/to/reference_speech.wav
 ```
 
-Or use the helper script:
-
-```bash
-bash infer_whisAID.sh
-```
- 
 ### Accent Embedding
-
-WhisAID is registered as a Hugging Face `AutoModel`. Minimal code for one wav accent embedding:
 
 ```python
 import torch
@@ -115,10 +114,7 @@ model = AutoModel.from_config(
 ).cuda().eval()
 
 audio = torch.from_numpy(load_audio("/path/to/audio.wav"))
-mel = log_mel_spectrogram(
-    pad_or_trim(audio),
-    n_mels=model.config.n_mels,
-).unsqueeze(0).cuda()
+mel = log_mel_spectrogram(pad_or_trim(audio), n_mels=model.config.n_mels).unsqueeze(0).cuda()
 
 with torch.no_grad():
     out = model(input_ids=mel)

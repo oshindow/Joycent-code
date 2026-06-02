@@ -1,0 +1,11 @@
+gradio==5.34.2
+torch
+transformers==4.46.3
+huggingface_hub
+numpy
+pandas
+tqdm
+tiktoken
+numba
+regex
+more-itertools
