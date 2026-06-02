@@ -6,6 +6,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # MIT License for more details.
 
+import os
 import random
 import numpy as np
 
@@ -20,7 +21,7 @@ from joycent.model.utils import fix_len_compatibility
 from joycent.params import seed as random_seed
 
 import sys
-sys.path.insert(0, 'hifi-gan')
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'hifi-gan'))
 from meldataset import mel_spectrogram, mel_spectrogram_align
 import json
 import whisper
