@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
 DATA_ROOT="${DATA_ROOT:-/data2/xintong/mandarin_accent}"
 FILELIST="${FILELIST:-resources/filelists/zh_all/train.txt}"
 GPUS="${GPUS:-1,2}"
@@ -24,7 +27,7 @@ run_stage() {
     local gpu_id="${GPU_IDS[$gpu_index]}"
     (
       export CUDA_VISIBLE_DEVICES="${gpu_id}"
-      PYTHONPATH=. python "$@" \
+      PYTHONPATH="${REPO_ROOT}:${PYTHONPATH:-}" python "$@" \
         --data-root "${DATA_ROOT}" \
         --filelist-path "${FILELIST}" \
         --num-shards "${NUM_WORKERS}" \
@@ -38,16 +41,16 @@ run_stage() {
 
 case "${STAGE}" in
   spk)
-    run_stage "speaker embeddings" dump_spk_embeddings.py
+    run_stage "speaker embeddings" "${SCRIPT_DIR}/dump_spk_embeddings.py"
     ;;
   acc)
-    run_stage "accent embeddings" dump_acc_embeddings.py \
+    run_stage "accent embeddings" "${SCRIPT_DIR}/dump_acc_embeddings.py" \
       --batch-size "${ACC_BATCH_SIZE}" \
       --checkpoint-repo-id "${WHISAID_REPO_ID}"
     ;;
   all)
-    run_stage "speaker embeddings" dump_spk_embeddings.py
-    run_stage "accent embeddings" dump_acc_embeddings.py \
+    run_stage "speaker embeddings" "${SCRIPT_DIR}/dump_spk_embeddings.py"
+    run_stage "accent embeddings" "${SCRIPT_DIR}/dump_acc_embeddings.py" \
       --batch-size "${ACC_BATCH_SIZE}" \
       --checkpoint-repo-id "${WHISAID_REPO_ID}"
     ;;

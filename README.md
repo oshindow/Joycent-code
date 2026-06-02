@@ -135,19 +135,19 @@ FILELIST=resources/filelists/zh_all/train.txt \
 GPUS=0,1 \
 NUM_WORKERS=2 \
 ACC_BATCH_SIZE=16 \
-bash extract_feature.sh
+bash feature_extraction/extract_feature.sh
 ```
 
 Use `STAGE=spk` or `STAGE=acc` to run only one embedding type.
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python dump_spk_embeddings.py \
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python feature_extraction/dump_spk_embeddings.py \
   --data-root /path/to/data_root \
   --filelist-path resources/filelists/zh_all/train.txt
 ```
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python dump_acc_embeddings.py \
+PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python feature_extraction/dump_acc_embeddings.py \
   --data-root /path/to/data_root \
   --filelist-path resources/filelists/zh_all/train.txt \
   --checkpoint-repo-id walston/whisaid-zh-grl
@@ -155,7 +155,7 @@ PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python dump_acc_embeddings.py \
 
 Repeat the same commands with `--filelist-path resources/filelists/zh_all/valid.txt` if the validation wavs are not already covered by the training filelist.
 
-The old entry points `facodec.py` and `dump_acc_features.py` are kept as compatibility wrappers, but new runs should use `dump_spk_embeddings.py` and `dump_acc_embeddings.py`.
+The old entry points `feature_extraction/facodec.py` and `feature_extraction/dump_acc_features.py` are kept as compatibility wrappers, but new runs should use `feature_extraction/dump_spk_embeddings.py` and `feature_extraction/dump_acc_embeddings.py`.
 
 ### Training
 
