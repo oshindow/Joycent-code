@@ -18,6 +18,9 @@ Joycent and the SG-only fine-tuned CosyVoice3 model are displayed side by side
 with separate controls, outputs, and runtime information. Loading or generating
 with one model does not clear the other model's runtime or output.
 
+The first request for each model downloads and loads its checkpoints and may
+take several minutes. Later requests reuse the cached model and are much faster.
+
 Joycent starts with built-in speaker and accent references, so the default
 phoneme sequence can be synthesized immediately. Users may replace either
 reference with an uploaded file or microphone recording.

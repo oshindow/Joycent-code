@@ -299,6 +299,13 @@ CSS = """
 .cosyvoice-panel h2 {
     color: #a84d16;
 }
+.startup-notice {
+    background: #fff8d8;
+    border: 1px solid #e1b94f;
+    border-radius: 10px;
+    color: #6f5100;
+    padding: 10px 14px;
+}
 """
 
 
@@ -310,6 +317,12 @@ with gr.Blocks(
     gr.Markdown(
         "# Singapore Mandarin Accent TTS\n"
         "Joycent and the SG-only fine-tuned CosyVoice3 model are available side by side."
+    )
+    gr.Markdown(
+        "**First run notice:** The first request for each model downloads and "
+        "loads its checkpoints, so generation may take several minutes. "
+        "Later requests reuse the cached model and are much faster.",
+        elem_classes=["startup-notice"],
     )
     with gr.Row(equal_height=False):
         with gr.Column(elem_classes=["joycent-panel"]):

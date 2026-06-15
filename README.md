@@ -21,7 +21,7 @@ Project demo page: [anonymous-accent-tts.github.io/Joycent-demo](https://anonymo
         <a href="https://huggingface.co/spaces/walston/whisaid-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open WhisAID Space"></a>
         <a href="https://huggingface.co/walston/whisaid-zh-grl"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow" alt="WhisAID model repository"></a>
       </p>
-      <p>Upload or record speech to predict its accent and inspect the full class distribution. The first request loads the model; later requests reuse the cached model.</p>
+      <p>Upload or record speech to predict its accent and inspect the full class distribution.</p>
       <a href="https://huggingface.co/spaces/walston/whisaid-demo">
         <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="100%">
       </a>
@@ -39,7 +39,7 @@ Project demo page: [anonymous-accent-tts.github.io/Joycent-demo](https://anonymo
         <a href="https://huggingface.co/spaces/walston/joycent-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open Joycent Space"></a>
         <a href="https://huggingface.co/walston/joycent"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fjoycent-yellow" alt="Joycent model repository"></a>
       </p>
-      <p>Joycent and the SG-only fine-tuned CosyVoice3 model are displayed side by side with independent inputs, outputs, model caches, and runtime measurements.</p>
+      <p>Joycent and the Singaporean-accented Mandarin speech data fine-tuned CosyVoice3 model.</p>
       <a href="https://huggingface.co/spaces/walston/joycent-demo">
         <img src="image/joycent-demo.gif" alt="Joycent and CosyVoice3 Hugging Face Space demo" width="100%">
       </a>
@@ -200,25 +200,4 @@ For Joycent, select local or Hugging Face acoustic and vocoder checkpoints with
 For CosyVoice3, the script loads the official
 `FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model and replaces its `llm.pt`
 with the SG-only checkpoint from `walston/cosyvoice3-sg`.
-
-## Hugging Face Space
-
-The Space displays Joycent on the left and CosyVoice3 SG-only on the right.
-Each model has separate controls, audio output, runtime information, and model
-cache. The bundled Joycent references allow immediate synthesis with the
-default phoneme sequence.
-
-Upload or update the Space with:
-
-```bash
-bash demo/joycent_space/upload_space.sh walston/joycent-demo
-```
-
-The Space reports model loading time, feature extraction time, inference time,
-generated audio duration, and RTF excluding model loading.
-
-To create or update the standalone CosyVoice3 SG model repository:
-
-```bash
-bash demo/cosyvoice_sg_model_repo/upload.sh
-```
+ 
