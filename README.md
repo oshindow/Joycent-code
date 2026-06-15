@@ -9,7 +9,7 @@ Official implementation of **Joycent**, an accent text-to-speech (TTS) framework
     <td width="50%" valign="top">
       <h3>WhisAID Results</h3>
       <p>Metrics are reported on seen speakers, unseen speakers, generalization gap, and SCSC. Higher is better except for <strong>SCSC↓</strong>.</p>
-      <img src="image/image.png" alt="WhisAID results on seen and unseen speakers" width="100%">
+      <img src="image/whisAID.png" alt="WhisAID results on seen and unseen speakers" width="100%">
     </td>
     <td width="50%" valign="top">
       <h3>WhisAID Demo</h3>
@@ -21,6 +21,21 @@ Official implementation of **Joycent**, an accent text-to-speech (TTS) framework
       <a href="https://huggingface.co/spaces/walston/whisaid-demo">
         <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="100%">
       </a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Joycent Results</h3>
+      <p>Metrics cover speech quality, accent similarity, speaker similarity, and real-time factor. Higher is better except for <strong>RTF↓</strong>.</p>
+      <img src="image/Joycent.png" alt="Joycent accent TTS results" width="100%">
+    </td>
+    <td width="50%" valign="top">
+      <h3>Joycent Demo</h3>
+      <p>
+        <a href="https://huggingface.co/spaces/walston/joycent-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open in Spaces"></a>
+        <a href="https://huggingface.co/walston/joycent"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fjoycent-yellow" alt="Model Repo"></a>
+      </p>
+      <p>The demo supports Joycent and the SG-only fine-tuned CosyVoice3 model for Singapore Mandarin accent speech synthesis.</p>
     </td>
   </tr>
 </table>
@@ -79,7 +94,6 @@ The wav path is resolved against `--data-root`, so the CSV files stay machine-in
     ...
 ```
 
-With this layout, a filelist entry such as `magichub_multiaccent/magichub_singapore/wav_16k/...wav` is loaded from `/path/to/data/magichub_multiaccent/magichub_singapore/wav_16k/...wav`.
   
 ### Fine-Tuning
 
@@ -87,21 +101,17 @@ With this layout, a filelist entry such as `magichub_multiaccent/magichub_singap
 ./run_whisAID.sh
 ```
 
+Set `DATA_ROOT` and other training options at the top of `run_whisAID.sh`.
+
 ### Evaluation
 
 ```bash
 ./infer_whisAID.sh
 ```
 
-For F1, classification report, and reference-speech accent similarity:
+Set `DATA_ROOT` and `TARGET_REFERENCE_AUDIO` at the top of `infer_whisAID.sh`.
 
-```bash
-PYTHONPATH=. python whisAID/whisAID_eval.py \
-  --checkpoint-repo-id walston/whisaid-zh-grl \
-  --test-path resources/whisAID/zh_all/test_unseen.csv \
-  --data-root /path/to/data_root \
-  --target-reference-audio /path/to/reference_speech.wav
-```
+output classificaiton resutls and accent similarity score compared with `--target-reference-audio` (use absolate path).
 
 ### Accent Embedding
 
@@ -140,32 +150,12 @@ The wav path is relative to `--data-root`. Speaker embeddings are written next t
 Recommended batched extraction:
 
 ```bash
-DATA_ROOT=/path/to/data_root \
-FILELIST=resources/filelists/zh_all/train.txt \
-GPUS=0,1 \
-NUM_WORKERS=2 \
-ACC_BATCH_SIZE=16 \
 bash feature_extraction/extract_feature.sh
 ```
 
-Use `STAGE=spk` or `STAGE=acc` to run only one embedding type.
-
-```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python feature_extraction/dump_spk_embeddings.py \
-  --data-root /path/to/data_root \
-  --filelist-path resources/filelists/zh_all/train.txt
-```
-
-```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python feature_extraction/dump_acc_embeddings.py \
-  --data-root /path/to/data_root \
-  --filelist-path resources/filelists/zh_all/train.txt \
-  --checkpoint-repo-id walston/whisaid-zh-grl
-```
-
-Repeat the same commands with `--filelist-path resources/filelists/zh_all/valid.txt` if the validation wavs are not already covered by the training filelist.
-
-The old entry points `feature_extraction/facodec.py` and `feature_extraction/dump_acc_features.py` are kept as compatibility wrappers, but new runs should use `feature_extraction/dump_spk_embeddings.py` and `feature_extraction/dump_acc_embeddings.py`.
+Set `DATA_ROOT`, `FILELIST`, GPU options, and `STAGE` at the top of
+`feature_extraction/extract_feature.sh`. Use `STAGE=spk` or `STAGE=acc` to run
+only one embedding type.
 
 ### Training
 
@@ -175,87 +165,43 @@ TTS filelists use the same relative-path convention as WhisAID. Each row keeps f
 wav|text|spk|acc
 ```
 
-The wav field is resolved against `--data-root`, so the repository filelists do not need machine-specific absolute paths. Run from the repository root:
-
-`joycent/lengths.json` follows the same convention: keys are relative wav paths that match the filelists, and the training dataset resolves them with `--data-root` when audio needs to be loaded.
+Run from the repository root:
 
 ```bash
 bash run_joycent.sh
 ```
 
-For custom paths or hyperparameters, call the training module directly:
-
-```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python joycent/train_joycent.py \
-  --data-root /path/to/data_root \
-  --train-filelist-path resources/filelists/zh_all/train.txt \
-  --valid-filelist-path resources/filelists/zh_all/valid.txt \
-  --log-dir logs/joycent \
-  --pretrained-model /path/to/acoustic_checkpoint.pt
-```
-
-Omit `--pretrained-model` to start from scratch. Other commonly changed options are `--batch-size`, `--learning-rate`, `--n-epochs`, and `--master-port`.
-
 ### Inference
 
-`infer_joycent.sh` synthesizes from the built-in seen and unseen speaker reference pools by default. Override the checkpoint paths, output directory, speaker split, accent reference, or text list with environment variables:
+Set `MODEL=joycent` or `MODEL=cosyvoice` at the top of `infer_joycent.sh`.
+
+For the Joycent model:
 
 ```bash
-ACOUSTIC_CHECKPOINT=/path/to/grad.pt \
-VOCODER_CHECKPOINT=/path/to/checkpoint.pkl \
-OUTPUT_DIR=outputs/joycent \
-SPEAKER_SET=all \
-ACCENT_REFERENCE=/path/to/accent_reference.wav \
-ACCENT_NAME=sg \
-CUDA_VISIBLE_DEVICES=0 \
 bash infer_joycent.sh
 ```
 
-Use `SPEAKER_SET=seen` or `SPEAKER_SET=unseen` for a single split. The underlying CLI also accepts custom references and text lists:
+For CosyVoice, the script loads the official
+`FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model and replaces only `llm.pt`
+with the SG-only checkpoint at `walston/cosyvoice3-sg/llm.pt`.
+Configure the prompt wav, synthesis text, and output path in the CosyVoice
+section of the script.
+
+The SG-only checkpoint has its own model repository. To create or update it:
 
 ```bash
-PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 python joycent/inference_joycent.py \
-  --speaker-reference custom_spk=/path/to/speaker_reference.wav \
-  --accent-reference /path/to/accent_reference.wav \
-  --text-list /path/to/texts.txt \
-  --output-dir outputs/joycent
+bash demo/cosyvoice_sg_model_repo/upload.sh
 ```
 
-Each text item can be either `uid|phoneme sequence` or a raw phoneme sequence. Generated wav files are written under the configured output directory.
+### Hugging Face Space
 
-## Logs
-
-TensorBoard:
+The Gradio Space supports both Joycent and the SG-only CosyVoice3 model:
 
 ```bash
-tensorboard --logdir logs
+bash demo/joycent_space/upload_space.sh walston/joycent-demo
 ```
 
-Common output locations:
-
-```text
-logs/
-exp/
-outputs/
-```
-
-## Repository Rules
-
-This repo excludes:
-
-- files larger than 100 MB
-- soft links
-- checkpoints and model weights
-- raw datasets
-- generated wav/audio samples
-- Python caches and build artifacts
-
-Before pushing:
-
-```bash
-find . -type l -ls
-find . -type f -size +100M -print
-git status
-```
-
-Both `find` commands should return nothing.
+The Space loads Joycent from `walston/joycent`, the SG-only CosyVoice checkpoint
+from `walston/cosyvoice3-sg`, the official CosyVoice3 base model from
+`FunAudioLLM/Fun-CosyVoice3-0.5B-2512`, and WhisAID from
+`walston/whisaid-zh-grl`.

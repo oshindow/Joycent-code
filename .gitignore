@@ -29,7 +29,7 @@ datasets/
 data/
 outputs/
 out/
-*.wav
+
 *.flac
 *.mp3
 *.npy

@@ -4,14 +4,17 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
-# PYTHONPATH=. CUDA_VISIBLE_DEVICES=2 python whisAID_inference.py \
-#   --checkpoint-repo-id walston/whisaid-zh-grl \
-#   --test-path resources/whisAID/zh_all/test_unseen.csv \
-#   --data-root /data2/xintong/mandarin_accent
-  
-PYTHONPATH=. python whisAID/whisAID_eval.py \
-  --checkpoint-repo-id walston/whisaid-zh-grl \
-  --test-path resources/whisAID/zh_all/test_unseen.csv \
-  --data-root /data2/xintong/mandarin_accent \
-  --target-reference-audio /home/xintong/Joycent_code/A0001_S002_0_G0002_segment_0064.wav \
-  --similarity-output whisaid_singapore_similarity.csv
+DATA_ROOT=/path/to/data_root
+TARGET_REFERENCE_AUDIO=/path/to/reference_speech.wav
+CHECKPOINT_REPO_ID=walston/whisaid-zh-grl
+TEST_PATH=resources/whisAID/zh_all/test_unseen.csv
+SIMILARITY_OUTPUT=whisaid_singapore_similarity.csv
+CUDA_DEVICE=0
+
+PYTHONPATH=. CUDA_VISIBLE_DEVICES="$CUDA_DEVICE" \
+  python whisAID/whisAID_eval.py \
+  --checkpoint-repo-id "$CHECKPOINT_REPO_ID" \
+  --test-path "$TEST_PATH" \
+  --data-root "$DATA_ROOT" \
+  --target-reference-audio "$TARGET_REFERENCE_AUDIO" \
+  --similarity-output "$SIMILARITY_OUTPUT"

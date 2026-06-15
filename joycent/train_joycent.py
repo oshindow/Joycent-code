@@ -15,18 +15,18 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
 import joycent.params as params
-from joycent.model import GradTTSGST, GradTTSConformer, GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm
-from joycent.data_grl import TextMelSpeakerDataset, TextMelSpeakerBatchCollate, TextMelSpeakerAccentQwenDataset, TextMelSpeakerAccentQwenBatchCollate
+from joycent.model.tts_conformer_gstloss_whisper3_qwen2_facodec3_acc_rmllm import (
+    GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm,
+)
+from joycent.data_grl import TextMelSpeakerAccentQwenDataset, TextMelSpeakerAccentQwenBatchCollate
 from joycent.utils import plot_tensor, save_plot
-from joycent.text.symbols import symbols
 from joycent.text.zhdict import ZHDict
 import os
 from joycent.data_utils import DistributedBucketSampler
-from joycent.optimizer import ScheduledOptim
 torch.autograd.set_detect_anomaly(True)
 
-train_filelist_path = 'resources/filelists/zh_all/train.txt'
-valid_filelist_path = 'resources/filelists/zh_all/valid.txt'
+train_filelist_path = 'resources/Joycent/zh_all/train.txt'
+valid_filelist_path = 'resources/Joycent/zh_all/valid.txt'
 data_root = ''
 cmudict_path = params.cmudict_path
 zhdict_path = params.zhdict_path
@@ -77,21 +77,12 @@ spk_layers = params.spk_layers
 n_acc = params.n_acc
 n_spk = params.n_spk
 model_name = params.model_name
-from joycent.utils import write_hdf5, read_hdf5 
 import torch.multiprocessing as mp
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
-from ParallelWaveGAN.parallel_wavegan.datasets import (
-    AudioDataset,
-    AudioSCPDataset,
-    MelDataset,
-    MelF0ExcitationDataset,
-    MelSCPDataset,
-)
 from torch.nn import functional as F
 pretrained_model = ''
-n_warm_up_step = 40000
 
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
@@ -128,58 +119,6 @@ def apply_args(args):
     n_epochs = args.n_epochs
     params.batch_size = args.batch_size
     os.environ['MASTER_PORT'] = args.master_port
-
-def infer_mel_to_audio(dumpdir):
-
-    
-    mel_query = "*.h5"
-    mel_load_fn = lambda x: read_hdf5(x, "feats")  # NOQA
-
-    dataset = MelDataset(
-        dumpdir,
-        mel_query=mel_query,
-        mel_load_fn=mel_load_fn,
-        return_utt_id=True,
-    )
-    
-    # print("infer mel to audio:", len(dataset), dumpdir)
-    # logging.info(f"The number of features to be decoded = {len(dataset)}.")
-
-    # start generation
-    total_rtf = 0.0
-    with torch.no_grad():
-        for idx, items in enumerate(dataset):
-            # if not use_f0_and_excitation:
-            utt_id, c = items
-            f0, excitation = None, None
-            # print(utt_id, c)
-            # else:
-            #     utt_id, c, f0, excitation = items
-            batch = dict(normalize_before=False)
-            if c is not None:
-                c = torch.tensor(c, dtype=torch.float).to('cuda:0')
-                batch.update(c=c)
-            if f0 is not None:
-                f0 = torch.tensor(f0, dtype=torch.float).to('cuda:0')
-                batch.update(f0=f0)
-            if excitation is not None:
-                excitation = torch.tensor(excitation, dtype=torch.float).to('cuda:0')
-                batch.update(excitation=excitation)
-            # start = time.time()
-            y = vocoder.inference(**batch).view(-1)
-            # print(config["sampling_rate"])
-            # rtf = (time.time() - start) / (len(y) / config["sampling_rate"])
-            # pbar.set_postfix({"RTF": rtf})
-            # total_rtf += rtf
-
-            # save as PCM 16 bit wav file
-            print(os.path.join(dumpdir, f"{utt_id}_gen.wav"))
-            sf.write(
-                os.path.join(dumpdir, f"{utt_id}_gen.wav"),
-                y.cpu().numpy(),
-                config["sampling_rate"],
-                "PCM_16",
-            )
 
 def main(params, runtime_args):
     """Assume Single Node Multi GPUs Training Only"""
@@ -321,7 +260,6 @@ def run(rank, n_gpus, runtime_args):
     except:
         start_epoch = 0
         iteration = 0
-    # scheduler = ScheduledOptim(optimizer, n_feats, n_warm_up_step, iteration)
     model = DDP(model, device_ids=[rank])
     # print("finish initializing DDP model")
     if rank == 0:

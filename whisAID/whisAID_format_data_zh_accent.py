@@ -99,7 +99,6 @@ with open('/path/to/data/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/SPKI
         if spk not in spk2acc:
             spk2acc[spk] = accid   
             spk2acc_name[spk] = acc
-        # datas.append("|".join(['/data2/xintong/Mandarin_Heavy_Accent_Accent_Conversational_Speech_Corpus/wav_16k/' + spk + '.wav', spk2id[spk], accid]))
 heavy = '/path/to/data/Mandarin_Heavy_Accent_Conversational_Speech_Corpus'
 # spk_utt_cnt = {}
 for file in os.listdir(os.path.join(heavy, 'wav_16k')):

@@ -13,7 +13,9 @@ from huggingface_hub import hf_hub_download
 import joycent.params as params
 import whisper
 from Amphion.models.codec.ns3_codec import FACodecDecoder, FACodecEncoder
-from joycent.model import GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm
+from joycent.model.tts_conformer_gstloss_whisper3_qwen2_facodec3_acc_rmllm import (
+    GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm,
+)
 from ParallelWaveGAN.parallel_wavegan.datasets import MelDataset
 from ParallelWaveGAN.parallel_wavegan.utils import load_model, read_hdf5
 from joycent.text import text_to_sequence_zh, zhdict
@@ -21,18 +23,20 @@ from joycent.utils import intersperse, write_hdf5
 
 
 SEEN_SPEAKERS = {
-    "SSB0623": "/data2/xintong/aishell3/test/wav_16k/SSB0623/SSB06230059.wav",
-    "SSB0629": "/data2/xintong/aishell3/train/wav_16k/SSB0629/SSB06290387.wav",
-    "SSB0863": "/data2/xintong/aishell3/test/wav_16k/SSB0863/SSB08630099.wav",
+    "SSB1828": "aishell3/train/wav_16k/SSB1828/SSB18280143.wav",
+    "G0001": (
+        "magichub_multiaccent/magichub_singapore/wav_16k/G0001/"
+        "A0001_S005_0_G0001_segment_0076.wav"
+    ),
 }
 
 UNSEEN_SPEAKERS = {
-    "SSB0693": "/data2/xintong/aishell3/test/wav_16k/SSB0693/SSB06930020.wav",
-    "SSB1340": "/data2/xintong/aishell3/test/wav_16k/SSB1340/SSB13400036.wav",
+    "SSB0693": "aishell3/test/wav_16k/SSB0693/SSB06930020.wav",
+    "SSB1340": "aishell3/test/wav_16k/SSB1340/SSB13400036.wav",
 }
 
 DEFAULT_ACCENT_REFERENCE = (
-    "/data2/xintong/magichub_singapore/wav_16k/G0002/"
+    "magichub_multiaccent/magichub_singapore/wav_16k/G0002/"
     "A0001_S001_0_G0002_segment_0134.wav"
 )
 
@@ -40,6 +44,18 @@ DEFAULT_TEXTS = [
     "A0002_S001_0_G0004_segment_0014|sil q ian2 ii i1 zh en4 z iy5 ii iu3 x i3 h uan1 vv ve4 sil d u2 sil",
     "A0002_S001_0_G0004_segment_0023|ee e2 n a1 b u2 c uo4 ee ei2 n i3 d e5 zh ong1 uu un2 h ai2 sil k e3 ii i3 sil d u2 n ei4 sil x ie1 sil sh u1 sil",
     "A0002_S001_0_G0004_segment_0059|sil t a1 d e5 sil g u4 sh ix4 sh ix4 sil j iang3 uu u3 sil b u4 sil f en4 sil f en1 sil uu u3 sil b u4 sil f en4 l ai2 sil j iang3 sil d e5 sil",
+    "SSB06230059|sil sh ix4 zh en1 d e5 m ei2 ii iu3 sil",
+    "SSB08170253|sil sh ix4 uu ui3 sh ix4 zh eng4 f u3 ii i3 j ing1 x ia4 j ve2 x in1 sil",
+    "SSB08170368|sil d an4 sh ix4 zh eng1 q v3 h ao3 ch eng2 j i4 d e5 sil q ian2 t i2 sh ix4 sh en1 t i3 h ao3 sil",
+    "SSB08510183|sil uu uo3 x iang3 zh ix1 ii iu3 zh e4 ii iang4 c ai2 n eng2 p ing2 x i1 zh e4 g e4 f eng1 b o1 sil",
+    "SSB08630099|sil b en3 c iy4 b i3 s ai4 j iang1 g uo2 j i4 m an4 ch eng2 ii iu1 m ei3 d e5 h uan2 j ing4 sil vv v2 m a3 l a1 s ong1 j in4 x ing2 uu uan2 m ei3 r ong2 h e2 sil",
+    "SSB06930020|sil s ou1 h u2 vv v2 l e4 x vn4 j v4 g ang3 m ei2 b ao4 d ao4 sil",
+    "SSB06930038|sil uu uang4 j i4 n i3 uu uo3 z uo4 b u2 d ao4 sil",
+    "SSB19020103|sil zh e4 zh u3 ii iao4 sh ix4 ii in1 uu ui4 d ui4 vv v2 h en3 d uo1 ch e1 zh u3 l ai2 sh uo1 sil",
+    "SSB17280356|sil b ei4 g uan1 z ai4 z iy4 j i3 f ang2 l i3 sil",
+    "SSB18720267|sil t a1 d ai4 l ing3 zh ong1 g uo2 n v3 p ai2 ch uang3 j in4 j ve2 s ai4 sil",
+    "A0002_S001_0_G0004_segment_0080|sil m ei2 ii iu3 uu uo3 z ui4 j in4 ee e4 z ui4 j in4 sh ix4 z ai4 k an4 n a3 g e4 m i4 sh ix4 d a4 t ao2 t uo1 d an4 sh ix4 ii i3 j ing1 uu uan2 l e5 d ao4 z ui4 h ou4 ii i1 sil j i2 uu uo3 h ai2 m ei2 sil k an4 sil",
+    "A0002_S001_0_G0004_segment_0111|ee en5 r an2 h ou4 ch u2 l e5 zh e4 g e4 vv ve4 d u2 d e5 h ua4 n i3 ii iu3 n i3 sil ii iu3 sil d u2 sh en2 m e5 m a3 sil ch u2 l e5 n i3 g ang1 c ai2 j iang3 d e5 ii i3 t ian1 t u2 l ong2 j i4 aa a4 sil"
 ]
 
 
@@ -47,14 +63,14 @@ def parse_args():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    parser.add_argument(
-        "--acoustic-checkpoint",
-        default="/data2/xintong/gradtts/logs/joycent_e5/grad_160.pt",
-    )
-    parser.add_argument(
-        "--vocoder-checkpoint",
-        default="/data2/xintong/tts_server/ParallelWaveGAN/exp/magichub_sg_16k_csmsc_aishell3_base_finetuning/checkpoint-50000steps.pkl",
-    )
+    parser.add_argument("--data-root", default="")
+    parser.add_argument("--acoustic-checkpoint", default="")
+    parser.add_argument("--acoustic-repo-id", default=None)
+    parser.add_argument("--acoustic-filename", default="grad_210.pt")
+    parser.add_argument("--vocoder-checkpoint", default="")
+    parser.add_argument("--vocoder-repo-id", default=None)
+    parser.add_argument("--vocoder-filename", default="checkpoint.pkl")
+    parser.add_argument("--vocoder-config-filename", default="config.yml")
     parser.add_argument("--output-dir", default="outputs/joycent")
     parser.add_argument(
         "--speaker-set",
@@ -108,6 +124,16 @@ def parse_args():
     return parser.parse_args()
 
 
+def resolve_checkpoint(local_path, repo_id, filename, label):
+    if repo_id:
+        return hf_hub_download(repo_id=repo_id, filename=filename)
+    if local_path:
+        return os.path.expanduser(local_path)
+    raise ValueError(
+        f"Set --{label}-checkpoint or --{label}-repo-id."
+    )
+
+
 def load_acoustic_model(checkpoint_path, device):
     print("Initializing Joycent acoustic model...")
     params.n_spks = 222
@@ -143,7 +169,7 @@ def load_acoustic_model(checkpoint_path, device):
         params.model_name,
         acc_cln_layer=0,
         spk_cln_layer=5,
-        spk_dec=True,
+        spk_dec=False,
         acc_dec=False,
     )
     checkpoint = torch.load(checkpoint_path, map_location=device)
@@ -151,9 +177,10 @@ def load_acoustic_model(checkpoint_path, device):
     return model.to(device).eval(), zh_dict
 
 
-def load_vocoder(checkpoint_path, output_dir, device):
+def load_vocoder(checkpoint_path, output_dir, device, config_path=None):
     print("Initializing vocoder...")
-    config_path = os.path.join(os.path.dirname(checkpoint_path), "config.yml")
+    if config_path is None:
+        config_path = os.path.join(os.path.dirname(checkpoint_path), "config.yml")
     with open(config_path, "r", encoding="utf-8") as file:
         config = yaml.load(file, Loader=yaml.Loader)
     config["outdir"] = output_dir
@@ -228,6 +255,13 @@ def parse_custom_reference(value, index):
     return name, path
 
 
+def resolve_reference(path, data_root):
+    path = os.path.expanduser(path)
+    if os.path.isabs(path) or not data_root:
+        return path
+    return os.path.join(os.path.expanduser(data_root), path)
+
+
 def select_speakers(args):
     pool = {}
     if args.speaker_set in ("seen", "all"):
@@ -252,7 +286,10 @@ def select_speakers(args):
 
     if not selected:
         raise ValueError("No speaker references were selected.")
-    return selected
+    return {
+        name: resolve_reference(path, args.data_root)
+        for name, path in selected.items()
+    }
 
 
 def accent_embedding_path(reference):
@@ -277,11 +314,65 @@ def extract_speaker_embedding(reference_wav, fa_encoder, fa_decoder, device):
     return spk_embs
 
 
+def synthesize_audio(
+    phonemes,
+    speaker_reference,
+    accent_embedding,
+    model,
+    zh_dict,
+    fa_encoder,
+    fa_decoder,
+    vocoder,
+    config,
+    device,
+    n_timesteps=10,
+    temperature=1.5,
+    length_scale=0.91,
+):
+    spk_embs = extract_speaker_embedding(
+        speaker_reference,
+        fa_encoder,
+        fa_decoder,
+        device,
+    )
+    acc_embs = torch.as_tensor(
+        accent_embedding,
+        dtype=torch.float32,
+        device=device,
+    )
+    if acc_embs.ndim == 1:
+        acc_embs = acc_embs.unsqueeze(0)
+
+    x = text_to_sequence_zh(phonemes, dictionary=zh_dict)
+    x = torch.LongTensor(intersperse(x, len(zh_dict))).to(device)[None]
+    x_lengths = torch.LongTensor([x.shape[-1]]).to(device)
+
+    with torch.no_grad():
+        _, y_dec, _ = model.prompt(
+            x=x,
+            x_lengths=x_lengths,
+            spk_embs=spk_embs,
+            acc_embs=acc_embs,
+            n_timesteps=n_timesteps,
+            temperature=temperature,
+            stoc=False,
+            length_scale=length_scale,
+        )
+        feats = y_dec.squeeze(0).transpose(0, 1)
+        wav = vocoder.inference(
+            c=feats,
+            normalize_before=False,
+        ).view(-1)
+
+    return config["sampling_rate"], wav.detach().cpu().numpy()
+
+
 def synthesize_mels(args, model, zh_dict, fa_encoder, fa_decoder, config, device):
     os.makedirs(args.output_dir, exist_ok=True)
     speakers = select_speakers(args)
     text_items = read_text_items(args)
-    acc_path = accent_embedding_path(args.accent_reference)
+    accent_reference = resolve_reference(args.accent_reference, args.data_root)
+    acc_path = accent_embedding_path(accent_reference)
     acc_embs = torch.from_numpy(np.load(acc_path)).float().unsqueeze(0).to(device)
 
     total_rtf = 0.0
@@ -370,8 +461,32 @@ def vocode_mels(output_dir, vocoder, config, device):
 def main():
     args = parse_args()
     device = torch.device(args.device)
-    model, zh_dict = load_acoustic_model(args.acoustic_checkpoint, device)
-    vocoder, config = load_vocoder(args.vocoder_checkpoint, args.output_dir, device)
+    acoustic_checkpoint = resolve_checkpoint(
+        args.acoustic_checkpoint,
+        args.acoustic_repo_id,
+        args.acoustic_filename,
+        "acoustic",
+    )
+    vocoder_checkpoint = resolve_checkpoint(
+        args.vocoder_checkpoint,
+        args.vocoder_repo_id,
+        args.vocoder_filename,
+        "vocoder",
+    )
+    vocoder_config = None
+    if args.vocoder_repo_id:
+        vocoder_config = hf_hub_download(
+            repo_id=args.vocoder_repo_id,
+            filename=args.vocoder_config_filename,
+        )
+
+    model, zh_dict = load_acoustic_model(acoustic_checkpoint, device)
+    vocoder, config = load_vocoder(
+        vocoder_checkpoint,
+        args.output_dir,
+        device,
+        config_path=vocoder_config,
+    )
     fa_encoder, fa_decoder = load_facodec(device)
     synthesize_mels(args, model, zh_dict, fa_encoder, fa_decoder, config, device)
     vocode_mels(args.output_dir, vocoder, config, device)

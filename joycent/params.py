@@ -44,7 +44,7 @@ beta_max = 20.0
 pe_scale = 1000  # 1 for `grad-tts-old.pt` checkpoint
 
 # training parameters
-log_dir = '/data2/xintong/gradtts/logs/new_exp'
+log_dir = 'logs/joycent'
 test_size = 4
 n_epochs = 500
 batch_size = 16

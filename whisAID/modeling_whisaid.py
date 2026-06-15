@@ -9,7 +9,7 @@ from transformers.utils import ModelOutput
 import whisper
 
 
-DEFAULT_PRETRAINED_CHECKPOINT = "/data2/xintong/whisperAID/exp/whisAID_zh_grl/004/checkpoint-epoch=0006.ckpt"
+DEFAULT_PRETRAINED_CHECKPOINT = ""
 DEFAULT_CHECKPOINT_FILENAME = "checkpoint-epoch=0006.ckpt"
 
 
@@ -67,7 +67,12 @@ class WhisAIDForAccentClassification(PreTrainedModel):
                 filename=config.checkpoint_filename,
                 revision=config.checkpoint_revision,
             )
-        return config.checkpoint_path
+        if config.checkpoint_path:
+            return config.checkpoint_path
+        raise ValueError(
+            "Set checkpoint_repo_id for a Hugging Face checkpoint or "
+            "checkpoint_path for a local checkpoint."
+        )
 
     @classmethod
     def from_pretrained(cls, pretrained_model_name_or_path, *model_args, config=None, **kwargs):

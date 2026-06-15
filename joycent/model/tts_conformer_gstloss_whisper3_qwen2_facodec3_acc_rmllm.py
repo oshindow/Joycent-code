@@ -13,12 +13,9 @@ import torch
 
 from joycent.model import monotonic_align
 from joycent.model.base import BaseModule
-from joycent.model.text_encoder_2cln import TextEncoder, TextConformerEncoder
+from joycent.model.text_encoder_2cln import TextConformerEncoder
 from joycent.model.diffusion import Diffusion
 from joycent.model.utils import sequence_mask, generate_path, duration_loss, fix_len_compatibility
-from joycent.model.classifier import ReversalClassifier
-from joycent.model.module_gstloss_grl_whisper3 import GSTWhisper
-from joycent.model.classifier import GradientReversalFunction
 from torch.nn import functional as F
 from copy import deepcopy
 
@@ -280,4 +277,4 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
         prior_loss = torch.sum(0.5 * ((y - mu_y) ** 2 + math.log(2 * math.pi)) * y_mask)
         prior_loss = prior_loss / (torch.sum(y_mask) * self.n_feats)
         
-        return dur_loss, prior_loss, diff_loss 
+        return dur_loss, prior_loss, diff_loss
