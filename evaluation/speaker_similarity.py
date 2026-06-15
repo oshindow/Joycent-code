@@ -5,7 +5,7 @@ import torch.nn.functional as F
 import librosa
 import torchaudio as ta
 import os
-checkpoint = torch.load('/data2/xintong/wavlm/WavLM-Large.pt')
+checkpoint = torch.load('/path/to/WavLM-Large.pt')
 cfg = WavLMConfig(checkpoint['cfg'])
 model = WavLM(cfg)
 model.load_state_dict(checkpoint['model'])
@@ -34,11 +34,11 @@ rootdir = 'accent_testsets/evaluation/output/'
 # accent: 自己或者sg
 
 spk_pool = {
-    'SSB0623': '/data2/xintong/aishell3/test/wav_16k/SSB0623/SSB06230059.wav',
-    'SSB0629': '/data2/xintong/aishell3/train/wav_16k/SSB0629/SSB06290387.wav',
-    'SSB0863': '/data2/xintong/aishell3/test/wav_16k/SSB0863/SSB08630099.wav',
-    # 'SSB0693': '/data2/xintong/aishell3/test/wav_16k/SSB0693/SSB06930020.wav',
-    # 'SSB1340': '/data2/xintong/aishell3/test/wav_16k/SSB1340/SSB13400036.wav',
+    'SSB0623': '/path/to/aishell3/test/wav_16k/SSB0623/SSB06230059.wav',
+    'SSB0629': '/path/to/aishell3/train/wav_16k/SSB0629/SSB06290387.wav',
+    'SSB0863': '/path/to/aishell3/test/wav_16k/SSB0863/SSB08630099.wav',
+    # 'SSB0693': '/path/to/aishell3/test/wav_16k/SSB0693/SSB06930020.wav',
+    # 'SSB1340': '/path/to/aishell3/test/wav_16k/SSB1340/SSB13400036.wav',
     # 'G0003': 'accent_testsets/prompt_acc/sichuan/G0003_0001.wav',
     'G0001': 'accent_testsets/prompt_acc/sg/A0001_S006_0_G0001_segment_0173.wav',
     'G0002': 'accent_testsets/prompt_acc/sg/A0001_S001_0_G0002_segment_0134.wav',

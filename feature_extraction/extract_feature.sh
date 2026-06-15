@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-DATA_ROOT=/data2/xintong/mandarin_accent
+DATA_ROOT=/path/to/data_root
 FILELIST=resources/Joycent/zh_all/train.txt
 GPUS=0,1
 NUM_WORKERS=2

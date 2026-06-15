@@ -4,7 +4,7 @@ from pydub import AudioSegment
 import chardet
 
 # Create directories if they don't exist
-rootdir = '/data1/xintong/Tianjin_Dialect_Conversational_Speech_Corpus'
+rootdir = '/path/to/Tianjin_Dialect_Conversational_Speech_Corpus'
 # Guangzhou_Cantonese_Conversational_Speech_Corpus
 # Nanchang_Dialect_Conversational_Speech_Corpus
 # Shanghai_Dialect_Conversational_Speech_Corpus

@@ -16,7 +16,7 @@ length_dict = {}
 acc_spk = {'0': set(),'1': set(),'2':set() ,'3': set()}
 
 # 读取文件并统计
-root = '/data2/xintong/magichub_singapore/wav_16k/G0001'
+root = '/path/to/magichub_singapore/wav_16k/G0001'
 import os
 for file in os.listdir(root):
     if '.wav' in file:
@@ -46,8 +46,8 @@ def extract_test_speech(root, file_path):
         new_path = old_path.replace('wav_16k', 'G0004_test')
         shutil.copy(old_path, new_path)
 
-root = '/data2/xintong/magichub_singapore/wav_16k/G0004'
-file_path = '/data2/xintong/magichub_singapore/G0004_part2_test.json'
+root = '/path/to/magichub_singapore/wav_16k/G0004'
+file_path = '/path/to/magichub_singapore/G0004_part2_test.json'
 extract_test_speech(root, file_path)
 
 ## alignment2textgrid
@@ -134,8 +134,8 @@ def alignment2textgrid(root, file_path):
             tgt.io.write_to_file(textgrid, tgtfilepath, format='long', encoding='utf-8')
 
 # Read a TextGrid object from a file.
-root = '/data2/xintong/magichub_singapore/alignments/G0004'
-file_path = '/data2/xintong/magichub_singapore/G0004_part2_test.json'
+root = '/path/to/magichub_singapore/alignments/G0004'
+file_path = '/path/to/magichub_singapore/G0004_part2_test.json'
 alignment2textgrid(root, file_path)
 print('')
 ## split contents
@@ -152,7 +152,7 @@ def split_contents(content_path):
             with open(textfilepath, 'w', encoding='utf8') as output:
                 output.write(text)
 
-content_path = '/data2/xintong/magichub_singapore/content.txt'
+content_path = '/path/to/magichub_singapore/content.txt'
 split_contents(content_path) 
 # import random
 # length_list = list(length_dict.items())

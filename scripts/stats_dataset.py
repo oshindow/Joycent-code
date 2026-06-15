@@ -31,7 +31,7 @@ def plot_audio_lengths(audio_lengths):
     plt.savefig('LJSpeech.png')
 
 # Specify the folder path
-folder_path = '/data1/xintong/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence/WAV'
+folder_path = '/path/to/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence/WAV'
 
 # Get audio lengths
 audio_lengths = get_audio_lengths(folder_path)

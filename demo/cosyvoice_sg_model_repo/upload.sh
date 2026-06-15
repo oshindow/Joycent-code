@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CHECKPOINT=/home/xintong/CosyVoice/examples/aishell3_magichub_sg/cosyvoice3/exp/cosyvoice3_sg_only/inference_model_sg/llm.pt
+CHECKPOINT=/path/to/cosyvoice3_sg_only/llm.pt
 REPO_ID=walston/cosyvoice3-sg
 
 python demo/cosyvoice_sg_model_repo/upload.py \

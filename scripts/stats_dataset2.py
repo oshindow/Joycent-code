@@ -55,21 +55,21 @@ if __name__ == "__main__":
             
             # latic
             # spk = uid[1:5]
-            # filepath = "/data2/xintong/LATIC/WAVE/WAVE/SPEAKER" + spk + '/SESSION0/' + uid + '.WAV' 
+            # filepath = "/path/to/LATIC/WAVE/WAVE/SPEAKER" + spk + '/SESSION0/' + uid + '.WAV'
 
 
             # magichub
             # spk = uid.split('_')[3]
-            # filepath = "/data2/xintong/magichub_singapore/clean_data/clean_data/wav_16k/" + spk + '/' + uid  
+            # filepath = "/path/to/magichub_singapore/clean_data/clean_data/wav_16k/" + spk + '/' + uid
                 
             # sichuan
             # spk = uid.split('_')[0]
-            # filepath = "/data1/xintong/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence/WAV/" + spk + '/' + uid  
+            # filepath = "/path/to/Sichuan_Dialect_Scripted_Speech_Corpus_Daily_Use_Sentence/WAV/" + spk + '/' + uid
                 
             # audio_files.append(filepath)
             spk = uid[:7]
-            filepath1 = "/data2/xintong/tts_chinese/aishell3/" + "train" + '/wav_16k/' + spk + '/' + uid + '.wav'
-            filepath2 = "/data2/xintong/tts_chinese/aishell3/" + "test" + '/wav_16k/' + spk + '/' + uid + '.wav'
+            filepath1 = "/path/to/aishell3/" + "train" + '/wav_16k/' + spk + '/' + uid + '.wav'
+            filepath2 = "/path/to/aishell3/" + "test" + '/wav_16k/' + spk + '/' + uid + '.wav'
             
             if os.path.exists(filepath1):
                 audio_files.append(filepath1)

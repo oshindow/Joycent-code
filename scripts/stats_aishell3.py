@@ -2,14 +2,14 @@ import os
 import json
 import torchaudio
 # spk2accent = {}
-with open('/home/xintong/Speech-Backbones/Grad-TTS/resources/spk2accent.json', 'r', encoding='utf8') as input:
+with open('/path/to/spk2accent.json', 'r', encoding='utf8') as input:
     spk2accent = json.load(input)
 
 spk_dict = {}
 utt_dict = {}
 dur_dict = {}
 # audio_lengths.append(duration)
-aishell3_dir = '/data2/xintong/aishell3/test/wav_16k'
+aishell3_dir = '/path/to/aishell3/test/wav_16k'
 for root, dirs, files in os.walk(aishell3_dir):
     for dir in dirs:
         spk = dir
