@@ -200,4 +200,11 @@ For Joycent, select local or Hugging Face acoustic and vocoder checkpoints with
 For CosyVoice3, the script loads the official
 `FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model and replaces its `llm.pt`
 with the SG-only checkpoint from `walston/cosyvoice3-sg`.
- 
+
+## Acknowledgements
+
+Parts of this repository are adapted from the following open-source projects:
+
+- [Whisper](https://github.com/openai/whisper)
+- [Grad-TTS](https://github.com/huawei-noah/Speech-Backbones/tree/main/Grad-TTS)
+  from [Speech-Backbones](https://github.com/huawei-noah/Speech-Backbones)
