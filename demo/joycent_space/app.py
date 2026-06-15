@@ -1,4 +1,3 @@
-import gc
 import os
 import subprocess
 import sys
@@ -11,6 +10,7 @@ from huggingface_hub import hf_hub_download
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
+SPACE_ROOT = PROJECT_ROOT
 while PROJECT_ROOT != PROJECT_ROOT.parent:
     if (PROJECT_ROOT / "joycent").is_dir():
         break
@@ -42,6 +42,7 @@ from joycent.inference_cosyvoice import (  # noqa: E402
     synthesize_cosyvoice,
 )
 from joycent.inference_joycent import (  # noqa: E402
+    extract_speaker_embedding,
     load_acoustic_model,
     load_facodec,
     load_vocoder,
@@ -55,7 +56,9 @@ from whisper import load_audio, log_mel_spectrogram, pad_or_trim  # noqa: E402
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 JOYCENT_MODEL_ID = os.getenv("JOYCENT_MODEL_ID", "walston/joycent")
 JOYCENT_MODEL_FILENAME = os.getenv("JOYCENT_MODEL_FILENAME", "grad_210.pt")
-VOCODER_REPO_ID = os.getenv("JOYCENT_VOCODER_REPO_ID", JOYCENT_MODEL_ID)
+VOCODER_REPO_ID = os.getenv("JOYCENT_VOCODER_REPO_ID", "").strip()
+if not VOCODER_REPO_ID or VOCODER_REPO_ID == "walston/joycent":
+    VOCODER_REPO_ID = "walston/joycent-vocoder"
 VOCODER_FILENAME = os.getenv(
     "JOYCENT_VOCODER_FILENAME",
     "checkpoint-50000steps.pkl",
@@ -80,8 +83,14 @@ COSYVOICE_MODEL_FILENAME = os.getenv(
 
 DEFAULT_PHONEMES = "sil sh ix4 zh en1 d e5 m ei2 ii iu3 sil"
 DEFAULT_COSYVOICE_TEXT = "但是争取好成绩的前提是身体好"
-CURRENT_MODEL = None
-CURRENT_RUNTIME = None
+DEFAULT_SPEAKER_REFERENCE = (
+    SPACE_ROOT / "assets" / "speaker_reference.wav"
+)
+DEFAULT_ACCENT_REFERENCE = (
+    SPACE_ROOT / "assets" / "accent_reference.wav"
+)
+JOYCENT_RUNTIME = None
+COSYVOICE_RUNTIME = None
 
 
 def load_joycent_runtime():
@@ -113,33 +122,28 @@ def load_joycent_runtime():
     return model, zh_dict, vocoder, config, fa_encoder, fa_decoder, whisaid
 
 
-def load_selected_runtime(model_name):
-    global CURRENT_MODEL, CURRENT_RUNTIME
+def get_joycent_runtime():
+    global JOYCENT_RUNTIME
+    if JOYCENT_RUNTIME is not None:
+        return JOYCENT_RUNTIME, 0.0, True
+    load_start = time.perf_counter()
+    JOYCENT_RUNTIME = load_joycent_runtime()
+    return JOYCENT_RUNTIME, time.perf_counter() - load_start, False
 
-    if CURRENT_MODEL == model_name and CURRENT_RUNTIME is not None:
-        return CURRENT_RUNTIME
 
-    CURRENT_MODEL = None
-    CURRENT_RUNTIME = None
-    gc.collect()
-    if DEVICE.type == "cuda":
-        torch.cuda.empty_cache()
-
-    if model_name == "joycent":
-        CURRENT_RUNTIME = load_joycent_runtime()
-    elif model_name == "cosyvoice":
-        CURRENT_RUNTIME = load_cosyvoice_model(
-            base_repo_id=COSYVOICE_BASE_REPO_ID,
-            finetuned_repo_id=COSYVOICE_MODEL_ID,
-            finetuned_filename=COSYVOICE_MODEL_FILENAME,
-            cosyvoice_root=str(PROJECT_ROOT),
-            fp16=True,
-        )
-    else:
-        raise ValueError("Model must be joycent or cosyvoice.")
-
-    CURRENT_MODEL = model_name
-    return CURRENT_RUNTIME
+def get_cosyvoice_runtime():
+    global COSYVOICE_RUNTIME
+    if COSYVOICE_RUNTIME is not None:
+        return COSYVOICE_RUNTIME, 0.0, True
+    load_start = time.perf_counter()
+    COSYVOICE_RUNTIME = load_cosyvoice_model(
+        base_repo_id=COSYVOICE_BASE_REPO_ID,
+        finetuned_repo_id=COSYVOICE_MODEL_ID,
+        finetuned_filename=COSYVOICE_MODEL_FILENAME,
+        cosyvoice_root=str(PROJECT_ROOT),
+        fp16=True,
+    )
+    return COSYVOICE_RUNTIME, time.perf_counter() - load_start, False
 
 
 def extract_accent_embedding(audio_path, model):
@@ -167,13 +171,26 @@ def synthesize_joycent(
     if not phonemes or not phonemes.strip():
         raise gr.Error("Please enter a Mandarin phoneme sequence.")
 
-    runtime = load_selected_runtime("joycent")
+    runtime, load_time, model_cached = get_joycent_runtime()
     model, zh_dict, vocoder, config, fa_encoder, fa_decoder, whisaid = runtime
-    accent_embedding = extract_accent_embedding(accent_audio, whisaid)
 
     if DEVICE.type == "cuda":
         torch.cuda.synchronize()
-    start = time.perf_counter()
+    feature_start = time.perf_counter()
+    accent_embedding = extract_accent_embedding(accent_audio, whisaid)
+    speaker_embedding = extract_speaker_embedding(
+        speaker_audio,
+        fa_encoder,
+        fa_decoder,
+        DEVICE,
+    )
+    if DEVICE.type == "cuda":
+        torch.cuda.synchronize()
+    feature_time = time.perf_counter() - feature_start
+
+    if DEVICE.type == "cuda":
+        torch.cuda.synchronize()
+    inference_start = time.perf_counter()
     sample_rate, waveform = synthesize_audio(
         phonemes.strip(),
         speaker_audio,
@@ -188,57 +205,61 @@ def synthesize_joycent(
         n_timesteps=int(n_timesteps),
         temperature=float(temperature),
         length_scale=float(length_scale),
+        speaker_embedding=speaker_embedding,
     )
     if DEVICE.type == "cuda":
         torch.cuda.synchronize()
+    inference_time = time.perf_counter() - inference_start
+    audio_duration = len(waveform) / sample_rate
+    rtf = (
+        (feature_time + inference_time) / audio_duration
+        if audio_duration > 0
+        else float("inf")
+    )
+    load_status = "cached" if model_cached else "loaded"
 
     info = (
         f"Device: {DEVICE}\n"
         f"Acoustic model: {JOYCENT_MODEL_ID}/{JOYCENT_MODEL_FILENAME}\n"
         f"Vocoder: {VOCODER_REPO_ID}/{VOCODER_FILENAME}\n"
-        f"Inference time: {time.perf_counter() - start:.2f}s"
+        f"Model load time: {load_time:.2f}s ({load_status})\n"
+        f"Feature extraction time: {feature_time:.2f}s\n"
+        f"Inference time: {inference_time:.2f}s\n"
+        f"Audio duration: {audio_duration:.2f}s\n"
+        f"RTF excluding model load: {rtf:.4f}"
     )
     return (sample_rate, waveform), info
 
 
-def synthesize_selected(
-    model_name,
-    speaker_audio,
-    accent_audio,
-    phonemes,
+def synthesize_cosyvoice_ui(
+    cosyvoice_prompt_audio,
     cosyvoice_text,
     prompt_text,
     instruct,
-    n_timesteps,
-    temperature,
-    length_scale,
 ):
     try:
-        if model_name == "joycent":
-            return synthesize_joycent(
-                speaker_audio,
-                accent_audio,
-                phonemes,
-                n_timesteps,
-                temperature,
-                length_scale,
-            )
-
-        if not speaker_audio:
+        if not cosyvoice_prompt_audio:
             raise gr.Error("Please upload or record a CosyVoice prompt.")
-        model, model_dir = load_selected_runtime("cosyvoice")
+        (model, model_dir), load_time, model_cached = get_cosyvoice_runtime()
         if DEVICE.type == "cuda":
             torch.cuda.synchronize()
         start = time.perf_counter()
         sample_rate, waveform = synthesize_cosyvoice(
             model,
             cosyvoice_text,
-            speaker_audio,
+            cosyvoice_prompt_audio,
             prompt_text=prompt_text,
             instruct=instruct,
         )
         if DEVICE.type == "cuda":
             torch.cuda.synchronize()
+        inference_time = time.perf_counter() - start
+        audio_duration = waveform.shape[-1] / sample_rate
+        rtf = (
+            inference_time / audio_duration
+            if audio_duration > 0
+            else float("inf")
+        )
     except gr.Error:
         raise
     except Exception as error:
@@ -249,88 +270,153 @@ def synthesize_selected(
         f"Base model: {COSYVOICE_BASE_REPO_ID}\n"
         f"SG-only model: {COSYVOICE_MODEL_ID}/{COSYVOICE_MODEL_FILENAME}\n"
         f"Prepared model: {model_dir}\n"
-        f"Inference time: {time.perf_counter() - start:.2f}s"
+        f"Model load time: {load_time:.2f}s "
+        f"({'cached' if model_cached else 'loaded'})\n"
+        "Feature extraction time: included in CosyVoice inference\n"
+        f"Inference time: {inference_time:.2f}s\n"
+        f"Audio duration: {audio_duration:.2f}s\n"
+        f"RTF excluding model load: {rtf:.4f}"
     )
     return (sample_rate, waveform.squeeze(0).numpy()), info
 
 
-with gr.Blocks(title="Singapore Mandarin Accent TTS", theme=gr.themes.Soft()) as demo:
+CSS = """
+.joycent-panel {
+    background: linear-gradient(180deg, #eef6ff 0%, #dcecff 100%);
+    border: 1px solid #8bbcff;
+    border-radius: 16px;
+    padding: 18px;
+}
+.cosyvoice-panel {
+    background: linear-gradient(180deg, #fff5ea 0%, #ffe3c2 100%);
+    border: 1px solid #f3aa62;
+    border-radius: 16px;
+    padding: 18px;
+}
+.joycent-panel h2 {
+    color: #195ca8;
+}
+.cosyvoice-panel h2 {
+    color: #a84d16;
+}
+"""
+
+
+with gr.Blocks(
+    title="Singapore Mandarin Accent TTS",
+    theme=gr.themes.Soft(),
+    css=CSS,
+) as demo:
     gr.Markdown(
         "# Singapore Mandarin Accent TTS\n"
-        "Choose Joycent or the SG-only fine-tuned CosyVoice3 model."
+        "Joycent and the SG-only fine-tuned CosyVoice3 model are available side by side."
     )
-    model_input = gr.Dropdown(
-        choices=["joycent", "cosyvoice"],
-        value="joycent",
-        label="Model",
-    )
-    with gr.Row():
-        speaker_input = gr.Audio(
-            sources=["upload", "microphone"],
-            type="filepath",
-            label="Speaker reference / CosyVoice prompt",
-        )
-        accent_input = gr.Audio(
-            sources=["upload", "microphone"],
-            type="filepath",
-            label="Joycent accent reference",
-        )
+    with gr.Row(equal_height=False):
+        with gr.Column(elem_classes=["joycent-panel"]):
+            gr.Markdown("## Joycent")
+            joycent_speaker_input = gr.Audio(
+                sources=["upload", "microphone"],
+                type="filepath",
+                label="Speaker reference",
+                value=str(DEFAULT_SPEAKER_REFERENCE),
+            )
+            accent_input = gr.Audio(
+                sources=["upload", "microphone"],
+                type="filepath",
+                label="Accent reference",
+                value=str(DEFAULT_ACCENT_REFERENCE),
+            )
+            phoneme_input = gr.Textbox(
+                label="Mandarin phonemes",
+                value=DEFAULT_PHONEMES,
+                lines=3,
+            )
+            with gr.Accordion("Generation settings", open=False):
+                steps_input = gr.Slider(
+                    1,
+                    50,
+                    value=10,
+                    step=1,
+                    label="Diffusion steps",
+                )
+                temperature_input = gr.Slider(
+                    0.1,
+                    2.0,
+                    value=1.5,
+                    step=0.05,
+                    label="Temperature",
+                )
+                length_input = gr.Slider(
+                    0.5,
+                    1.5,
+                    value=0.91,
+                    step=0.01,
+                    label="Length scale",
+                )
+            joycent_button = gr.Button(
+                "Generate with Joycent",
+                variant="primary",
+            )
+            joycent_audio_output = gr.Audio(label="Joycent output")
+            joycent_info_output = gr.Textbox(
+                label="Joycent runtime info",
+                lines=8,
+            )
 
-    phoneme_input = gr.Textbox(
-        label="Joycent Mandarin phonemes",
-        value=DEFAULT_PHONEMES,
-        lines=3,
-    )
-    cosyvoice_text_input = gr.Textbox(
-        label="CosyVoice synthesis text",
-        value=DEFAULT_COSYVOICE_TEXT,
-        lines=3,
-    )
-    prompt_text_input = gr.Textbox(
-        label="CosyVoice prompt transcript (optional)",
-        value="",
-        lines=2,
-    )
-    instruct_input = gr.Textbox(
-        label="CosyVoice instruction",
-        value=DEFAULT_INSTRUCT,
-        lines=2,
-    )
-    with gr.Accordion("Joycent generation settings", open=False):
-        steps_input = gr.Slider(1, 50, value=10, step=1, label="Diffusion steps")
-        temperature_input = gr.Slider(
-            0.1,
-            2.0,
-            value=1.5,
-            step=0.05,
-            label="Temperature",
-        )
-        length_input = gr.Slider(
-            0.5,
-            1.5,
-            value=0.91,
-            step=0.01,
-            label="Length scale",
-        )
+        with gr.Column(elem_classes=["cosyvoice-panel"]):
+            gr.Markdown("## CosyVoice3 SG-only")
+            cosyvoice_prompt_input = gr.Audio(
+                sources=["upload", "microphone"],
+                type="filepath",
+                label="Prompt audio",
+                value=str(DEFAULT_SPEAKER_REFERENCE),
+            )
+            cosyvoice_text_input = gr.Textbox(
+                label="Synthesis text",
+                value=DEFAULT_COSYVOICE_TEXT,
+                lines=3,
+            )
+            prompt_text_input = gr.Textbox(
+                label="Prompt transcript (optional)",
+                value="",
+                lines=2,
+            )
+            instruct_input = gr.Textbox(
+                label="Instruction",
+                value=DEFAULT_INSTRUCT,
+                lines=2,
+            )
+            cosyvoice_button = gr.Button(
+                "Generate with CosyVoice3",
+                variant="primary",
+            )
+            cosyvoice_audio_output = gr.Audio(label="CosyVoice3 output")
+            cosyvoice_info_output = gr.Textbox(
+                label="CosyVoice3 runtime info",
+                lines=8,
+            )
 
-    generate_button = gr.Button("Generate Speech", variant="primary")
-    audio_output = gr.Audio(label="Generated speech")
-    info_output = gr.Textbox(label="Runtime info", lines=5)
-    generate_button.click(
-        fn=synthesize_selected,
+    joycent_button.click(
+        fn=synthesize_joycent,
         inputs=[
-            model_input,
-            speaker_input,
+            joycent_speaker_input,
             accent_input,
             phoneme_input,
-            cosyvoice_text_input,
-            prompt_text_input,
-            instruct_input,
             steps_input,
             temperature_input,
             length_input,
         ],
-        outputs=[audio_output, info_output],
+        outputs=[joycent_audio_output, joycent_info_output],
+    )
+    cosyvoice_button.click(
+        fn=synthesize_cosyvoice_ui,
+        inputs=[
+            cosyvoice_prompt_input,
+            cosyvoice_text_input,
+            prompt_text_input,
+            instruct_input,
+        ],
+        outputs=[cosyvoice_audio_output, cosyvoice_info_output],
     )
 
 

@@ -328,13 +328,17 @@ def synthesize_audio(
     n_timesteps=10,
     temperature=1.5,
     length_scale=0.91,
+    speaker_embedding=None,
 ):
-    spk_embs = extract_speaker_embedding(
-        speaker_reference,
-        fa_encoder,
-        fa_decoder,
-        device,
-    )
+    if speaker_embedding is None:
+        spk_embs = extract_speaker_embedding(
+            speaker_reference,
+            fa_encoder,
+            fa_decoder,
+            device,
+        )
+    else:
+        spk_embs = speaker_embedding
     acc_embs = torch.as_tensor(
         accent_embedding,
         dtype=torch.float32,

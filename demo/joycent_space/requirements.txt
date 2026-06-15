@@ -1,11 +1,12 @@
 gradio==5.34.2
-torch
-torchaudio
+torch==2.3.1
+torchaudio==2.3.1
 transformers==4.51.3
 huggingface_hub
 numpy==1.26.4
 scipy
 librosa
+lightning==2.2.4
 soundfile
 PyYAML
 h5py
@@ -13,6 +14,13 @@ matplotlib
 filelock
 kaldiio
 pyworld
+gdown==5.1.0
+wget==3.2
+rich==13.7.1
+networkx==3.1
+onnx==1.16.0
+pyarrow==18.1.0
+tensorboard==2.14.0
 einops
 Cython
 numba
@@ -32,4 +40,3 @@ onnxruntime-gpu==1.18.0
 protobuf==4.25.3
 wetext==0.0.4
 x-transformers==2.11.24
-git+https://github.com/shivammehta25/Matcha-TTS.git@dd9105b34bf2be2230f4aa1e4769fb586a3c824e

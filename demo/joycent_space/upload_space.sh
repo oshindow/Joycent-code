@@ -9,9 +9,16 @@ fi
 
 SPACE_ID="$1"
 COSYVOICE_ROOT=../CosyVoice
+MATCHA_ROOT="$COSYVOICE_ROOT/third_party/Matcha-TTS/matcha"
 
 if [ ! -d "$COSYVOICE_ROOT/cosyvoice" ]; then
   echo "CosyVoice source not found: $COSYVOICE_ROOT/cosyvoice"
+  exit 1
+fi
+
+if [ ! -d "$MATCHA_ROOT" ]; then
+  echo "Matcha-TTS source not found: $MATCHA_ROOT"
+  echo "Run: git -C $COSYVOICE_ROOT submodule update --init --recursive"
   exit 1
 fi
 
@@ -19,8 +26,10 @@ huggingface-cli upload "$SPACE_ID" demo/joycent_space/README.md README.md --repo
 huggingface-cli upload "$SPACE_ID" demo/joycent_space/app.py app.py --repo-type space
 huggingface-cli upload "$SPACE_ID" demo/joycent_space/requirements.txt requirements.txt --repo-type space
 huggingface-cli upload "$SPACE_ID" demo/joycent_space/packages.txt packages.txt --repo-type space
+huggingface-cli upload "$SPACE_ID" demo/joycent_space/assets assets --repo-type space
 huggingface-cli upload "$SPACE_ID" joycent joycent --repo-type space
 huggingface-cli upload "$SPACE_ID" "$COSYVOICE_ROOT/cosyvoice" cosyvoice --repo-type space
+huggingface-cli upload "$SPACE_ID" "$MATCHA_ROOT" matcha --repo-type space
 huggingface-cli upload "$SPACE_ID" whisAID whisAID --repo-type space
 huggingface-cli upload "$SPACE_ID" whisper whisper --repo-type space
 huggingface-cli upload "$SPACE_ID" Amphion/models/codec/ns3_codec Amphion/models/codec/ns3_codec --repo-type space

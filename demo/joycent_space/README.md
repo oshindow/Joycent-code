@@ -14,17 +14,32 @@ suggested_hardware: a10g-small
 
 # Singapore Mandarin Accent TTS
 
-Choose between Joycent and the SG-only fine-tuned CosyVoice3 model.
+Joycent and the SG-only fine-tuned CosyVoice3 model are displayed side by side
+with separate controls, outputs, and runtime information. Loading or generating
+with one model does not clear the other model's runtime or output.
 
-The acoustic model is loaded from `walston/joycent` by default. The Space also
-needs a ParallelWaveGAN checkpoint and its `config.yml`. Configure these Space
-variables when the vocoder is stored in another model repository:
+Joycent starts with built-in speaker and accent references, so the default
+phoneme sequence can be synthesized immediately. Users may replace either
+reference with an uploaded file or microphone recording.
+
+Runtime information reports model loading, feature extraction, inference,
+generated audio duration, and RTF. RTF excludes model loading time.
+
+The Space bundles the CosyVoice and Matcha-TTS source directories. Initialize
+the CosyVoice submodules before running `upload_space.sh`.
+
+The acoustic model is loaded from `walston/joycent` by default. The
+ParallelWaveGAN checkpoint and `config.yml` are loaded from
+`walston/joycent-vocoder`. Configure these Space variables to override them:
 
 ```text
 JOYCENT_VOCODER_REPO_ID
 JOYCENT_VOCODER_FILENAME
 JOYCENT_VOCODER_CONFIG_FILENAME
 ```
+
+The old `JOYCENT_VOCODER_REPO_ID=walston/joycent` value is automatically
+redirected to `walston/joycent-vocoder`.
 
 CosyVoice loads the official `FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model
 and replaces only its LLM checkpoint with

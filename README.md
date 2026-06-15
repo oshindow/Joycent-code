@@ -1,23 +1,27 @@
-# Joycent Code
+# Joycent
 
-Official implementation of **Joycent**, an accent text-to-speech (TTS) framework for Mandarin, together with the pre-trained accent identification model **WhisAID** and the **ParallelWaveGAN** vocoder.
+Official implementation of **Joycent**, a Mandarin accent text-to-speech (TTS)
+framework, together with the pretrained accent identification model
+**WhisAID** and a **ParallelWaveGAN** vocoder.
 
-## Results and Demo
+Project demo page: [anonymous-accent-tts.github.io/Joycent-demo](https://anonymous-accent-tts.github.io/Joycent-demo/)
+
+## Results And Demos
 
 <table>
   <tr>
     <td width="50%" valign="top">
       <h3>WhisAID Results</h3>
-      <p>Metrics are reported on seen speakers, unseen speakers, generalization gap, and SCSC. Higher is better except for <strong>SCSC↓</strong>.</p>
+      <p>Results cover seen speakers, unseen speakers, the generalization gap, and SCSC. Higher is better except for <strong>Gap↓</strong> and <strong>SCSC↓</strong>.</p>
       <img src="image/whisAID.png" alt="WhisAID results on seen and unseen speakers" width="100%">
     </td>
     <td width="50%" valign="top">
       <h3>WhisAID Demo</h3>
       <p>
-        <a href="https://huggingface.co/spaces/walston/whisaid-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open in Spaces"></a>
-        <a href="https://huggingface.co/walston/whisaid-zh-grl"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow" alt="Model Repo"></a>
+        <a href="https://huggingface.co/spaces/walston/whisaid-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open WhisAID Space"></a>
+        <a href="https://huggingface.co/walston/whisaid-zh-grl"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow" alt="WhisAID model repository"></a>
       </p>
-      <p>The demo accepts uploaded audio or microphone recording, predicts the accent name, and shows the full prediction distribution.</p>
+      <p>Upload or record speech to predict its accent and inspect the full class distribution. The first request loads the model; later requests reuse the cached model.</p>
       <a href="https://huggingface.co/spaces/walston/whisaid-demo">
         <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="100%">
       </a>
@@ -26,29 +30,38 @@ Official implementation of **Joycent**, an accent text-to-speech (TTS) framework
   <tr>
     <td width="50%" valign="top">
       <h3>Joycent Results</h3>
-      <p>Metrics cover speech quality, accent similarity, speaker similarity, and real-time factor. Higher is better except for <strong>RTF↓</strong>.</p>
+      <p>Results cover speech quality, accentedness, accent similarity, speaker similarity, and real-time factor. Higher is better except for <strong>RTF↓</strong>.</p>
       <img src="image/Joycent.png" alt="Joycent accent TTS results" width="100%">
     </td>
     <td width="50%" valign="top">
       <h3>Joycent Demo</h3>
       <p>
-        <a href="https://huggingface.co/spaces/walston/joycent-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open in Spaces"></a>
-        <a href="https://huggingface.co/walston/joycent"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fjoycent-yellow" alt="Model Repo"></a>
+        <a href="https://huggingface.co/spaces/walston/joycent-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open Joycent Space"></a>
+        <a href="https://huggingface.co/walston/joycent"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fjoycent-yellow" alt="Joycent model repository"></a>
       </p>
-      <p>The demo supports Joycent and the SG-only fine-tuned CosyVoice3 model for Singapore Mandarin accent speech synthesis.</p>
+      <p>Joycent and the SG-only fine-tuned CosyVoice3 model are displayed side by side with independent inputs, outputs, model caches, and runtime measurements.</p>
+      <a href="https://huggingface.co/spaces/walston/joycent-demo">
+        <img src="image/joycent-demo.gif" alt="Joycent and CosyVoice3 Hugging Face Space demo" width="100%">
+      </a>
     </td>
   </tr>
 </table>
 
-## Environment
+## Installation
 
-Tested with Python 3.10 and CUDA-enabled PyTorch.
+The project is tested with Python 3.10 and CUDA-enabled PyTorch.
 
 ```bash
 conda create -n joycent python=3.10 -y
 conda activate joycent
 pip install -r requirements.txt
 pip install pytorch-lightning==2.4.0 --no-deps
+```
+
+Initialize the third-party submodules:
+
+```bash
+git submodule update --init --recursive
 ```
 
 Build the monotonic alignment extension:
@@ -59,31 +72,31 @@ python setup.py build_ext --inplace
 cd ../../..
 ```
 
-Initialize third-party submodules:
-
-```bash
-git submodule update --init --recursive
-```
-
 ## Pretrained Models
 
-| Model | Link | Notes |
+| Component | Repository | Description |
 | --- | --- | --- |
-| WhisAID Chinese accent classifier | https://huggingface.co/walston/whisaid-zh-grl | Used by `whisAID_inference.py` with `--checkpoint-repo-id walston/whisaid-zh-grl`. |
+| WhisAID | [walston/whisaid-zh-grl](https://huggingface.co/walston/whisaid-zh-grl) | Mandarin accent classifier and accent encoder |
+| Joycent | [walston/joycent](https://huggingface.co/walston/joycent) | Joycent acoustic checkpoint |
+| Joycent vocoder | [walston/joycent-vocoder](https://huggingface.co/walston/joycent-vocoder) | ParallelWaveGAN checkpoint and configuration |
+| CosyVoice3 SG | [walston/cosyvoice3-sg](https://huggingface.co/walston/cosyvoice3-sg) | SG-only fine-tuned `llm.pt` |
+| CosyVoice3 base | [FunAudioLLM/Fun-CosyVoice3-0.5B-2512](https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512) | Official tokenizer, Flow, HiFT, and auxiliary files |
 
 ## WhisAID
 
-WhisAID is a Mandarin accent identification model. The released Chinese checkpoint supports **12 accent labels** and can be used for both classification and accent embedding extraction.
+WhisAID identifies Mandarin accents and extracts accent embeddings. The
+released Chinese checkpoint supports **12 accent labels**.
 
 ### Data
 
-WhisAID filelists live in `resources/whisAID/zh_all`. Each row contains a relative wav path, speaker id, and accent id:
+WhisAID filelists live in `resources/whisAID/zh_all`. Each row contains:
 
 ```text
 relative_wav_path|speaker_id|accent_id
 ```
 
-The wav path is resolved against `--data-root`, so the CSV files stay machine-independent. For example:
+The wav path is resolved against `--data-root`, keeping the CSV files
+machine-independent:
 
 ```text
 --data-root /path/to/data
@@ -94,26 +107,28 @@ The wav path is resolved against `--data-root`, so the CSV files stay machine-in
     ...
 ```
 
-  
 ### Fine-Tuning
 
-```bash
-./run_whisAID.sh
-```
+Set `DATA_ROOT` and the training options at the top of `run_whisAID.sh`, then
+run:
 
-Set `DATA_ROOT` and other training options at the top of `run_whisAID.sh`.
+```bash
+bash run_whisAID.sh
+```
 
 ### Evaluation
 
+Set `DATA_ROOT` and `TARGET_REFERENCE_AUDIO` at the top of
+`infer_whisAID.sh`, then run:
+
 ```bash
-./infer_whisAID.sh
+bash infer_whisAID.sh
 ```
 
-Set `DATA_ROOT` and `TARGET_REFERENCE_AUDIO` at the top of `infer_whisAID.sh`.
+The script reports classification metrics and the accent similarity between
+each test utterance and the target reference audio.
 
-output classificaiton resutls and accent similarity score compared with `--target-reference-audio` (use absolate path).
-
-### Accent Embedding
+### Accent Embeddings
 
 ```python
 import torch
@@ -126,46 +141,45 @@ model = AutoModel.from_config(
 ).cuda().eval()
 
 audio = torch.from_numpy(load_audio("/path/to/audio.wav"))
-mel = log_mel_spectrogram(pad_or_trim(audio), n_mels=model.config.n_mels).unsqueeze(0).cuda()
+mel = log_mel_spectrogram(
+    pad_or_trim(audio),
+    n_mels=model.config.n_mels,
+).unsqueeze(0).cuda()
 
 with torch.no_grad():
-    out = model(input_ids=mel)
+    output = model(input_ids=mel)
 
-accent_embedding = out.features[0].cpu().numpy()
-accent_id = out.logits.argmax(dim=-1).item()
+accent_embedding = output.features[0].cpu().numpy()
+accent_id = output.logits.argmax(dim=-1).item()
 ```
 
 ## Joycent
 
-### Feature Preparation
+### Data And Features
 
-Before Joycent fine-tuning, dump the speaker and accent embeddings used by the training dataset. Both scripts read the same filelist format as training:
+Joycent filelists contain four fields:
 
 ```text
-wav|text|spk|acc
+relative_wav_path|phoneme_sequence|speaker_id|accent_id
 ```
 
-The wav path is relative to `--data-root`. Speaker embeddings are written next to the wav tree under `facodec_spk`, and accent embeddings are written under `feat_acc_grl_030326`.
-
-Recommended batched extraction:
+The wav path is resolved against `--data-root`. Before training, extract the
+FACodec speaker embeddings and WhisAID accent embeddings:
 
 ```bash
 bash feature_extraction/extract_feature.sh
 ```
 
-Set `DATA_ROOT`, `FILELIST`, GPU options, and `STAGE` at the top of
-`feature_extraction/extract_feature.sh`. Use `STAGE=spk` or `STAGE=acc` to run
-only one embedding type.
+Configure `DATA_ROOT`, `FILELIST`, GPU settings, and `STAGE` at the top of the
+script. Use `STAGE=spk` or `STAGE=acc` to extract only one feature type.
+
+Speaker embeddings are stored under `facodec_spk`, while accent embeddings are
+stored under `feat_acc_grl_030326`.
 
 ### Training
 
-TTS filelists use the same relative-path convention as WhisAID. Each row keeps four fields:
-
-```text
-wav|text|spk|acc
-```
-
-Run from the repository root:
+Configure the paths and hyperparameters at the top of `run_joycent.sh`, then
+run:
 
 ```bash
 bash run_joycent.sh
@@ -173,35 +187,38 @@ bash run_joycent.sh
 
 ### Inference
 
-Set `MODEL=joycent` or `MODEL=cosyvoice` at the top of `infer_joycent.sh`.
-
-For the Joycent model:
+Set `MODEL=joycent` or `MODEL=cosyvoice` at the top of `infer_joycent.sh`:
 
 ```bash
 bash infer_joycent.sh
 ```
 
-For CosyVoice, the script loads the official
-`FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model and replaces only `llm.pt`
-with the SG-only checkpoint at `walston/cosyvoice3-sg/llm.pt`.
-Configure the prompt wav, synthesis text, and output path in the CosyVoice
-section of the script.
+For Joycent, select local or Hugging Face acoustic and vocoder checkpoints with
+`MODEL_SOURCE` and `VOCODER_SOURCE`. The released checkpoints are stored in
+`walston/joycent` and `walston/joycent-vocoder`.
 
-The SG-only checkpoint has its own model repository. To create or update it:
+For CosyVoice3, the script loads the official
+`FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model and replaces its `llm.pt`
+with the SG-only checkpoint from `walston/cosyvoice3-sg`.
 
-```bash
-bash demo/cosyvoice_sg_model_repo/upload.sh
-```
+## Hugging Face Space
 
-### Hugging Face Space
+The Space displays Joycent on the left and CosyVoice3 SG-only on the right.
+Each model has separate controls, audio output, runtime information, and model
+cache. The bundled Joycent references allow immediate synthesis with the
+default phoneme sequence.
 
-The Gradio Space supports both Joycent and the SG-only CosyVoice3 model:
+Upload or update the Space with:
 
 ```bash
 bash demo/joycent_space/upload_space.sh walston/joycent-demo
 ```
 
-The Space loads Joycent from `walston/joycent`, the SG-only CosyVoice checkpoint
-from `walston/cosyvoice3-sg`, the official CosyVoice3 base model from
-`FunAudioLLM/Fun-CosyVoice3-0.5B-2512`, and WhisAID from
-`walston/whisaid-zh-grl`.
+The Space reports model loading time, feature extraction time, inference time,
+generated audio duration, and RTF excluding model loading.
+
+To create or update the standalone CosyVoice3 SG model repository:
+
+```bash
+bash demo/cosyvoice_sg_model_repo/upload.sh
+```
