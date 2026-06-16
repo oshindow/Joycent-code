@@ -208,3 +208,19 @@ Parts of this repository are adapted from the following open-source projects:
 - [Whisper](https://github.com/openai/whisper)
 - [Grad-TTS](https://github.com/huawei-noah/Speech-Backbones/tree/main/Grad-TTS)
   from [Speech-Backbones](https://github.com/huawei-noah/Speech-Backbones)
+
+## Citation
+
+Please cite our work if you find it useful:
+
+```bibtex
+@misc{wang2026joycentdiffusionbasedaccenttts,
+      title={Joycent: Diffusion-based Accent TTS without Accented Phone Prediction},
+      author={Xintong Wang and Ye Wang},
+      year={2026},
+      eprint={2606.16417},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD},
+      url={https://arxiv.org/abs/2606.16417},
+}
+```
