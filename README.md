@@ -4,7 +4,7 @@ Official implementation of **Joycent**, a Mandarin accent text-to-speech (TTS)
 framework, together with the pretrained accent identification model
 **WhisAID** and a **ParallelWaveGAN** vocoder.
 
-Project demo page: [anonymous-accent-tts.github.io/Joycent-demo](https://anonymous-accent-tts.github.io/Joycent-demo/)
+[Paper](https://arxiv.org/abs/2606.16417) | [demo](https://anonymous-accent-tts.github.io/Joycent-demo/)
 
 ## Results And Demos
 
@@ -221,6 +221,5 @@ Please cite our work if you find it useful:
       eprint={2606.16417},
       archivePrefix={arXiv},
       primaryClass={cs.SD},
-      url={https://arxiv.org/abs/2606.16417},
 }
 ```
