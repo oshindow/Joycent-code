@@ -89,7 +89,10 @@ released Chinese checkpoint supports **12 accent labels**.
 
 ### Data
 
-WhisAID filelists live in `resources/whisAID/zh_all`. Each row contains:
+WhisAID training and evaluation filelists are generated locally from the
+licensed source datasets and are not distributed in this repository. Keep them
+under an ignored path such as `resources/whisAID/zh_all/` or point the scripts
+to another local path. Each row contains:
 
 ```text
 relative_wav_path|speaker_id|accent_id
@@ -106,6 +109,13 @@ machine-independent:
     magichub_singapore/
     ...
 ```
+
+To regenerate the local filelists, normalize each source dataset to 16 kHz wav
+files, assign stable speaker IDs and accent IDs, split utterances by speaker
+into train/seen-test/unseen-test subsets, and write the rows above with paths
+relative to `--data-root`. Dataset-specific formatting scripts used for this
+conversion contain local filesystem and licensing assumptions, so keep them
+outside the published repository.
 
 ### Fine-Tuning
 
@@ -157,7 +167,10 @@ accent_id = output.logits.argmax(dim=-1).item()
 
 ### Data And Features
 
-Joycent filelists contain four fields:
+Joycent training filelists are also local generated artifacts and are ignored by
+Git. The default scripts expect them under `resources/Joycent/zh_all/`, but you
+can set another local path at the top of `run_joycent.sh`. Each row contains
+four fields:
 
 ```text
 relative_wav_path|phoneme_sequence|speaker_id|accent_id
@@ -175,6 +188,14 @@ script. Use `STAGE=spk` or `STAGE=acc` to extract only one feature type.
 
 Speaker embeddings are stored under `facodec_spk`, while accent embeddings are
 stored under `feat_acc_grl_030326`.
+
+The Joycent filelists are produced from the same licensed audio roots after
+text normalization, phoneme conversion, speaker/accent ID assignment, and
+train/validation splitting. The bucket sampler also uses a local generated
+length cache. Generate it from the local Joycent training filelist and keep it
+ignored as `joycent/lengths.json`, or set `JOYCENT_LENGTHS_PATH` to another
+local JSON file. Local data formatting and statistics scripts should remain in
+your working copy only and should not be pushed.
 
 ### Training
 

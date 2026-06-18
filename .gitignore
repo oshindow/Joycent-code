@@ -27,6 +27,8 @@ dist/
 # Datasets and generated audio
 datasets/
 data/
+resources/Joycent/
+resources/whisAID/
 outputs/
 out/
 
@@ -42,6 +44,14 @@ accent_testsets
 
 *.csv
 *.log
+
+# Generated training metadata and local dataset-formatting utilities
+joycent/lengths.json
+resources/spk2acc*.json
+resources/spk2id*.json
+scripts/prepare_new_data.py
+scripts/stats_*.py
+whisAID/whisAID_format_data_*.py
 
 train_joycent_E*.py
 

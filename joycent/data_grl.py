@@ -26,7 +26,32 @@ from meldataset import mel_spectrogram, mel_spectrogram_align
 import json
 import whisper
 
-LENGTHS_PATH = os.path.join(os.path.dirname(__file__), "lengths.json")
+DEFAULT_LENGTHS_PATH = os.path.join(os.path.dirname(__file__), "lengths.json")
+
+
+def get_lengths_path():
+    return os.path.expanduser(os.environ.get("JOYCENT_LENGTHS_PATH", DEFAULT_LENGTHS_PATH))
+
+
+def load_lengths_file():
+    lengths_path = get_lengths_path()
+    if not os.path.exists(lengths_path):
+        raise FileNotFoundError(
+            "Joycent training requires a local lengths cache. "
+            f"Expected {lengths_path}. Generate it from your local training filelist "
+            "or set JOYCENT_LENGTHS_PATH to an existing local lengths JSON file."
+        )
+    with open(lengths_path, 'r', encoding='utf8') as input:
+        return json.load(input)
+
+
+def write_lengths_file(lengths):
+    lengths_path = get_lengths_path()
+    lengths_dir = os.path.dirname(lengths_path)
+    if lengths_dir:
+        os.makedirs(lengths_dir, exist_ok=True)
+    with open(lengths_path, 'w', encoding='utf8') as output:
+        json.dump(lengths, output, indent=4)
 
 def resolve_data_path(path, data_root=""):
     path = os.path.expanduser(path)
@@ -294,14 +319,12 @@ class TextMelSpeakerAccentDataset(torch.utils.data.Dataset):
             idx += 1
 
         print(self.lengths_max)
-        with open(LENGTHS_PATH, 'w', encoding='utf8') as output:
-            json.dump(self.lengths, output, indent=4)
+        write_lengths_file(self.lengths)
             
         return self.lengths
     
     def get_lengths(self):
-        with open(LENGTHS_PATH, 'r', encoding='utf8') as input:
-            self.lengths_dict = json.load(input)
+        self.lengths_dict = load_lengths_file()
         self.lengths_max = 683
         return self.lengths_dict
     
@@ -503,14 +526,12 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
             idx += 1
 
         print(self.lengths_max)
-        with open(LENGTHS_PATH, 'w', encoding='utf8') as output:
-            json.dump(self.lengths, output, indent=4)
+        write_lengths_file(self.lengths)
             
         return self.lengths
     
     def get_lengths(self):
-        with open(LENGTHS_PATH, 'r', encoding='utf8') as input:
-            self.lengths_dict = json.load(input)
+        self.lengths_dict = load_lengths_file()
         self.lengths_max = 683
         return self.lengths_dict
     

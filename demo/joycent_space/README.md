@@ -28,6 +28,14 @@ reference with an uploaded file or microphone recording.
 Runtime information reports model loading, feature extraction, inference,
 generated audio duration, and RTF. RTF excludes model loading time.
 
+The page also shows a live analytics panel with all-time active users and
+generation counts for the current Space runtime, average generated audio
+length, active sessions, average session time, countries or regions resolved
+from request IP addresses, device categories, referring sites, and per-model
+generation use. The panel clock uses Beijing / Singapore Time (UTC+8). These
+statistics are kept in the running Space process and reset if the Space
+restarts.
+
 The Space bundles the CosyVoice and Matcha-TTS source directories. Initialize
 the CosyVoice submodules before running `upload_space.sh`.
 

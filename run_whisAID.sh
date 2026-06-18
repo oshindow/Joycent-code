@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
 DATA_ROOT=/path/to/data_root
+# Generated locally from the licensed datasets; ignored by Git.
 TRAIN_PATH=resources/whisAID/zh_all/train.csv
 VAL_PATH=resources/whisAID/zh_all/test_unseen.csv
 OUTPUT_DIR=exp/whisAID

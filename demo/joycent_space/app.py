@@ -1,8 +1,17 @@
 import os
+import json
 import subprocess
 import sys
 import time
+from collections import Counter
+from datetime import datetime, timezone, timedelta
+from hashlib import sha256
+from html import escape
+from ipaddress import ip_address
 from pathlib import Path
+from threading import Lock
+from urllib.parse import urlparse
+from urllib.request import urlopen
 
 import gradio as gr
 import torch
@@ -91,6 +100,216 @@ DEFAULT_ACCENT_REFERENCE = (
 )
 JOYCENT_RUNTIME = None
 COSYVOICE_RUNTIME = None
+ANALYTICS = None
+DISPLAY_TIMEZONE = timezone(timedelta(hours=8), "UTC+8")
+DISPLAY_TIMEZONE_LABEL = "Beijing / Singapore Time (UTC+8)"
+
+
+class DemoAnalytics:
+    def __init__(self):
+        self.lock = Lock()
+        self.users = set()
+        self.generations = 0
+        self.audio_seconds = 0.0
+        self.generation_models = Counter()
+        self.countries = Counter()
+        self.devices = Counter()
+        self.referrers = Counter()
+        self.country_cache = {}
+        self.sessions = {}
+
+    @staticmethod
+    def today():
+        return datetime.now(DISPLAY_TIMEZONE).date().isoformat()
+
+    @staticmethod
+    def get_header(request, name, default=""):
+        headers = getattr(request, "headers", {}) or {}
+        getter = getattr(headers, "get", None)
+        if getter is None:
+            return default
+        return getter(name, default) or default
+
+    def session_id(self, request):
+        session_hash = getattr(request, "session_hash", None)
+        if session_hash:
+            return f"session:{session_hash}"
+        user_agent = self.get_header(request, "user-agent")
+        forwarded_for = self.get_header(request, "x-forwarded-for")
+        client = getattr(request, "client", "") or ""
+        raw = f"{forwarded_for}|{client}|{user_agent}"
+        return "anon:" + sha256(raw.encode("utf-8")).hexdigest()[:24]
+
+    @staticmethod
+    def normalize_ip(candidate):
+        candidate = (candidate or "").strip()
+        if not candidate:
+            return ""
+        candidate = candidate.split(",")[0].strip()
+        if candidate.startswith("[") and "]" in candidate:
+            candidate = candidate[1:candidate.index("]")]
+        elif candidate.count(":") == 1 and "." in candidate:
+            candidate = candidate.rsplit(":", 1)[0]
+        try:
+            parsed = ip_address(candidate)
+        except ValueError:
+            return ""
+        if parsed.is_private or parsed.is_loopback or parsed.is_link_local:
+            return ""
+        return str(parsed)
+
+    def client_ip(self, request):
+        for header in (
+            "x-forwarded-for",
+            "cf-connecting-ip",
+            "x-real-ip",
+            "fastly-client-ip",
+            "x-client-ip",
+        ):
+            ip_value = self.normalize_ip(self.get_header(request, header))
+            if ip_value:
+                return ip_value
+        client = getattr(request, "client", None)
+        host = getattr(client, "host", "") or (client[0] if isinstance(client, tuple) else "")
+        return self.normalize_ip(str(host))
+
+    def country_from_ip(self, ip_value):
+        if not ip_value:
+            return "Unknown"
+        if ip_value in self.country_cache:
+            return self.country_cache[ip_value]
+        try:
+            with urlopen(f"https://ipapi.co/{ip_value}/json/", timeout=1.5) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            country = payload.get("country_name") or payload.get("country") or "Unknown"
+        except Exception:
+            country = "Unknown"
+        self.country_cache[ip_value] = country
+        return country
+
+    def country(self, request):
+        return self.country_from_ip(self.client_ip(request))
+
+    def device(self, request):
+        user_agent = self.get_header(request, "user-agent").lower()
+        if "ipad" in user_agent or "tablet" in user_agent:
+            return "Tablet"
+        if "mobi" in user_agent or "android" in user_agent or "iphone" in user_agent:
+            return "Mobile"
+        if user_agent:
+            return "Desktop"
+        return "Unknown"
+
+    def referrer(self, request):
+        referer = self.get_header(request, "referer").strip()
+        if not referer:
+            return "Direct / Unknown"
+        parsed = urlparse(referer)
+        return parsed.netloc or referer[:48]
+
+    def touch(self, request):
+        session_id = self.session_id(request)
+        now = time.time()
+        country = self.country(request)
+        device = self.device(request)
+        referrer = self.referrer(request)
+
+        with self.lock:
+            is_new_session = session_id not in self.sessions
+            self.sessions.setdefault(
+                session_id,
+                {
+                    "first_seen": now,
+                    "last_seen": now,
+                    "country": country,
+                    "device": device,
+                    "referrer": referrer,
+                },
+            )
+            self.sessions[session_id]["last_seen"] = now
+            self.users.add(session_id)
+            if is_new_session:
+                self.countries[country] += 1
+                self.devices[device] += 1
+                self.referrers[referrer] += 1
+
+    def record_generation(self, request, model_name, audio_seconds):
+        self.touch(request)
+        with self.lock:
+            self.generations += 1
+            self.audio_seconds += max(float(audio_seconds), 0.0)
+            self.generation_models[model_name] += 1
+
+    @staticmethod
+    def format_seconds(seconds):
+        seconds = max(float(seconds), 0.0)
+        minutes, remainder = divmod(int(seconds), 60)
+        if minutes:
+            return f"{minutes}m {remainder:02d}s"
+        return f"{seconds:.0f}s"
+
+    def top_items(self, counter, empty_label="No data yet"):
+        if not counter:
+            return f"<li>{empty_label}</li>"
+        rows = []
+        for label, count in counter.most_common(4):
+            rows.append(f"<li><span>{escape(str(label))}</span><b>{count}</b></li>")
+        return "".join(rows)
+
+    def render(self):
+        with self.lock:
+            users = len(self.users)
+            generations = self.generations
+            audio_seconds = self.audio_seconds
+            avg_audio = audio_seconds / generations if generations else 0.0
+            model_counts = self.generation_models.copy()
+            countries = self.countries.copy()
+            devices = self.devices.copy()
+            referrers = self.referrers.copy()
+            active_sessions = [
+                session
+                for session in self.sessions.values()
+                if time.time() - session["last_seen"] <= 120
+            ]
+            avg_session_seconds = (
+                sum(session["last_seen"] - session["first_seen"] for session in self.sessions.values())
+                / len(self.sessions)
+                if self.sessions
+                else 0.0
+            )
+
+        return f"""
+        <section class="analytics-panel">
+            <div class="analytics-title">
+                <div>
+                    <h2>Live Demo Analytics</h2>
+                    <p>All-time totals from this Space runtime. Clock: {DISPLAY_TIMEZONE_LABEL}.</p>
+                </div>
+                <span>{datetime.now(DISPLAY_TIMEZONE).strftime("%H:%M:%S UTC+8")}</span>
+            </div>
+            <div class="analytics-grid">
+                <div><span>All-Time Active Users</span><strong>{users}</strong></div>
+                <div><span>All-Time Generations</span><strong>{generations}</strong></div>
+                <div><span>Average Audio Length</span><strong>{avg_audio:.1f}s</strong></div>
+                <div><span>Active Now</span><strong>{len(active_sessions)}</strong></div>
+                <div><span>Average Session Time</span><strong>{self.format_seconds(avg_session_seconds)}</strong></div>
+            </div>
+            <div class="analytics-lists">
+                <div><h3>Countries / Regions</h3><ul>{self.top_items(countries)}</ul></div>
+                <div><h3>Devices</h3><ul>{self.top_items(devices)}</ul></div>
+                <div><h3>Referring Sites</h3><ul>{self.top_items(referrers)}</ul></div>
+                <div><h3>Generation Use</h3><ul>{self.top_items(model_counts)}</ul></div>
+            </div>
+        </section>
+        """
+
+
+ANALYTICS = DemoAnalytics()
+
+
+def refresh_analytics(request: gr.Request):
+    ANALYTICS.touch(request)
+    return ANALYTICS.render()
 
 
 def load_joycent_runtime():
@@ -163,6 +382,7 @@ def synthesize_joycent(
     n_timesteps,
     temperature,
     length_scale,
+    request: gr.Request,
 ):
     if not speaker_audio:
         raise gr.Error("Please upload or record a speaker reference.")
@@ -228,7 +448,8 @@ def synthesize_joycent(
         f"Audio duration: {audio_duration:.2f}s\n"
         f"RTF excluding model load: {rtf:.4f}"
     )
-    return (sample_rate, waveform), info
+    ANALYTICS.record_generation(request, "Joycent", audio_duration)
+    return (sample_rate, waveform), info, ANALYTICS.render()
 
 
 def synthesize_cosyvoice_ui(
@@ -236,6 +457,7 @@ def synthesize_cosyvoice_ui(
     cosyvoice_text,
     prompt_text,
     instruct,
+    request: gr.Request,
 ):
     try:
         if not cosyvoice_prompt_audio:
@@ -277,7 +499,8 @@ def synthesize_cosyvoice_ui(
         f"Audio duration: {audio_duration:.2f}s\n"
         f"RTF excluding model load: {rtf:.4f}"
     )
-    return (sample_rate, waveform.squeeze(0).numpy()), info
+    ANALYTICS.record_generation(request, "CosyVoice3 SG-only", audio_duration)
+    return (sample_rate, waveform.squeeze(0).numpy()), info, ANALYTICS.render()
 
 
 CSS = """
@@ -305,6 +528,91 @@ CSS = """
     border-radius: 10px;
     color: #6f5100;
     padding: 10px 14px;
+}
+.analytics-panel {
+    background: #f8fafc;
+    border: 1px solid #cfd8e3;
+    border-radius: 8px;
+    margin-top: 18px;
+    padding: 16px;
+}
+.analytics-title {
+    align-items: center;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.analytics-title h2 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+.analytics-title p {
+    color: #536070;
+    margin: 4px 0 0;
+}
+.analytics-title span {
+    color: #536070;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.analytics-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.analytics-grid div {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 8px;
+    min-height: 86px;
+    padding: 12px;
+}
+.analytics-grid span {
+    color: #536070;
+    display: block;
+    font-size: 0.86rem;
+}
+.analytics-grid strong {
+    color: #172033;
+    display: block;
+    font-size: 1.55rem;
+    line-height: 1.2;
+    margin-top: 8px;
+}
+.analytics-lists {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    margin-top: 10px;
+}
+.analytics-lists div {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 8px;
+    padding: 12px;
+}
+.analytics-lists h3 {
+    font-size: 0.95rem;
+    margin: 0 0 8px;
+}
+.analytics-lists ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.analytics-lists li {
+    align-items: center;
+    color: #536070;
+    display: flex;
+    font-size: 0.9rem;
+    gap: 10px;
+    justify-content: space-between;
+    line-height: 1.6;
+}
+.analytics-lists b {
+    color: #172033;
+    font-variant-numeric: tabular-nums;
 }
 """
 
@@ -409,6 +717,11 @@ with gr.Blocks(
                 lines=8,
             )
 
+    analytics_dashboard = gr.HTML(value=ANALYTICS.render())
+    analytics_timer = gr.Timer(value=10)
+
+    demo.load(fn=refresh_analytics, outputs=analytics_dashboard)
+    analytics_timer.tick(fn=refresh_analytics, outputs=analytics_dashboard)
     joycent_button.click(
         fn=synthesize_joycent,
         inputs=[
@@ -419,7 +732,7 @@ with gr.Blocks(
             temperature_input,
             length_input,
         ],
-        outputs=[joycent_audio_output, joycent_info_output],
+        outputs=[joycent_audio_output, joycent_info_output, analytics_dashboard],
     )
     cosyvoice_button.click(
         fn=synthesize_cosyvoice_ui,
@@ -429,7 +742,7 @@ with gr.Blocks(
             prompt_text_input,
             instruct_input,
         ],
-        outputs=[cosyvoice_audio_output, cosyvoice_info_output],
+        outputs=[cosyvoice_audio_output, cosyvoice_info_output, analytics_dashboard],
     )
 
 

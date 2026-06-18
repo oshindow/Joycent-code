@@ -13,6 +13,7 @@ huggingface-cli upload "$SPACE_ID" demo/whisaid_space/README.md README.md --repo
 huggingface-cli upload "$SPACE_ID" demo/whisaid_space/app.py app.py --repo-type space
 huggingface-cli upload "$SPACE_ID" demo/whisaid_space/requirements.txt requirements.txt --repo-type space
 huggingface-cli upload "$SPACE_ID" demo/whisaid_space/packages.txt packages.txt --repo-type space
+huggingface-cli upload "$SPACE_ID" demo/whisaid_space/assets assets --repo-type space
 huggingface-cli upload "$SPACE_ID" whisAID whisAID --repo-type space
 huggingface-cli upload "$SPACE_ID" whisper whisper --repo-type space
 
