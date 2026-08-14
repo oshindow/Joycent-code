@@ -1,0 +1,96 @@
+aishell3/dev/wav_16k/SSB0711/SSB07110314.wav|sil n i3 n iu3 q v1 l e5 sh eng1 m ing4 h an4 v3 s iy3 uang2 d e5 g ui1 z e2 sil|231|11
+aishell3/dev/wav_16k/SSB1383/SSB13830476.wav|sil n v3 z iy3 ui4 f u4 h un1 b ang1 q ian2 f u1 d an1 b ao3 j ie4 u3 sh ix2 uan4 q ian2 f u1 l ing4 q v3 h ou4 sh ix1 l ian2 sil|312|11
+aishell3/dev/wav_16k/SSB1000/SSB10000301.wav|sil h e4 l an2 x ian4 l i4 g ang1 zh en4 t ong1 i4 x iao3 x ve2 sil|265|10
+aishell3/dev/wav_16k/SSB0809/SSB08090253.wav|sil f u2 l ai2 sh an1 f eng1 j ing3 q v1 sh ou4 p iao4 ch u4 sil|250|10
+aishell3/dev/wav_16k/SSB1340/SSB13400179.wav|sil zh u2 j ian4 z ou3 ch u1 r en2 sh eng1 d i1 g u3 d e5 x in1 k e4 an1 sil|306|10
+aishell3/dev/wav_16k/SSB0716/SSB07160395.wav|sil uo3 m en5 sh ix4 an4 n in2 d e5 zh u3 f u4 z uo4 d e5 sil|232|11
+aishell3/dev/wav_16k/SSB1810/SSB18100489.wav|sil l ao3 r en2 g ui4 x ia4 q i2 d ao3 sil|347|10
+aishell3/dev/wav_16k/SSB1402/SSB14020163.wav|sil er2 q ie3 b u2 h ui4 sh ix4 l ian2 b ang1 d iao4 ch a2 j v2 d e5 r en2 sil|317|10
+aishell3/dev/wav_16k/SSB1322/SSB13220355.wav|sil c ong2 i2 g e5 ch ang2 zh ou1 q i2 k an4 m ei3 g uo2 g u3 sh ix4 sh ix4 zh en4 d ang4 x iang4 sh ang4 sil|304|10
+aishell3/dev/wav_16k/SSB1239/SSB12390074.wav|sil d a4 x ve2 x in1 sh eng1 i4 m i3 s an1 er4 ai4 x in1 x in1 l ing2 j i1 t ang1 b ei4 t ong2 x ve2 ch eng1 x iao3 j v4 r en2 sil|299|10
+aishell3/dev/wav_16k/SSB0716/SSB07160266.wav|sil ch ao2 iang2 h ua1 d ian4 sil|232|11
+aishell3/dev/wav_16k/SSB1452/SSB14520466.wav|sil iu3 sh ix2 h ai2 h ui4 g ei3 iu3 x v1 iao4 d e5 f en3 s iy1 s ong4 sh ang4 zh u4 f u2 sil|322|10
+aishell3/dev/wav_16k/SSB1382/SSB13820018.wav|sil b ang1 b u4 l iao3 sh en2 m e5 m ang2 sil|311|10
+aishell3/dev/wav_16k/SSB1091/SSB10910453.wav|sil zh ou1 j ie2 l un2 ch u1 ian3 d e5 d ian4 sh ix4 j v4 iu3 sh en2 m e5 sil|276|10
+aishell3/dev/wav_16k/SSB1728/SSB17280145.wav|sil n i3 d ui4 n i3 sh uo1 h ua4 d e5 t ai4 d u4 sil|339|10
+aishell3/dev/wav_16k/SSB0534/SSB05340090.wav|sil zh ix4 sh ang4 l i4 h e2 sil|202|10
+aishell3/dev/wav_16k/SSB1110/SSB11100052.wav|sil k e3 sh ix4 n i3 q ve4 l i2 k ai1 t a1 l e5 sil|280|10
+aishell3/dev/wav_16k/SSB1340/SSB13400303.wav|sil j iang1 q ian2 q i1 q in2 m ou3 m ou3 h an4 t ong2 x ing2 n an2 z iy3 zh uang4 d ao3 h ou4 sil|306|10
+aishell3/dev/wav_16k/SSB0822/SSB08220312.wav|sil h ai3 n an2 t un2 ch ang1 sh ang4 i4 van2 zh eng4 f u3 zh ong4 d ian3 g ong1 ch eng2 l an4 ui3 sil|252|10
+aishell3/dev/wav_16k/SSB0863/SSB08630429.wav|sil ui4 l e5 x i1 in3 g eng4 d uo1 d e5 uai4 d i4 p ao3 zh e3 l ai2 g ao1 ch un2 l v3 iu2 c an1 s ai4 sil|254|10
+aishell3/dev/wav_16k/SSB0716/SSB07160441.wav|sil n i3 d ei3 k ao3 l v4 d ao4 uo3 m en5 h ui4 b ian4 d e5 g eng4 k u4 sil|232|11
+aishell3/dev/wav_16k/SSB0686/SSB06860020.wav|sil uo3 x v1 iao4 k ai3 l i4 an1 sil|226|10
+aishell3/dev/wav_16k/SSB1377/SSB13770243.wav|sil iao4 j ie3 j ve2 zh ong1 g uo2 sh e4 h ui4 l ao3 l ing2 h ua4 d e5 un4 t i2 sil|310|10
+aishell3/dev/wav_16k/SSB1064/SSB10640291.wav|sil iao1 s an1 l iu4 i1 q i1 q i1 sil|274|10
+aishell3/dev/wav_16k/SSB1000/SSB10000445.wav|sil n eng2 f ou3 t ong2 sh ix2 d eng1 j i4 z ai4 f u4 m u3 h an4 zh un3 f u1 q i1 d uo1 r en2 m ing2 x ia4 sil|265|10
+aishell3/dev/wav_16k/SSB1008/SSB10080006.wav|sil r u2 g uo3 t ian1 j in1 n v3 p ai2 iu3 x v1 iao4 sil|268|10
+aishell3/dev/wav_16k/SSB1091/SSB10910335.wav|sil z iy4 uang2 f ei1 x ie4 t ing2 f eng1 g ong1 k ai1 f u4 h e2 i3 g uo4 q v4 j iu3 g e5 ve4 sil|276|10
+aishell3/dev/wav_16k/SSB1878/SSB18780316.wav|sil zh ong1 iang1 d ian4 sh ix4 t ai2 ch eng2 d an1 zh e5 zh ong4 iao4 d e5 g ong1 i4 z e2 r en4 sil|355|10
+aishell3/dev/wav_16k/SSB1197/SSB11970342.wav|sil d an4 uo3 m ei3 ve4 n eng2 j ian4 d ao4 t a1 d e5 sh ix2 j ian1 ie3 j iu4 sh ix2 m iao3 z uo3 iu4 sil|291|10
+aishell3/dev/wav_16k/SSB1055/SSB10550026.wav|sil h ong2 ian2 d e5 sh u1 j i2 iu3 sh en2 m e5 sil|272|10
+aishell3/dev/wav_16k/SSB1383/SSB13830477.wav|sil er4 q ian1 b a1 b ai3 b a1 sh ix2 q i1 sil|312|11
+aishell3/dev/wav_16k/SSB1385/SSB13850366.wav|sil zh e4 n a3 l i3 j iao4 v4 ian2 sil|313|10
+aishell3/dev/wav_16k/SSB1110/SSB11100368.wav|sil x v3 ch ang1 sh ix4 d e5 x iang1 zh en4 iu3 sh en2 m e5 sil|280|10
+aishell3/dev/wav_16k/SSB0817/SSB08170389.wav|sil u3 uan4 i4 q ian1 b a1 b ai3 l ing2 s an1 sil|251|10
+aishell3/dev/wav_16k/SSB1197/SSB11970202.wav|sil d an4 q i2 sh ix2 b ing4 m ei2 iu3 sil|291|10
+aishell3/dev/wav_16k/SSB1322/SSB13220237.wav|sil g uang3 d ong1 sh eng3 d e5 x iang1 zh en4 iu3 sh en2 m e5 sil|304|10
+aishell3/dev/wav_16k/SSB1846/SSB18460137.wav|sil q in1 zh ou1 sh ix4 d e5 zh ong1 x ve2 iu3 sh en2 m e5 sil|352|11
+aishell3/dev/wav_16k/SSB0716/SSB07160193.wav|sil q i4 x iu1 van4 x iao4 iu3 sh en2 m e5 sil|232|11
+aishell3/dev/wav_16k/SSB1383/SSB13830059.wav|sil d an4 x in1 j ing4 sh ang4 h an4 sh ao4 n v3 sh ix2 d ai4 sh ix2 uan2 q van2 b u4 i2 iang4 l e5 sil|312|11
+aishell3/dev/wav_16k/SSB0736/SSB07360041.wav|sil n i3 sh ix4 f ou3 m ing2 j iao4 sh ui3 ie3 iu4 zh ix1 j in4 sil|236|11
+aishell3/dev/wav_16k/SSB1385/SSB13850215.wav|sil uo3 x iang3 t ing1 x in1 h ui4 g en1 zh e5 ai4 i4 q i3 z ou3 sil|313|10
+aishell3/dev/wav_16k/SSB1377/SSB13770301.wav|sil zh an4 sh ix2 uo3 m en5 h ai2 m ei2 iu3 v3 t an2 g uo2 d a4 x ve2 q ian1 x ia4 g uo2 j i4 j iao1 l iu2 d e5 x iang1 g uan1 x ie2 i4 sil|310|10
+aishell3/dev/wav_16k/SSB1239/SSB12390026.wav|sil b u4 sh ao3 g ong1 s iy1 k ai1 sh ix3 zh uan3 x ing2 h uo4 zh e3 t uo4 zh an3 z iy4 sh en1 ie4 u4 sil|299|10
+aishell3/dev/wav_16k/SSB1365/SSB13650414.wav|sil g ao1 f eng1 q i4 x iu1 ch ang3 sil|308|10
+aishell3/dev/wav_16k/SSB1239/SSB12390152.wav|sil u2 s u4 l ing2 sh ang4 uang3 f en1 x iang3 v4 er2 j ing1 x i1 in3 b u4 sh ao3 f en3 s iy1 sil|299|10
+aishell3/dev/wav_16k/SSB0338/SSB03380149.wav|sil r iz4 v3 g e1 sil|180|10
+aishell3/dev/wav_16k/SSB1408/SSB14080476.wav|sil h en3 m ing2 x ian3 iu2 n i2 s iy1 b en3 n eng2 d e5 f ou3 r en4 l e5 n a4 c iy4 sh ix4 j ian4 d e5 x i4 j ie2 sil|318|10
+aishell3/dev/wav_16k/SSB1684/SSB16840368.wav|sil x iang3 iao4 t ing1 t ong2 n ian2 sil|335|10
+aishell3/dev/wav_16k/SSB1385/SSB13850174.wav|sil t a1 z ai4 h ui4 i4 sh ix4 i2 g e5 b u4 ui2 r en2 zh u4 i4 d e5 q i2 j iao3 z uo4 x ia4 sil|313|10
+aishell3/dev/wav_16k/SSB1203/SSB12030019.wav|sil v4 p ing2 t ing2 ch e1 ch ang3 sil|292|10
+aishell3/dev/wav_16k/SSB1110/SSB11100335.wav|sil in1 ui4 uo3 f ei1 ch ang2 ai4 uo3 m en5 z ai4 i4 q i3 d e5 n a4 uan3 sil|280|10
+aishell3/dev/wav_16k/SSB1002/SSB10020261.wav|sil g ai1 x iang4 m u4 ui4 l ai2 k e3 i3 f u4 g ai4 zh ix4 h uo3 x ing1 sil|267|10
+aishell3/dev/wav_16k/SSB0822/SSB08220273.wav|sil h ai3 n an2 i4 van2 zh eng4 f u3 zh ong4 d ian3 g ong1 ch eng2 l an4 ui3 n ong2 m in2 g ong1 g ong1 q ian2 u2 ch u4 iao4 sil|252|10
+aishell3/dev/wav_16k/SSB1002/SSB10020303.wav|sil q ie3 zh ix4 h uan4 sh ix4 x iang4 x v1 iu2 g u3 d ong1 h ui4 g u3 d ong1 d a4 h ui4 z uo4 ch u1 j ve2 i4 d e5 sil|267|10
+aishell3/dev/wav_16k/SSB1064/SSB10640477.wav|sil ch eng2 d u1 sh ix4 d e5 i1 sh eng1 iu3 sh en2 m e5 sil|274|10
+aishell3/dev/wav_16k/SSB1393/SSB13930049.wav|sil t a1 d e5 q ve1 d ian3 sh ix4 sh en2 m e5 sil|315|10
+aishell3/dev/wav_16k/SSB0915/SSB09150022.wav|sil uo3 m en5 h en3 k uai4 h ui4 t ui1 ch u1 d ai4 zh e4 f ang1 m ian4 x in1 p ian4 d e5 f u2 u4 q i4 ch an3 p in3 sil|258|11
+aishell3/dev/wav_16k/SSB1382/SSB13820250.wav|sil uo3 zh ix3 sh ix4 z ai4 i4 x iang3 sil|311|10
+aishell3/dev/wav_16k/SSB1399/SSB13990366.wav|sil t i2 g ao1 t ai4 iang2 n eng2 g uang1 d ian4 g uang1 r e4 zh uan3 h uan4 x iao4 l v4 sil|316|10
+aishell3/dev/wav_16k/SSB1891/SSB18910017.wav|sil uo3 h en3 z an4 sh ang3 n i3 d e5 n u3 l i4 sil|356|10
+aishell3/dev/wav_16k/SSB1402/SSB14020180.wav|sil g ou3 g u3 zh ix2 u4 iu3 sh en2 m e5 sil|317|10
+aishell3/dev/wav_16k/SSB1745/SSB17450348.wav|sil j ian1 g uan3 c eng2 j iang1 g en1 j v4 sh ix4 ch ang3 x v1 q iu2 q ing2 k uang4 j iong3 t i3 sh e4 j i4 sil|341|10
+aishell3/dev/wav_16k/SSB1002/SSB10020372.wav|sil v4 j i4 t ou2 z iy1 j iang1 d a2 i4 b ai3 i4 m ei3 van2 sil|267|10
+aishell3/dev/wav_16k/SSB0863/SSB08630065.wav|sil m a3 l a1 s ong1 b i3 s ai4 l i4 l ai2 i3 j ing4 s u4 ui2 k an4 d ian3 sil|254|10
+aishell3/dev/wav_16k/SSB0693/SSB06930368.wav|sil zh ang1 x in4 zh e2 d e5 g e1 sil|227|11
+aishell3/dev/wav_16k/SSB0736/SSB07360209.wav|sil b a3 k ong1 t iao2 un1 d u4 f ang4 x iao3 ui2 s an1 sh ix2 sil|236|11
+aishell3/dev/wav_16k/SSB1382/SSB13820143.wav|sil an1 p ing2 x ian4 d e5 q i4 ie4 iu3 sh en2 m e5 sil|311|10
+aishell3/dev/wav_16k/SSB1891/SSB18910364.wav|sil m ei2 t ing1 g uo4 zh e4 g e5 r en2 sil|356|10
+aishell3/dev/wav_16k/SSB1902/SSB19020082.wav|sil uai4 x ing1 r en2 zh ix1 q van2 sil|357|10
+aishell3/dev/wav_16k/SSB1809/SSB18090301.wav|sil j in4 q i2 g uo2 j i4 j in1 j ia4 d a4 t iao4 sh ui3 sil|346|10
+aishell3/dev/wav_16k/SSB0702/SSB07020318.wav|sil d an4 n a4 b u2 sh ix4 uo3 d e5 g ong1 v4 sil|229|11
+aishell3/dev/wav_16k/SSB0749/SSB07490348.wav|sil l ai2 i4 sh ou3 x in1 v3 sil|240|11
+aishell3/dev/wav_16k/SSB0711/SSB07110092.wav|sil zh ang3 d a4 f a1 f u2 d iu1 sh ix1 m eng2 ui4 sil|231|11
+aishell3/dev/wav_16k/SSB1891/SSB18910222.wav|sil t i3 c ao1 ao4 vn4 g uan4 j vn1 iang2 i1 l in2 m u4 q ian2 ie3 sh ix4 m a3 k ong3 d uo1 x iang4 m u4 d e5 h e2 h uo3 r en2 sil|356|10
+aishell3/dev/wav_16k/SSB1831/SSB18310375.wav|sil h uo4 d e2 j in1 n ian2 h uang2 j in1 d a4 s ai4 z ong3 g uan4 j vn1 d e5 d ui4 u3 sil|349|11
+aishell3/dev/wav_16k/SSB1322/SSB13220143.wav|sil b o4 f ang4 l in2 j vn4 j ie2 c ao2 c ao1 sil|304|10
+aishell3/dev/wav_16k/SSB1918/SSB19180439.wav|sil uo3 m en5 z ong3 sh ix4 x i3 h uan1 z an4 sh ang3 uo3 m en5 d e5 r en2 sil|358|10
+aishell3/dev/wav_16k/SSB0993/SSB09930262.wav|sil l a1 d ing1 u3 g e1 q v3 sil|263|10
+aishell3/dev/wav_16k/SSB0993/SSB09930019.wav|sil l iang3 zh ou1 n ei4 d u2 d e5 sh u1 z ui4 d uo1 j iu4 iu3 j iang3 p in3 sil|263|10
+aishell3/dev/wav_16k/SSB1000/SSB10000009.wav|sil x iang1 t an2 i1 x iao4 zh ang3 uan2 h u1 zh ix2 sh ou3 zh ix4 x ve2 sh eng1 er4 s iy3 er4 sh ang1 h uo4 z ui4 sil|265|10
+aishell3/dev/wav_16k/SSB1328/SSB13280101.wav|sil ui4 j ia1 q iang2 k e1 j i4 r en2 c ai2 p ei2 iang3 sil|305|10
+aishell3/dev/wav_16k/SSB1161/SSB11610442.wav|sil l ai2 sh ou3 in1 ve4 t ong2 h ua4 sil|288|10
+aishell3/dev/wav_16k/SSB1187/SSB11870162.wav|sil uo3 b a4 z ai4 uo3 x iao3 sh ix2 h ou4 j iu4 l i2 k ai1 l e5 sil|290|10
+aishell3/dev/wav_16k/SSB1457/SSB14570421.wav|sil q van2 n ian2 g ong4 j iu3 z ong1 d i4 k uai4 ch u1 r ang4 sil|323|10
+aishell3/dev/wav_16k/SSB0871/SSB08710438.wav|sil q i1 b ai3 s an1 sh ix2 b a1 sil|255|10
+aishell3/dev/wav_16k/SSB1872/SSB18720062.wav|sil b u3 t ie1 j ian3 sh ao3 l ing2 d ian3 u3 uan4 van2 sil|354|10
+aishell3/dev/wav_16k/SSB0711/SSB07110132.wav|sil j vn1 sh ix4 c iy2 h ui4 iu3 sh en2 m e5 sil|231|11
+aishell3/dev/wav_16k/SSB0749/SSB07490426.wav|sil l ai2 i4 sh ou3 x iang1 j ian4 h en4 uan3 sil|240|11
+aishell3/dev/wav_16k/SSB1863/SSB18630235.wav|sil ch en2 b ai3 q iang2 sil|353|10
+aishell3/dev/wav_16k/SSB0717/SSB07170062.wav|sil b ao4 k an1 b ao4 zh ix3 iu3 sh en2 m e5 sil|233|11
+aishell3/dev/wav_16k/SSB1064/SSB10640264.wav|sil zh e4 iang4 j iu4 sh ix4 b u4 x ing2 sil|274|10
+aishell3/dev/wav_16k/SSB1365/SSB13650283.wav|sil ie3 iu3 t u2 sh u1 g uan3 d a4 j v4 van4 x in1 un2 zh ong1 x in1 d eng3 b iao1 zh ix4 x ing4 un2 h ua4 g ong1 ch eng2 sil|308|10
+aishell3/dev/wav_16k/SSB0915/SSB09150381.wav|sil j iu3 b ai3 i1 sh ix2 q i1 uan4 u3 q ian1 s an1 b ai3 q i1 sh ix2 b a1 sil|258|11
+aishell3/dev/wav_16k/SSB1918/SSB19180391.wav|sil x in1 un2 f a1 ian2 r en2 zh ang1 x iao3 j vn1 j ie4 sh ao4 sil|358|10
+aishell3/dev/wav_16k/SSB1918/SSB19180412.wav|sil f ang4 i4 sh ou3 z ou3 g uo4 k a1 f ei1 u1 sil|358|10
+aishell3/dev/wav_16k/SSB1002/SSB10020039.wav|sil j ia1 d a4 d ang3 van2 l ing3 d ao3 g an1 b u4 n ei4 m u4 j iao1 i4 an4 ch a2 b an4 l i4 d u4 sil|267|10

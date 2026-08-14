@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 import time
 from pathlib import Path
@@ -73,6 +74,11 @@ def parse_args():
     parser.add_argument("--vocoder-config-filename", default="config.yml")
     parser.add_argument("--output-dir", default="outputs/joycent")
     parser.add_argument(
+        "--inference-list",
+        default=None,
+        help="JSONL manifest containing one fully specified inference case per line.",
+    )
+    parser.add_argument(
         "--speaker-set",
         choices=["seen", "unseen", "all"],
         default="all",
@@ -92,6 +98,11 @@ def parse_args():
             "Custom speaker reference as NAME=/path/to.wav or /path/to.wav. "
             "Can be passed multiple times."
         ),
+    )
+    parser.add_argument(
+        "--speaker-reference-list",
+        default=None,
+        help="Optional text file with one NAME=/path/to.wav speaker reference per line.",
     )
     parser.add_argument(
         "--accent-reference",
@@ -121,6 +132,8 @@ def parse_args():
     parser.add_argument("--n-timesteps", type=int, default=10)
     parser.add_argument("--temperature", type=float, default=1.5)
     parser.add_argument("--length-scale", type=float, default=0.91)
+    parser.add_argument("--n-spks", type=int, default=222)
+    parser.add_argument("--n-accents", type=int, default=4)
     return parser.parse_args()
 
 
@@ -134,11 +147,12 @@ def resolve_checkpoint(local_path, repo_id, filename, label):
     )
 
 
-def load_acoustic_model(checkpoint_path, device):
+def load_acoustic_model(checkpoint_path, device, n_spks, n_accents):
     print("Initializing Joycent acoustic model...")
-    params.n_spks = 222
+    params.n_spks = n_spks
+    params.n_acc = n_accents
     params.n_enc_channels = 256
-    zh_dict = zhdict.ZHDict("resources/zh_dictionary.json")
+    zh_dict = zhdict.ZHDict(params.zhdict_path)
 
     model = GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(
         zh_dict.__len__() + 1,
@@ -262,6 +276,18 @@ def resolve_reference(path, data_root):
     return os.path.join(os.path.expanduser(data_root), path)
 
 
+def read_speaker_reference_list(path):
+    references = []
+    if not path:
+        return references
+    with open(path, "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                references.append(line)
+    return references
+
+
 def select_speakers(args):
     pool = {}
     if args.speaker_set in ("seen", "all"):
@@ -278,9 +304,14 @@ def select_speakers(args):
     else:
         selected.update(pool)
 
+    speaker_references = []
+    speaker_references.extend(read_speaker_reference_list(args.speaker_reference_list))
     if args.speaker_reference:
+        speaker_references.extend(args.speaker_reference)
+
+    if speaker_references:
         selected = {}
-        for index, value in enumerate(args.speaker_reference, start=1):
+        for index, value in enumerate(speaker_references, start=1):
             name, path = parse_custom_reference(value, index)
             selected[name] = path
 
@@ -430,18 +461,71 @@ def synthesize_mels(args, model, zh_dict, fa_encoder, fa_decoder, config, device
         print(f"Average acoustic RTF: {total_rtf / num_items:.4f}")
 
 
+def synthesize_manifest(args, model, zh_dict, fa_encoder, fa_decoder, config, device):
+    os.makedirs(args.output_dir, exist_ok=True)
+    with open(args.inference_list, encoding="utf-8") as source:
+        cases = [json.loads(line) for line in source if line.strip()]
+
+    speaker_cache = {}
+    accent_cache = {}
+    total_rtf = 0.0
+    for index, case in enumerate(cases, 1):
+        speaker_reference = resolve_reference(case["speaker_reference"], args.data_root)
+        if speaker_reference not in speaker_cache:
+            print(f"Extracting speaker embedding from {speaker_reference}")
+            speaker_cache[speaker_reference] = extract_speaker_embedding(
+                speaker_reference, fa_encoder, fa_decoder, device
+            )
+
+        accent_path = resolve_reference(case["accent_embedding"], args.data_root)
+        if accent_path not in accent_cache:
+            accent_cache[accent_path] = torch.from_numpy(np.load(accent_path)).float().unsqueeze(0).to(device)
+
+        x = text_to_sequence_zh(case["phones"], dictionary=zh_dict)
+        x = torch.LongTensor(intersperse(x, len(zh_dict))).to(device)[None]
+        x_lengths = torch.LongTensor([x.shape[-1]]).to(device)
+        with torch.no_grad():
+            if device.type == "cuda":
+                torch.cuda.synchronize()
+            start = time.time()
+            _, y_dec, _ = model.prompt(
+                x=x,
+                x_lengths=x_lengths,
+                spk_embs=speaker_cache[speaker_reference],
+                acc_embs=accent_cache[accent_path],
+                n_timesteps=args.n_timesteps,
+                temperature=args.temperature,
+                stoc=False,
+                spk=str(case["speaker_id"]),
+                length_scale=args.length_scale,
+            )
+            if device.type == "cuda":
+                torch.cuda.synchronize()
+
+        elapsed = time.time() - start
+        duration = y_dec.shape[-1] * config.get("hop_size", 256) / config.get("sampling_rate", 16000)
+        total_rtf += elapsed / duration
+        feats = y_dec.squeeze(0).transpose(0, 1).cpu().numpy().astype(np.float32)
+        accent_output_dir = os.path.join(args.output_dir, case["target_accent"])
+        os.makedirs(accent_output_dir, exist_ok=True)
+        outpath = os.path.join(accent_output_dir, f"{case['id']}.h5")
+        write_hdf5(outpath, "feats", feats)
+        write_hdf5(outpath, "wave", np.zeros(feats.shape[0] * 256, dtype=np.float32))
+        print(f"[{index}/{len(cases)}] Wrote mel: {outpath}")
+
+    if cases:
+        print(f"Average acoustic RTF: {total_rtf / len(cases):.4f}")
+
+
 def vocode_mels(output_dir, vocoder, config, device):
-    dataset = MelDataset(
-        output_dir,
-        mel_query="*.h5",
-        mel_load_fn=lambda path: read_hdf5(path, "feats"),
-        return_utt_id=True,
-    )
+    mel_paths = sorted(Path(output_dir).rglob("*.h5"))
 
     total_rtf = 0.0
     num_items = 0
     with torch.no_grad():
-        for utt_id, feats in dataset:
+        for mel_path in mel_paths:
+            utt_id = mel_path.stem
+            feats = read_hdf5(str(mel_path), "feats")
             batch = {"normalize_before": False}
             batch["c"] = torch.tensor(feats, dtype=torch.float).to(device)
             if device.type == "cuda":
@@ -454,7 +538,7 @@ def vocode_mels(output_dir, vocoder, config, device):
             rtf = (time.time() - start) / (len(wav) / config["sampling_rate"])
             total_rtf += rtf
             num_items += 1
-            wav_path = os.path.join(output_dir, f"{utt_id}_gen.wav")
+            wav_path = str(mel_path.with_name(f"{utt_id}_gen.wav"))
             sf.write(wav_path, wav.cpu().numpy(), config["sampling_rate"], "PCM_16")
             print(f"Wrote wav: {wav_path} | vocoder RTF={rtf:.4f}")
 
@@ -484,7 +568,12 @@ def main():
             filename=args.vocoder_config_filename,
         )
 
-    model, zh_dict = load_acoustic_model(acoustic_checkpoint, device)
+    model, zh_dict = load_acoustic_model(
+        acoustic_checkpoint,
+        device,
+        args.n_spks,
+        args.n_accents,
+    )
     vocoder, config = load_vocoder(
         vocoder_checkpoint,
         args.output_dir,
@@ -492,7 +581,10 @@ def main():
         config_path=vocoder_config,
     )
     fa_encoder, fa_decoder = load_facodec(device)
-    synthesize_mels(args, model, zh_dict, fa_encoder, fa_decoder, config, device)
+    if args.inference_list:
+        synthesize_manifest(args, model, zh_dict, fa_encoder, fa_decoder, config, device)
+    else:
+        synthesize_mels(args, model, zh_dict, fa_encoder, fa_decoder, config, device)
     vocode_mels(args.output_dir, vocoder, config, device)
 
 

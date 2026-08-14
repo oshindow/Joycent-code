@@ -62,6 +62,10 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
         
         self.spk_projector = torch.nn.Linear(256, 64)
         self.acc_projector = torch.nn.Linear(256, 64)
+        if not self.spk_dec:
+            self.spk_projector.requires_grad_(False)
+        if not self.acc_dec:
+            self.acc_projector.requires_grad_(False)
 
     @torch.no_grad()
     def prompt(self, x, x_lengths, spk_embs, acc_embs, n_timesteps, cond=None, temperature=1.0, stoc=False, spk=None, acc=None, length_scale=1.0):
@@ -123,8 +127,7 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
 
         return encoder_outputs, decoder_outputs, attn[:, :, :y_max_length]
 
-    @torch.no_grad()
-    def forward(self, x, x_lengths, y, y_lengths_ref, spk_embs, acc_embs, n_timesteps, cond=None, temperature=1.0, stoc=False, spk=None, acc=None, length_scale=1.0):
+    def forward(self, x, x_lengths, y, y_lengths_ref, spk_embs, acc_embs, n_timesteps=None, cond=None, temperature=1.0, stoc=False, spk=None, acc=None, length_scale=1.0, training_loss=False, out_size=None, profile=False):
         """
         Generates mel-spectrogram from text. Returns:
             1. encoder outputs
@@ -141,6 +144,10 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
             length_scale (float, optional): controls speech pace.
                 Increase value to slow down generated speech and vice versa.
         """
+        if training_loss:
+            return self.compute_loss(x, x_lengths, y, y_lengths_ref, spk_embs,
+                                     acc_embs, out_size=out_size, profile=profile)
+
         x, x_lengths = self.relocate_input([x, x_lengths])
 
          
@@ -187,7 +194,7 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
 
         return encoder_outputs, decoder_outputs, attn[:, :, :y_max_length]
 
-    def compute_loss(self, x, x_lengths, y_prompt, y, y_lengths, spk_embs, acc_embs, out_size=None):
+    def compute_loss(self, x, x_lengths, y, y_lengths, spk_embs, acc_embs, out_size=None, profile=False):
         """
         Computes 3 losses:
             1. duration loss: loss between predicted token durations and those extracted by Monotinic Alignment Search (MAS).
@@ -203,6 +210,14 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
                 Should be divisible by 2^{num of UNet downsamplings}. Needed to increase batch size.
         """
         
+        events = []
+        def mark(name):
+            if profile:
+                event = torch.cuda.Event(enable_timing=True)
+                event.record()
+                events.append((name, event))
+
+        mark("start")
         x, x_lengths, y, y_lengths = self.relocate_input([x, x_lengths, y, y_lengths])
 
         acc_cond = acc_embs.unsqueeze(1).repeat(1, x.size(1), 1)
@@ -210,9 +225,11 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
         
         spk_cond = spk_embs.unsqueeze(1).repeat(1, x.size(1), 1)
         spk_proj = self.spk_projector(spk_embs)
+        mark("conditioning")
            
         # Encoder
         mu_x, logw, x_mask = self.encoder(x, x_lengths, acc_cond=acc_cond, spk_cond=spk_cond)
+        mark("encoder")
         
         y_max_length = y.shape[-1]
 
@@ -230,6 +247,7 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
 
             attn = monotonic_align.maximum_path(log_prior, attn_mask.squeeze(1))
             attn = attn.detach()
+        mark("mas")
 
         # Compute loss between predicted log-scaled durations and those obtained from MAS
         logw_ = torch.log(1e-8 + torch.sum(attn.unsqueeze(1), -1)) * x_mask
@@ -260,6 +278,7 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
             attn = attn_cut
             y = y_cut
             y_mask = y_cut_mask
+        mark("duration_and_segment")
 
         # Align encoded text with mel-spectrogram and get mu_y segment
         mu_y = torch.matmul(attn.squeeze(1).transpose(1, 2), mu_x.transpose(1, 2))
@@ -271,10 +290,21 @@ class GradTTSConformerGSTWhisper3Qwen2facodec3accrmllm(BaseModule):
         if not self.acc_dec:
             acc_proj = None
         
-        diff_loss, xt = self.decoder.compute_loss(y, y_mask, mu_y, spk=spk_proj, acc=acc_proj)
+        diff_loss, xt = self.decoder.compute_loss(y, y_mask, mu_y, spk=spk_proj, acc=acc_proj, profile=profile)
+        mark("decoder_unet")
         
         # Compute loss between aligned encoder outputs and mel-spectrogram
         prior_loss = torch.sum(0.5 * ((y - mu_y) ** 2 + math.log(2 * math.pi)) * y_mask)
         prior_loss = prior_loss / (torch.sum(y_mask) * self.n_feats)
-        
-        return dur_loss, prior_loss, diff_loss
+        mark("prior_loss")
+
+        if not profile:
+            return dur_loss, prior_loss, diff_loss
+        torch.cuda.synchronize()
+        timings = {
+            events[index][0]: events[index - 1][1].elapsed_time(events[index][1])
+            for index in range(1, len(events))
+        }
+        timings["forward_total"] = events[0][1].elapsed_time(events[-1][1])
+        timings.update({f"unet_{key}": value for key, value in self.decoder.estimator.last_profile.items()})
+        return dur_loss, prior_loss, diff_loss, timings

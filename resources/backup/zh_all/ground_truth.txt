@@ -1,0 +1,541 @@
+eval_split,dataset_group,speaker_key,speaker_id,accent_id,sample_index,audio_path
+seen_selected,AISHELL-3,SSB0112,217,1,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120193.wav
+seen_selected,AISHELL-3,SSB0112,217,1,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120379.wav
+seen_selected,AISHELL-3,SSB0112,217,1,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120413.wav
+seen_selected,AISHELL-3,SSB0112,217,1,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120321.wav
+seen_selected,AISHELL-3,SSB0112,217,1,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120350.wav
+seen_selected,AISHELL-3,SSB0112,217,1,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120259.wav
+seen_selected,AISHELL-3,SSB0112,217,1,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120161.wav
+seen_selected,AISHELL-3,SSB0112,217,1,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120458.wav
+seen_selected,AISHELL-3,SSB0112,217,1,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120405.wav
+seen_selected,AISHELL-3,SSB0112,217,1,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120029.wav
+seen_selected,AISHELL-3,SSB0112,217,1,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120256.wav
+seen_selected,AISHELL-3,SSB0112,217,1,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120337.wav
+seen_selected,AISHELL-3,SSB0112,217,1,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120160.wav
+seen_selected,AISHELL-3,SSB0112,217,1,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120410.wav
+seen_selected,AISHELL-3,SSB0112,217,1,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0112/SSB01120299.wav
+seen_selected,AISHELL-3,SSB0267,163,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670218.wav
+seen_selected,AISHELL-3,SSB0267,163,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670311.wav
+seen_selected,AISHELL-3,SSB0267,163,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670343.wav
+seen_selected,AISHELL-3,SSB0267,163,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670045.wav
+seen_selected,AISHELL-3,SSB0267,163,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670113.wav
+seen_selected,AISHELL-3,SSB0267,163,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670188.wav
+seen_selected,AISHELL-3,SSB0267,163,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670378.wav
+seen_selected,AISHELL-3,SSB0267,163,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670383.wav
+seen_selected,AISHELL-3,SSB0267,163,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670359.wav
+seen_selected,AISHELL-3,SSB0267,163,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670324.wav
+seen_selected,AISHELL-3,SSB0267,163,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670068.wav
+seen_selected,AISHELL-3,SSB0267,163,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670489.wav
+seen_selected,AISHELL-3,SSB0267,163,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670490.wav
+seen_selected,AISHELL-3,SSB0267,163,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670007.wav
+seen_selected,AISHELL-3,SSB0267,163,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670140.wav
+seen_selected,AISHELL-3,SSB0288,150,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880406.wav
+seen_selected,AISHELL-3,SSB0288,150,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880095.wav
+seen_selected,AISHELL-3,SSB0288,150,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880061.wav
+seen_selected,AISHELL-3,SSB0288,150,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880150.wav
+seen_selected,AISHELL-3,SSB0288,150,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880199.wav
+seen_selected,AISHELL-3,SSB0288,150,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880361.wav
+seen_selected,AISHELL-3,SSB0288,150,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880278.wav
+seen_selected,AISHELL-3,SSB0288,150,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880465.wav
+seen_selected,AISHELL-3,SSB0288,150,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880035.wav
+seen_selected,AISHELL-3,SSB0288,150,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880345.wav
+seen_selected,AISHELL-3,SSB0288,150,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880318.wav
+seen_selected,AISHELL-3,SSB0288,150,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880193.wav
+seen_selected,AISHELL-3,SSB0288,150,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880125.wav
+seen_selected,AISHELL-3,SSB0288,150,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880414.wav
+seen_selected,AISHELL-3,SSB0288,150,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0288/SSB02880362.wav
+seen_selected,AISHELL-3,SSB0299,139,1,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990335.wav
+seen_selected,AISHELL-3,SSB0299,139,1,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990141.wav
+seen_selected,AISHELL-3,SSB0299,139,1,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990179.wav
+seen_selected,AISHELL-3,SSB0299,139,1,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990066.wav
+seen_selected,AISHELL-3,SSB0299,139,1,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990260.wav
+seen_selected,AISHELL-3,SSB0299,139,1,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990092.wav
+seen_selected,AISHELL-3,SSB0299,139,1,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990272.wav
+seen_selected,AISHELL-3,SSB0299,139,1,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990196.wav
+seen_selected,AISHELL-3,SSB0299,139,1,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990507.wav
+seen_selected,AISHELL-3,SSB0299,139,1,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990402.wav
+seen_selected,AISHELL-3,SSB0299,139,1,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990097.wav
+seen_selected,AISHELL-3,SSB0299,139,1,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990055.wav
+seen_selected,AISHELL-3,SSB0299,139,1,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990347.wav
+seen_selected,AISHELL-3,SSB0299,139,1,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990515.wav
+seen_selected,AISHELL-3,SSB0299,139,1,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990202.wav
+seen_selected,AISHELL-3,SSB0307,214,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070156.wav
+seen_selected,AISHELL-3,SSB0307,214,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070418.wav
+seen_selected,AISHELL-3,SSB0307,214,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070209.wav
+seen_selected,AISHELL-3,SSB0307,214,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070241.wav
+seen_selected,AISHELL-3,SSB0307,214,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070136.wav
+seen_selected,AISHELL-3,SSB0307,214,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070458.wav
+seen_selected,AISHELL-3,SSB0307,214,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070438.wav
+seen_selected,AISHELL-3,SSB0307,214,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070138.wav
+seen_selected,AISHELL-3,SSB0307,214,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070270.wav
+seen_selected,AISHELL-3,SSB0307,214,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070190.wav
+seen_selected,AISHELL-3,SSB0307,214,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070394.wav
+seen_selected,AISHELL-3,SSB0307,214,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070302.wav
+seen_selected,AISHELL-3,SSB0307,214,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070236.wav
+seen_selected,AISHELL-3,SSB0307,214,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070143.wav
+seen_selected,AISHELL-3,SSB0307,214,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0307/SSB03070066.wav
+seen_selected,AISHELL-3,SSB0315,168,1,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150010.wav
+seen_selected,AISHELL-3,SSB0315,168,1,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150018.wav
+seen_selected,AISHELL-3,SSB0315,168,1,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150448.wav
+seen_selected,AISHELL-3,SSB0315,168,1,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150050.wav
+seen_selected,AISHELL-3,SSB0315,168,1,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150314.wav
+seen_selected,AISHELL-3,SSB0315,168,1,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150118.wav
+seen_selected,AISHELL-3,SSB0315,168,1,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150227.wav
+seen_selected,AISHELL-3,SSB0315,168,1,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150321.wav
+seen_selected,AISHELL-3,SSB0315,168,1,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150074.wav
+seen_selected,AISHELL-3,SSB0315,168,1,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150454.wav
+seen_selected,AISHELL-3,SSB0315,168,1,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150100.wav
+seen_selected,AISHELL-3,SSB0315,168,1,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150261.wav
+seen_selected,AISHELL-3,SSB0315,168,1,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150143.wav
+seen_selected,AISHELL-3,SSB0315,168,1,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150284.wav
+seen_selected,AISHELL-3,SSB0315,168,1,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0315/SSB03150233.wav
+seen_selected,AISHELL-3,SSB0323,91,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230395.wav
+seen_selected,AISHELL-3,SSB0323,91,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230371.wav
+seen_selected,AISHELL-3,SSB0323,91,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230479.wav
+seen_selected,AISHELL-3,SSB0323,91,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230174.wav
+seen_selected,AISHELL-3,SSB0323,91,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230057.wav
+seen_selected,AISHELL-3,SSB0323,91,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230470.wav
+seen_selected,AISHELL-3,SSB0323,91,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230272.wav
+seen_selected,AISHELL-3,SSB0323,91,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230029.wav
+seen_selected,AISHELL-3,SSB0323,91,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230103.wav
+seen_selected,AISHELL-3,SSB0323,91,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230464.wav
+seen_selected,AISHELL-3,SSB0323,91,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230342.wav
+seen_selected,AISHELL-3,SSB0323,91,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230415.wav
+seen_selected,AISHELL-3,SSB0323,91,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230432.wav
+seen_selected,AISHELL-3,SSB0323,91,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230030.wav
+seen_selected,AISHELL-3,SSB0323,91,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0323/SSB03230163.wav
+seen_selected,AISHELL-3,SSB0482,108,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820008.wav
+seen_selected,AISHELL-3,SSB0482,108,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820422.wav
+seen_selected,AISHELL-3,SSB0482,108,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820377.wav
+seen_selected,AISHELL-3,SSB0482,108,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820340.wav
+seen_selected,AISHELL-3,SSB0482,108,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820285.wav
+seen_selected,AISHELL-3,SSB0482,108,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820011.wav
+seen_selected,AISHELL-3,SSB0482,108,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820084.wav
+seen_selected,AISHELL-3,SSB0482,108,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820345.wav
+seen_selected,AISHELL-3,SSB0482,108,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820358.wav
+seen_selected,AISHELL-3,SSB0482,108,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820274.wav
+seen_selected,AISHELL-3,SSB0482,108,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820467.wav
+seen_selected,AISHELL-3,SSB0482,108,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820413.wav
+seen_selected,AISHELL-3,SSB0482,108,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820167.wav
+seen_selected,AISHELL-3,SSB0482,108,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820244.wav
+seen_selected,AISHELL-3,SSB0482,108,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0482/SSB04820174.wav
+seen_selected,AISHELL-3,SSB0565,196,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650313.wav
+seen_selected,AISHELL-3,SSB0565,196,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650500.wav
+seen_selected,AISHELL-3,SSB0565,196,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650048.wav
+seen_selected,AISHELL-3,SSB0565,196,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650457.wav
+seen_selected,AISHELL-3,SSB0565,196,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650115.wav
+seen_selected,AISHELL-3,SSB0565,196,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650407.wav
+seen_selected,AISHELL-3,SSB0565,196,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650416.wav
+seen_selected,AISHELL-3,SSB0565,196,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650353.wav
+seen_selected,AISHELL-3,SSB0565,196,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650361.wav
+seen_selected,AISHELL-3,SSB0565,196,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650101.wav
+seen_selected,AISHELL-3,SSB0565,196,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650003.wav
+seen_selected,AISHELL-3,SSB0565,196,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650279.wav
+seen_selected,AISHELL-3,SSB0565,196,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650037.wav
+seen_selected,AISHELL-3,SSB0565,196,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650027.wav
+seen_selected,AISHELL-3,SSB0565,196,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0565/SSB05650447.wav
+seen_selected,AISHELL-3,SSB0590,201,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900115.wav
+seen_selected,AISHELL-3,SSB0590,201,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900103.wav
+seen_selected,AISHELL-3,SSB0590,201,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900112.wav
+seen_selected,AISHELL-3,SSB0590,201,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900013.wav
+seen_selected,AISHELL-3,SSB0590,201,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900190.wav
+seen_selected,AISHELL-3,SSB0590,201,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900329.wav
+seen_selected,AISHELL-3,SSB0590,201,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900149.wav
+seen_selected,AISHELL-3,SSB0590,201,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900426.wav
+seen_selected,AISHELL-3,SSB0590,201,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900252.wav
+seen_selected,AISHELL-3,SSB0590,201,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900486.wav
+seen_selected,AISHELL-3,SSB0590,201,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900012.wav
+seen_selected,AISHELL-3,SSB0590,201,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900212.wav
+seen_selected,AISHELL-3,SSB0590,201,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900154.wav
+seen_selected,AISHELL-3,SSB0590,201,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900010.wav
+seen_selected,AISHELL-3,SSB0590,201,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0590/SSB05900238.wav
+seen_selected,AISHELL-3,SSB0599,44,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990060.wav
+seen_selected,AISHELL-3,SSB0599,44,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990476.wav
+seen_selected,AISHELL-3,SSB0599,44,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990255.wav
+seen_selected,AISHELL-3,SSB0599,44,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990083.wav
+seen_selected,AISHELL-3,SSB0599,44,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990440.wav
+seen_selected,AISHELL-3,SSB0599,44,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990075.wav
+seen_selected,AISHELL-3,SSB0599,44,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990469.wav
+seen_selected,AISHELL-3,SSB0599,44,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990166.wav
+seen_selected,AISHELL-3,SSB0599,44,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990233.wav
+seen_selected,AISHELL-3,SSB0599,44,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990192.wav
+seen_selected,AISHELL-3,SSB0599,44,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990367.wav
+seen_selected,AISHELL-3,SSB0599,44,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990353.wav
+seen_selected,AISHELL-3,SSB0599,44,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990113.wav
+seen_selected,AISHELL-3,SSB0599,44,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990429.wav
+seen_selected,AISHELL-3,SSB0599,44,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0599/SSB05990203.wav
+seen_selected,AISHELL-3,SSB0668,16,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680170.wav
+seen_selected,AISHELL-3,SSB0668,16,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680290.wav
+seen_selected,AISHELL-3,SSB0668,16,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680043.wav
+seen_selected,AISHELL-3,SSB0668,16,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680020.wav
+seen_selected,AISHELL-3,SSB0668,16,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680191.wav
+seen_selected,AISHELL-3,SSB0668,16,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680451.wav
+seen_selected,AISHELL-3,SSB0668,16,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680261.wav
+seen_selected,AISHELL-3,SSB0668,16,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680358.wav
+seen_selected,AISHELL-3,SSB0668,16,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680214.wav
+seen_selected,AISHELL-3,SSB0668,16,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680058.wav
+seen_selected,AISHELL-3,SSB0668,16,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680286.wav
+seen_selected,AISHELL-3,SSB0668,16,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680030.wav
+seen_selected,AISHELL-3,SSB0668,16,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680489.wav
+seen_selected,AISHELL-3,SSB0668,16,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680209.wav
+seen_selected,AISHELL-3,SSB0668,16,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0668/SSB06680349.wav
+seen_selected,AISHELL-3,SSB0671,155,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710461.wav
+seen_selected,AISHELL-3,SSB0671,155,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710041.wav
+seen_selected,AISHELL-3,SSB0671,155,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710029.wav
+seen_selected,AISHELL-3,SSB0671,155,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710484.wav
+seen_selected,AISHELL-3,SSB0671,155,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710457.wav
+seen_selected,AISHELL-3,SSB0671,155,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710100.wav
+seen_selected,AISHELL-3,SSB0671,155,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710288.wav
+seen_selected,AISHELL-3,SSB0671,155,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710121.wav
+seen_selected,AISHELL-3,SSB0671,155,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710082.wav
+seen_selected,AISHELL-3,SSB0671,155,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710072.wav
+seen_selected,AISHELL-3,SSB0671,155,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710046.wav
+seen_selected,AISHELL-3,SSB0671,155,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710464.wav
+seen_selected,AISHELL-3,SSB0671,155,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710448.wav
+seen_selected,AISHELL-3,SSB0671,155,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710326.wav
+seen_selected,AISHELL-3,SSB0671,155,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0671/SSB06710179.wav
+seen_selected,AISHELL-3,SSB0746,127,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460483.wav
+seen_selected,AISHELL-3,SSB0746,127,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460167.wav
+seen_selected,AISHELL-3,SSB0746,127,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460151.wav
+seen_selected,AISHELL-3,SSB0746,127,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460045.wav
+seen_selected,AISHELL-3,SSB0746,127,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460366.wav
+seen_selected,AISHELL-3,SSB0746,127,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460422.wav
+seen_selected,AISHELL-3,SSB0746,127,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460507.wav
+seen_selected,AISHELL-3,SSB0746,127,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460227.wav
+seen_selected,AISHELL-3,SSB0746,127,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460374.wav
+seen_selected,AISHELL-3,SSB0746,127,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460301.wav
+seen_selected,AISHELL-3,SSB0746,127,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460473.wav
+seen_selected,AISHELL-3,SSB0746,127,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460368.wav
+seen_selected,AISHELL-3,SSB0746,127,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460434.wav
+seen_selected,AISHELL-3,SSB0746,127,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460400.wav
+seen_selected,AISHELL-3,SSB0746,127,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0746/SSB07460061.wav
+seen_selected,AISHELL-3,SSB1100,30,1,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000134.wav
+seen_selected,AISHELL-3,SSB1100,30,1,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000324.wav
+seen_selected,AISHELL-3,SSB1100,30,1,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000279.wav
+seen_selected,AISHELL-3,SSB1100,30,1,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000394.wav
+seen_selected,AISHELL-3,SSB1100,30,1,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000021.wav
+seen_selected,AISHELL-3,SSB1100,30,1,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000015.wav
+seen_selected,AISHELL-3,SSB1100,30,1,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000329.wav
+seen_selected,AISHELL-3,SSB1100,30,1,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000338.wav
+seen_selected,AISHELL-3,SSB1100,30,1,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000308.wav
+seen_selected,AISHELL-3,SSB1100,30,1,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000197.wav
+seen_selected,AISHELL-3,SSB1100,30,1,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000362.wav
+seen_selected,AISHELL-3,SSB1100,30,1,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000453.wav
+seen_selected,AISHELL-3,SSB1100,30,1,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000186.wav
+seen_selected,AISHELL-3,SSB1100,30,1,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000294.wav
+seen_selected,AISHELL-3,SSB1100,30,1,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1100/SSB11000283.wav
+seen_selected,AISHELL-3,SSB1650,110,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500215.wav
+seen_selected,AISHELL-3,SSB1650,110,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500440.wav
+seen_selected,AISHELL-3,SSB1650,110,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500059.wav
+seen_selected,AISHELL-3,SSB1650,110,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500304.wav
+seen_selected,AISHELL-3,SSB1650,110,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500052.wav
+seen_selected,AISHELL-3,SSB1650,110,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500332.wav
+seen_selected,AISHELL-3,SSB1650,110,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500393.wav
+seen_selected,AISHELL-3,SSB1650,110,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500071.wav
+seen_selected,AISHELL-3,SSB1650,110,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500243.wav
+seen_selected,AISHELL-3,SSB1650,110,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500173.wav
+seen_selected,AISHELL-3,SSB1650,110,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500019.wav
+seen_selected,AISHELL-3,SSB1650,110,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500113.wav
+seen_selected,AISHELL-3,SSB1650,110,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500159.wav
+seen_selected,AISHELL-3,SSB1650,110,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500246.wav
+seen_selected,AISHELL-3,SSB1650,110,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1650/SSB16500208.wav
+seen_selected,Magichub-SG,G0001,218,3,1,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S004_0_G0001_segment_0128.wav
+seen_selected,Magichub-SG,G0001,218,3,2,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0054.wav
+seen_selected,Magichub-SG,G0001,218,3,3,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S002_0_G0001_segment_0056.wav
+seen_selected,Magichub-SG,G0001,218,3,4,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S002_0_G0001_segment_0121.wav
+seen_selected,Magichub-SG,G0001,218,3,5,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0085.wav
+seen_selected,Magichub-SG,G0001,218,3,6,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S001_0_G0001_segment_0104.wav
+seen_selected,Magichub-SG,G0001,218,3,7,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0138.wav
+seen_selected,Magichub-SG,G0001,218,3,8,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0107.wav
+seen_selected,Magichub-SG,G0001,218,3,9,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0128.wav
+seen_selected,Magichub-SG,G0001,218,3,10,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0194.wav
+seen_selected,Magichub-SG,G0001,218,3,11,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S003_0_G0001_segment_0149.wav
+seen_selected,Magichub-SG,G0001,218,3,12,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S003_0_G0001_segment_0090.wav
+seen_selected,Magichub-SG,G0001,218,3,13,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S003_0_G0001_segment_0015.wav
+seen_selected,Magichub-SG,G0001,218,3,14,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S004_0_G0001_segment_0038.wav
+seen_selected,Magichub-SG,G0001,288,12,15,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S002_0_G0001_segment_0121.wav
+seen_selected,Magichub-SG,G0002,219,3,1,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S002_0_G0002_segment_0044.wav
+seen_selected,Magichub-SG,G0002,219,3,2,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S002_0_G0002_segment_0301.wav
+seen_selected,Magichub-SG,G0002,219,3,3,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S003_0_G0002_segment_0038.wav
+seen_selected,Magichub-SG,G0002,219,3,4,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S005_0_G0002_segment_0091.wav
+seen_selected,Magichub-SG,G0002,219,3,5,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S001_0_G0002_segment_0160.wav
+seen_selected,Magichub-SG,G0002,219,3,6,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S002_0_G0002_segment_0215.wav
+seen_selected,Magichub-SG,G0002,219,3,7,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S004_0_G0002_segment_0056.wav
+seen_selected,Magichub-SG,G0002,219,3,8,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S003_0_G0002_segment_0146.wav
+seen_selected,Magichub-SG,G0002,219,3,9,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S003_0_G0002_segment_0077.wav
+seen_selected,Magichub-SG,G0002,219,3,10,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S001_0_G0002_segment_0121.wav
+seen_selected,Magichub-SG,G0002,219,3,11,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S004_0_G0002_segment_0006.wav
+seen_selected,Magichub-SG,G0002,219,3,12,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S004_0_G0002_segment_0141.wav
+seen_selected,Magichub-SG,G0002,219,3,13,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S004_0_G0002_segment_0217.wav
+seen_selected,Magichub-SG,G0002,219,3,14,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S006_0_G0002_segment_0119.wav
+seen_selected,Magichub-SG,G0002,219,3,15,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S006_0_G0002_segment_0143.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410057.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410185.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410104.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410212.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410211.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410150.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410207.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410124.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410116.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410055.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410213.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410014.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410117.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410209.wav
+unseen_selected,AISHELL-3,SSB0241,31,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0241/SSB02410082.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360113.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360281.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360048.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360133.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360211.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360003.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360077.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360249.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360244.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360184.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360311.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360107.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360030.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360237.wav
+unseen_selected,AISHELL-3,SSB1136,106,1,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1136/SSB11360034.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410293.wav
+unseen_selected,AISHELL-3,SSB1341,72,11,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410056.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410234.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410395.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410208.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410288.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410050.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410186.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410338.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410120.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410051.wav
+unseen_selected,AISHELL-3,SSB1341,72,11,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410172.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410103.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410386.wav
+unseen_selected,AISHELL-3,SSB1341,104,1,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1341/SSB13410082.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,1,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990059.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,2,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990235.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,3,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990316.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,4,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990040.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,5,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990318.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,6,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990261.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,7,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990423.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,8,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990422.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,9,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990247.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,10,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990060.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,11,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990132.wav
+unseen_selected,AISHELL-3,SSB1699,60,10,12,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990359.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,13,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990374.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,14,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990424.wav
+unseen_selected,AISHELL-3,SSB1699,203,0,15,/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1699/SSB16990096.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0008_S0003_0_G0819_G0820_368.736_370.559.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0006_S0009_0_G2203_G2204_723.17_728.349.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0022_S0006_0_G0813_G0814_1063.83_1064.556.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0022_S0006_0_G0813_G0814_125.582_129.77.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0018_S0004_0_G1683_G1684_866.069_867.204.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/facodec_spk/A0003_S0003_0_G0951_G0952_1006.566_1008.51.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/facodec_spk/A0032_S0006_0_G1649_G1650_1346.231_1346.774.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0017_S0003_0_G0425_G0426_166.992_168.776.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0032_S0006_0_G1649_G1650_1449.113_1449.621.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0008_S0003_0_G0819_G0820_795.729_795.982.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/facodec_spk/A0018_S0004_0_G1683_G1684_332.87_333.85.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0006_S0009_0_G2203_G2204_1272.535_1277.41.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0032_S0006_0_G1649_G1650_96.385_96.679.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/wav_16k/A0028_S0005_0_G1035_G1036_1064.989_1070.25.wav
+unseen_selected,Magichub Multi-Accents,spkid_153,153,2,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Guangzhou_Cantonese_Conversational_Speech_Corpus/facodec_spk/A0008_S0003_0_G0819_G0820_478.161_479.083.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0038_S0006_0_G0075_G0076_935.02_938.11.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S0007_0_G0009_G0010_255.38_258.19.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0002_S0003_0_G0003_G0004_613.94_615.1.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0038_S0006_0_G0075_G0076_1523.24_1525.78.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0109_S0006_0_G0217_G0218_1413.68_1414.69.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0038_S0006_0_G0075_G0076_224.257_224.615.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A1189_S0004_0_G1377_G1378_141.29_144.82.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A1189_S0004_0_G1377_G1378_1002.01_1008.46.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0109_S0006_0_G0217_G0218_37.691_38.835.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S0007_0_G0009_G0010_453.248_458.501.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A1175_S0007_0_G1349_G1350_1008.74_1010.44.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0038_S0006_0_G0075_G0076_1136.03_1138.78.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A1154_S0004_0_G1307_G1308_234.02_238.6.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0109_S0006_0_G0217_G0218_253.19_254.08.wav
+unseen_selected,Magichub Multi-Accents,spkid_161,161,4,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A1137_S0007_0_G1273_G1274_1542.29_1549.0.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0002_S0003_0_G0003_G0004_156.71_158.02.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S0007_0_G0009_G0010_1396.488_1402.962.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A1189_S0004_0_G1377_G1378_1403.21_1405.33.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A1175_S0007_0_G1349_G1350_1008.74_1010.44.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0109_S0006_0_G0217_G0218_390.031_390.616.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0009_S0005_0_G0017_G0018_796.97_800.45.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A1189_S0004_0_G1377_G1378_287.09_287.95.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A1189_S0004_0_G1377_G1378_971.87_976.39.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0002_S0003_0_G0003_G0004_1445.72_1448.47.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0038_S0006_0_G0075_G0076_1014.62_1020.07.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A1189_S0004_0_G1377_G1378_510.56_516.85.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0009_S0005_0_G0017_G0018_674.742_676.72.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A1137_S0007_0_G1273_G1274_1433.12_1433.605.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S0007_0_G0009_G0010_838.85_840.76.wav
+unseen_selected,Magichub Multi-Accents,spkid_163,163,4,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Shanghai_Dialect_Conversational_Speech_Corpus/wav_16k/A0009_S0005_0_G0017_G0018_1555.655_1560.087.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/facodec_spk/A0058_S0003_0_G0115_G0116_1070.56_1077.28.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0004_S0004_0_G0007_G0008_3.375_5.411.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0627_S0001_0_G1270_G1271_390.094_390.536.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/facodec_spk/A0067_S0003_0_G0133_G0134_881.087_886.564.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0058_S0003_0_G0115_G0116_197.473_203.496.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/facodec_spk/A0622_S0001_0_G1257_G1258_1700.897_1704.741.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/facodec_spk/A0058_S0003_0_G0115_G0116_754.624_759.08.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0017_S0003_0_G0033_G0034_1313.352_1317.224.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/facodec_spk/A0007_S0008_0_G0013_G0014_345.856_346.264.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0058_S0003_0_G0115_G0116_496.2_503.72.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0067_S0003_0_G0133_G0134_929.412_930.207.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/facodec_spk/A0017_S0003_0_G0033_G0034_236.512_238.856.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0007_S0008_0_G0013_G0014_329.6_331.776.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0007_S0008_0_G0013_G0014_160.808_162.256.wav
+unseen_selected,Magichub Multi-Accents,spkid_177,177,5,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Sichuan_Dialect_Conversational_Speech_Corpus/wav_16k/A0024_S0004_0_G0047_G0048_766.776_769.28.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0004_S003_0_G0003_867.649_869.979.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S012_0_G0006_783.168_786.1.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/facodec_spk/A0003_S006_0_G0001_197.059_197.979.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S012_0_G0006_1245.89_1246.508.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0003_S004_0_G0001_1246.458_1248.458.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S017_0_G0005_538.22_538.959.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0003_S004_0_G0002_635.478_636.069.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S012_0_G0005_648.469_652.269.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S013_0_G0005_1063.248_1064.679.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S017_0_G0006_762.379_763.807.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S016_0_G0005_649.85_651.309.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0003_S004_0_G0001_768.828_770.348.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S017_0_G0005_274.16_274.869.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/wav_16k/A0005_S005_0_G0005_518.986_520.298.wav
+unseen_selected,Magichub Multi-Accents,spkid_182,182,6,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Conversational_Speech_Corpus/facodec_spk/A0005_S016_0_G0006_250.561_251.482.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_24k/000112.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/WAV/000067.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_16k/000174.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/WAV/000198.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_24k/000150.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/WAV/000149.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_16k/000164.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_24k/000068.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_16k/000019.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_24k/000030.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/facodec_spk/000191.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_24k/000077.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/WAV/000199.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/WAV/000072.wav
+unseen_selected,Magichub Multi-Accents,spkid_226,226,6,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Tianjin_Dialect_Speech_Corpus_for_TTS/wav_24k/000193.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0576/G0576_1_S0434.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0575/G0575_1_S0310.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0010/G0010_1_S0375.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0579/G0579_1_S0471.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0575/G0575_1_S0428.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0011/G0011_1_S0002.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0575/G0575_1_S0376.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0575/G0575_1_S0272.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0579/G0579_1_S0224.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0011/G0011_1_S0049.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0010/G0010_1_S0010.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0576/G0576_1_S0057.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0575/G0575_1_S0556.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0010/G0010_1_S0495.wav
+unseen_selected,Magichub Multi-Accents,spkid_232,232,8,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0576/G0576_1_S0315.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0579/G0579_1_S0006.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0010/G0010_1_S0275.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0580/G0580_1_S0275.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0009/G0009_1_S0477.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0579/G0579_1_S0492.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0580/G0580_1_S0460.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0575/G0575_1_S0270.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0578/G0578_1_S0040.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/WAV/G0578/G0578_1_S0427.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0579/G0579_1_S0340.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0007/G0007_1_S0346.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0006/G0006_1_S0387.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0580/G0580_1_S0394.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0578/G0578_1_S0455.wav
+unseen_selected,Magichub Multi-Accents,spkid_234,234,8,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Wuhan_Dialect_Scripted_Speech_Corpus/facodec_spk/G0578/G0578_1_S0359.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0013_S0002_0_SPK022_607.79_610.48.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0008_S0003_0_SPK013_819.29_823.744.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0002_S0001_0_SPK036_435.71_440.207.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0001_S0004_0_SPK003_1130.48_1131.16.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0059_S0002_0_SPK036_441.95_443.65.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0009_S0004_0_SPK014_953.3_955.263.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0006_S0001_0_SPK037_1192.04_1196.5.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0018_S0001_0_SPK028_926.96_927.926.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0018_S0001_0_SPK027_108.499_111.58.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0026_S0001_0_SPK040_303.14_306.19.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0005_S0002_0_SPK006_1455.74_1458.94.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0012_S0004_0_SPK019_389.87_390.55.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0015_S0001_0_SPK023_326.15_326.74.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0039_S0001_0_SPK006_427.264_429.46.wav
+unseen_selected,Magichub Multi-Accents,spkid_276,276,2,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0004_S0002_0_SPK005_62.57_63.25.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0018_S0002_0_SPK027_134.263_136.959.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0017_S0001_0_SPK015_1100.48_1103.23.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0062_S0002_0_SPK008_1262.51_1265.35.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0027_S0001_0_SPK041_1502.06_1503.31.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0002_S0001_0_SPK008_916.58_918.61.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0058_S0002_0_SPK007_276.95_284.432.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0003_S0001_0_SPK009_1476.23_1479.485.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0011_S0001_0_SPK017_354.2_355.573.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0012_S0004_0_SPK019_1458.08_1461.028.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0021_S0001_0_SPK031_489.648_491.14.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0010_S0001_0_SPK011_463.25_465.692.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0003_S0002_0_SPK030_605.21_610.383.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0019_S0003_0_SPK010_97.97_99.16.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0012_S0002_0_SPK019_1565.72_1568.35.wav
+unseen_selected,Magichub Multi-Accents,spkid_282,282,7,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0005_S0001_0_SPK006_254.72_256.839.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0017_S0001_0_SPK015_1466.9_1467.4.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0065_S0003_0_SPK022_1145.48_1149.82.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0006_S0003_0_SPK037_249.626_250.245.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0002_S0003_0_SPK036_847.55_852.64.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0060_S0002_0_SPK005_1017.89_1023.22.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0012_S0002_0_SPK020_827.63_832.0.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0059_S0002_0_SPK036_387.17_393.07.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0022_S0002_0_SPK032_878.39_878.92.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0065_S0003_0_SPK022_1206.71_1211.2.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0012_S0001_0_SPK020_1967.75_1970.41.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0064_S0003_0_SPK016_504.08_505.15.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0046_S0001_0_SPK036_616.64_619.42.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0022_S0002_0_SPK032_117.29_117.85.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0031_S0001_0_SPK016_1282.67_1285.63.wav
+unseen_selected,Magichub Multi-Accents,spkid_286,286,7,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0045_S0001_0_SPK017_122.75_123.88.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,1,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0030_S0003_0_SPK015_323.72_324.22.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,2,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0017_S0002_0_SPK015_576.53_577.06.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,3,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0026_S0001_0_SPK040_690.53_692.17.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,4,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0012_S0003_0_SPK020_1028.9_1035.94.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,5,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0011_S0001_0_SPK018_386.664_389.157.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,6,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0064_S0003_0_SPK016_1125.68_1126.27.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,7,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0013_S0001_0_SPK022_1625.0_1626.22.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,8,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0007_S0002_0_SPK034_231.8_233.301.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,9,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0013_S0003_0_SPK021_1223.21_1224.07.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,10,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/facodec_spk/G0036_S0001_0_SPK023_1501.586_1502.556.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,11,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0013_S0001_0_SPK021_1023.83_1024.9.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,12,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0009_S0001_0_SPK014_294.29_298.981.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,13,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0024_S0003_0_SPK038_715.04_718.685.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,14,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0014_S0002_0_SPK026_693.98_700.84.wav
+unseen_selected,Magichub Multi-Accents,spkid_287,287,5,15,/data2/xintong/mandarin_accent/magichub_multiaccent/Mandarin_Heavy_Accent_Conversational_Speech_Corpus/wav_16k/G0015_S0002_0_SPK024_918.38_919.96.wav
+unseen_selected,Magichub-SG,G0001,218,3,1,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0020.wav
+unseen_selected,Magichub-SG,G0001,218,3,2,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S001_0_G0001_segment_0003.wav
+unseen_selected,Magichub-SG,G0001,218,3,3,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0041.wav
+unseen_selected,Magichub-SG,G0001,218,3,4,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0082.wav
+unseen_selected,Magichub-SG,G0001,218,3,5,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0184.wav
+unseen_selected,Magichub-SG,G0001,218,3,6,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S002_0_G0001_segment_0082.wav
+unseen_selected,Magichub-SG,G0001,218,3,7,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S002_0_G0001_segment_0013.wav
+unseen_selected,Magichub-SG,G0001,218,3,8,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0128.wav
+unseen_selected,Magichub-SG,G0001,218,3,9,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S002_0_G0001_segment_0004.wav
+unseen_selected,Magichub-SG,G0001,218,3,10,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S006_0_G0001_segment_0054.wav
+unseen_selected,Magichub-SG,G0001,218,3,11,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S004_0_G0001_segment_0131.wav
+unseen_selected,Magichub-SG,G0001,218,3,12,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0151.wav
+unseen_selected,Magichub-SG,G0001,218,3,13,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0040.wav
+unseen_selected,Magichub-SG,G0001,218,3,14,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0034.wav
+unseen_selected,Magichub-SG,G0001,218,3,15,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0001/A0001_S005_0_G0001_segment_0112.wav
+unseen_selected,Magichub-SG,G0004,221,3,1,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S001_0_G0004_segment_0186.wav
+unseen_selected,Magichub-SG,G0004,221,3,2,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S004_0_G0004_segment_0023.wav
+unseen_selected,Magichub-SG,G0004,221,3,3,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S001_0_G0004_segment_0122.wav
+unseen_selected,Magichub-SG,G0004,221,3,4,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0281.wav
+unseen_selected,Magichub-SG,G0004,221,3,5,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S005_0_G0004_segment_0221.wav
+unseen_selected,Magichub-SG,G0004,221,3,6,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S004_0_G0004_segment_0056.wav
+unseen_selected,Magichub-SG,G0004,221,3,7,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0012.wav
+unseen_selected,Magichub-SG,G0004,221,3,8,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S005_0_G0004_segment_0185.wav
+unseen_selected,Magichub-SG,G0004,221,3,9,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0195.wav
+unseen_selected,Magichub-SG,G0004,221,3,10,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S001_0_G0004_segment_0101.wav
+unseen_selected,Magichub-SG,G0004,221,3,11,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0113.wav
+unseen_selected,Magichub-SG,G0004,221,3,12,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S004_0_G0004_segment_0142.wav
+unseen_selected,Magichub-SG,G0004,221,3,13,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S001_0_G0004_segment_0191.wav
+unseen_selected,Magichub-SG,G0004,221,3,14,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S003_0_G0004_segment_0116.wav
+unseen_selected,Magichub-SG,G0004,221,3,15,/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0004/A0002_S001_0_G0004_segment_0181.wav

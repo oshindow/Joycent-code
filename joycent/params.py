@@ -13,8 +13,8 @@ from joycent.model.utils import fix_len_compatibility
 train_filelist_path = 'resources/filelists/ljspeech/train.txt'
 valid_filelist_path = 'resources/filelists/ljspeech/valid.txt'
 test_filelist_path = 'resources/filelists/ljspeech/test.txt'
-cmudict_path = 'resources/cmu_dictionary'
-zhdict_path = 'resources/zh_dictionary.json'
+cmudict_path = 'resources/backup/cmu_dictionary'
+zhdict_path = 'resources/backup/zh_dictionary.json'
 add_blank = True
 n_feats = 80
 n_spks = 1  # 247 for Libri-TTS filelist and 1 for LJSpeech
@@ -51,7 +51,9 @@ batch_size = 16
 learning_rate = 1e-4
 seed = 37
 save_every = 1
-out_size = fix_len_compatibility(100 * 2*16000//256)
+# 100 seconds at 16 kHz with a 256-sample mel hop (6,250 frames).  Since the
+# current corpus maximum is 17.66 seconds, this intentionally keeps full clips.
+out_size = fix_len_compatibility(100 * sample_rate // hop_length)
 
 
 

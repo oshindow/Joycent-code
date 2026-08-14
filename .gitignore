@@ -34,8 +34,33 @@ out/
 
 *.flac
 *.mp3
+*.wav
+*.m4a
+*.aac
+*.ogg
+*.opus
+*.wma
+*.aiff
+*.aif
+*.mid
+*.midi
+*.amr
+*.caf
 *.npy
 *.npz
+*.h5
+
+# Local files larger than 50 MiB (Git ignore rules cannot match by size)
+/G2PWModel/g2pw.onnx
+/resources/backup/zh_all/pseudo_shards/hf_cache/hub/models--walston--whisper-pinyin/blobs/7bd0ca47d3f916870d887e64c173da336f18c2222751aa4b7296c4439a8f66c6
+/resources/backup/zh_all/pseudo_shards/hf_cache/hub/tmpigtk4zaj
+/resources/multi_accent/combined_final/all.txt
+/resources/multi_accent/combined_final/train.txt
+/resources/multi_accent/combined_final/lengths.json
+/resources/multi_accent/kespeech/final/all.txt
+
+# Local symbolic links (Git ignore rules cannot match by file type)
+/output_joycent
 
 # Runtime logs can be added manually when lightweight and useful
 nohup.out

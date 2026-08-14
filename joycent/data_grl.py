@@ -400,7 +400,7 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
     def __init__(self, filelist_path, cmudict_path, add_blank=True,
                  n_fft=1024, n_mels=80, sample_rate=22050,
                  hop_length=256, win_length=1024, f_min=0., f_max=8000, zh_path=None, train=False, whisper_flag=False,
-                 data_root=""):
+                 data_root="", accent_embeddings_path=""):
         super().__init__()
         self.filelist = parse_filelist(filelist_path, split_char='|')
         self.data_root = data_root
@@ -418,10 +418,22 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
         self.f_max = f_max
         self.add_blank = add_blank
         self.whisper_flag = whisper_flag
+        self.accent_embeddings_path = accent_embeddings_path
         # random.seed(random_seed)
         # random.shuffle(self.filelist)
         # self.llm_embeds = torch.load('accent_embeddings.pt')
         self.llm_embeds = 0
+        if not accent_embeddings_path:
+            raise ValueError("accent_embeddings_path is required")
+        accent_data = torch.load(accent_embeddings_path, map_location="cpu", weights_only=False)
+        self.acc_embeddings = accent_data["embeddings"].float()
+        audiofiles = [os.path.normpath(path) for path in accent_data["audiofiles"]]
+        if len(audiofiles) != self.acc_embeddings.shape[0]:
+            raise ValueError("accent embedding rows and audiofiles have different lengths")
+        self.acc_embedding_index = {path: index for index, path in enumerate(audiofiles)}
+        if len(self.acc_embedding_index) != len(audiofiles):
+            raise ValueError("duplicate audio paths in accent embeddings")
+
         if train:
             self.lengths_dict = self.get_lengths()
             # a = self.write_lengths()
@@ -440,16 +452,29 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
         return mel.shape[1]
 
     def get_spk_emb(self, filepath):
-        spk_emb_path = filepath.replace('wav_16k', 'facodec_spk')
-        # spk_emb_path = spk_emb_path.replace('.wav')
-        spk_emb = torch.tensor(np.load(spk_emb_path + '.npy'))
-        return spk_emb
+        raise RuntimeError("get_spk_emb requires a speaker id")
+
+    @staticmethod
+    def get_spk_emb_path(filepath):
+        parts = list(os.path.normpath(filepath).split(os.sep))
+        for directory in ("wav_16k", "WAV", "wav", "wavs"):
+            if directory in parts:
+                parts[parts.index(directory)] = "facodec_spk"
+                return os.sep.join(parts) + ".npy"
+        raise ValueError(f"cannot map wav path to speaker embedding: {filepath}")
+
+    def load_spk_emb(self, filepath, speaker):
+        path = self.get_spk_emb_path(filepath)
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"no speaker embedding for speaker {speaker}: {filepath}")
+        return torch.from_numpy(np.load(path)).float()
     
     def get_acc_emb(self, filepath):
-        acc_emb_path = filepath.replace('wav_16k', 'feat_acc_grl_030326')[:-4]  
-         
-        acc_emb = torch.tensor(np.load(acc_emb_path + '.npy'))
-        return acc_emb
+        key = os.path.normpath(filepath)
+        try:
+            return self.acc_embeddings[self.acc_embedding_index[key]]
+        except KeyError as error:
+            raise KeyError(f"no accent embedding for {filepath}") from error
     
     def get_triplet(self, line, whisper):
         filepath, text, speaker, accent = line[0], line[1], line[2], line[3]
@@ -458,7 +483,7 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
         mel, mel_whisper = self.get_mel(filepath, whisper)
         speaker = self.get_speaker(speaker)
         accent = self.get_accent(accent)
-        spk_emb = self.get_spk_emb(filepath)
+        spk_emb = self.load_spk_emb(filepath, speaker.item())
         acc_emb = self.get_acc_emb(filepath)
         # 随机挑一个 LLM embedding
         llm_embed = None
@@ -503,6 +528,7 @@ class TextMelSpeakerAccentQwenDataset(torch.utils.data.Dataset):
         assert sr == self.sample_rate
         mel = mel_spectrogram_align(audio, self.n_fft, self.n_mels, self.sample_rate, self.hop_length,
                               self.win_length, self.f_min, self.f_max, center=False).squeeze()
+        mel_whisper = None
         if whisper_flag:
             # print("whisper mel")
             audio = whisper.pad_or_trim(audio.flatten())
@@ -587,16 +613,14 @@ class TextMelSpeakerAccentQwenBatchCollate(object):
         spk = []
         acc = []
         # llm_embeds = torch.zeros((B, 3584), dtype=torch.float32)
-        y_prompt = torch.zeros((B, n_feats, 3000), dtype=torch.float32)
         spk_embs = torch.zeros((B, 256), dtype=torch.float32)
         acc_embs = torch.zeros((B, 256), dtype=torch.float32)
         for i, item in enumerate(batch):
-            y_, x_, spk_, acc_, y_prompt_, spk_emb_, acc_emb_ = item['y'], item['x'], item['spk'], item["acc"], item['y_prompt'], item['spk_emb'], item['acc_emb']
+            y_, x_, spk_, acc_, spk_emb_, acc_emb_ = item['y'], item['x'], item['spk'], item["acc"], item['spk_emb'], item['acc_emb']
             y_lengths.append(y_.shape[-1])
             x_lengths.append(x_.shape[-1])
             y[i, :, :y_.shape[-1]] = y_
             x[i, :x_.shape[-1]] = x_
-            y_prompt[i, :, :y_prompt_.shape[-1]] = y_prompt_
             # llm_embeds[i, :] = llm_
             spk_embs[i, :] = spk_emb_
             acc_embs[i, :] = acc_emb_
@@ -606,4 +630,4 @@ class TextMelSpeakerAccentQwenBatchCollate(object):
         x_lengths = torch.LongTensor(x_lengths)
         spk = torch.cat(spk, dim=0)
         acc = torch.cat(acc, dim=0)
-        return {'x': x, 'x_lengths': x_lengths, 'y': y, 'y_lengths': y_lengths, 'y_prompt': y_prompt, 'spk': spk, 'acc': acc, 'filepath': item['filepath'], 'spk_embs': spk_embs, 'acc_embs': acc_embs}
+        return {'x': x, 'x_lengths': x_lengths, 'y': y, 'y_lengths': y_lengths, 'spk': spk, 'acc': acc, 'filepath': item['filepath'], 'spk_embs': spk_embs, 'acc_embs': acc_embs}

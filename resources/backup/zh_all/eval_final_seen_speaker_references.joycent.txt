@@ -1,0 +1,10 @@
+SSB0267_spk163_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0267/SSB02670274.wav
+SSB1837_spk0_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1837/SSB18370035.wav
+SSB0057_spk185_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0057/SSB00570296.wav
+SSB0786_spk174_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0786/SSB07860447.wav
+SSB1218_spk209_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1218/SSB12180475.wav
+SSB1956_spk39_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1956/SSB19560335.wav
+SSB0299_spk139_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB0299/SSB02990232.wav
+SSB1555_spk74_AISHELL3=/data2/xintong/mandarin_accent/aishell3/train/wav_16k/SSB1555/SSB15550462.wav
+G0003_spk220_MagichubSG=/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0003/A0002_S006_0_G0003_segment_0148.wav
+G0002_spk219_MagichubSG=/data2/xintong/mandarin_accent/magichub_multiaccent/magichub_singapore/wav_16k/G0002/A0001_S004_0_G0002_segment_0106.wav

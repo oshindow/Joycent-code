@@ -180,7 +180,15 @@ class GradLogPEstimator2d(BaseModule):
         self.final_block = Block(dim, dim)
         self.final_conv = torch.nn.Conv2d(dim, 1, 1)
 
-    def forward(self, x, mask, mu, t, spk=None, acc=None):
+    def forward(self, x, mask, mu, t, spk=None, acc=None, profile=False):
+        events = []
+        def mark(name):
+            if profile:
+                event = torch.cuda.Event(enable_timing=True)
+                event.record()
+                events.append((name, event))
+
+        mark("start")
         # print('GradLogPEstimator2d', spk, acc)
         s, a = None, None
         if not isinstance(spk, type(None)):
@@ -217,13 +225,14 @@ class GradLogPEstimator2d(BaseModule):
         else:
             # print("Do not concate anyone in decoder")
             x = torch.stack([mu, x], 1)
+        mark("input_and_time_embedding")
             
         mask = mask.unsqueeze(1)
 
         hiddens = []
         masks = [mask]
         # print(x.shape, mask.shape)
-        for resnet1, resnet2, attn, downsample in self.downs:
+        for index, (resnet1, resnet2, attn, downsample) in enumerate(self.downs):
             mask_down = masks[-1]
             x = resnet1(x, mask_down, t)
             x = resnet2(x, mask_down, t)
@@ -231,23 +240,36 @@ class GradLogPEstimator2d(BaseModule):
             hiddens.append(x)
             x = downsample(x * mask_down)
             masks.append(mask_down[:, :, :, ::2])
+            mark(f"down_{index}")
 
         masks = masks[:-1]
         mask_mid = masks[-1]
         x = self.mid_block1(x, mask_mid, t)
         x = self.mid_attn(x)
         x = self.mid_block2(x, mask_mid, t)
+        mark("mid")
 
-        for resnet1, resnet2, attn, upsample in self.ups:
+        for index, (resnet1, resnet2, attn, upsample) in enumerate(self.ups):
             mask_up = masks.pop()
             x = torch.cat((x, hiddens.pop()), dim=1)
             x = resnet1(x, mask_up, t)
             x = resnet2(x, mask_up, t)
             x = attn(x)
             x = upsample(x * mask_up)
+            mark(f"up_{index}")
 
         x = self.final_block(x, mask)
+        mark("final_block")
         output = self.final_conv(x * mask)
+        mark("final_conv_and_mask")
+
+        if profile:
+            torch.cuda.synchronize()
+            self.last_profile = {
+                events[index][0]: events[index - 1][1].elapsed_time(events[index][1])
+                for index in range(1, len(events))
+            }
+            self.last_profile["total"] = events[0][1].elapsed_time(events[-1][1])
 
         return (output * mask).squeeze(1)
 
@@ -316,16 +338,16 @@ class Diffusion(BaseModule):
     def forward(self, z, mask, mu, n_timesteps, stoc=False, spk=None, acc=None):
         return self.reverse_diffusion(z, mask, mu, n_timesteps, stoc, spk, acc)
 
-    def loss_t(self, x0, mask, mu, t, spk=None, acc=None):
+    def loss_t(self, x0, mask, mu, t, spk=None, acc=None, profile=False):
         xt, z = self.forward_diffusion(x0, mask, mu, t)
         time = t.unsqueeze(-1).unsqueeze(-1)
         cum_noise = get_noise(time, self.beta_min, self.beta_max, cumulative=True)
-        noise_estimation = self.estimator(xt, mask, mu, t, spk, acc)
+        noise_estimation = self.estimator(xt, mask, mu, t, spk, acc, profile=profile)
         noise_estimation *= torch.sqrt(1.0 - torch.exp(-cum_noise))
         loss = torch.sum((noise_estimation + z)**2) / (torch.sum(mask)*self.n_feats)
         return loss, xt
 
-    def compute_loss(self, x0, mask, mu, spk=None, acc=None, offset=1e-5):
+    def compute_loss(self, x0, mask, mu, spk=None, acc=None, offset=1e-5, profile=False):
         # print('diffusion loss')
         # print(x0.shape)
         # torch.manual_seed(x0.shape[-1])
@@ -333,4 +355,4 @@ class Diffusion(BaseModule):
                        requires_grad=False)
         # print(t)
         t = torch.clamp(t, offset, 1.0 - offset)
-        return self.loss_t(x0, mask, mu, t, spk, acc)
+        return self.loss_t(x0, mask, mu, t, spk, acc, profile=profile)
