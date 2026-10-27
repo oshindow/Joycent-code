@@ -4,49 +4,6 @@ Official implementation of **Joycent**, a Mandarin accent text-to-speech (TTS)
 framework, together with the pretrained accent identification model
 **WhisAID** and a **ParallelWaveGAN** vocoder.
 
-[Paper](https://arxiv.org/abs/2606.16417) | [demo](https://anonymous-accent-tts.github.io/Joycent-demo/)
-
-## Results And Demos
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>WhisAID Results</h3>
-      <p>Results cover seen speakers, unseen speakers, the generalization gap, and SCSC. Higher is better except for <strong>Gap↓</strong> and <strong>SCSC↓</strong>.</p>
-      <img src="image/whisAID.png" alt="WhisAID results on seen and unseen speakers" width="100%">
-    </td>
-    <td width="50%" valign="top">
-      <h3>WhisAID Demo</h3>
-      <p>
-        <a href="https://huggingface.co/spaces/walston/whisaid-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open WhisAID Space"></a>
-        <a href="https://huggingface.co/walston/whisaid-zh-grl"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fwhisaid--zh--grl-yellow" alt="WhisAID model repository"></a>
-      </p>
-      <p>Upload or record speech to predict its accent and inspect the full class distribution.</p>
-      <a href="https://huggingface.co/spaces/walston/whisaid-demo">
-        <img src="image/whisaid-demo.gif" alt="WhisAID Hugging Face Space demo" width="100%">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>Joycent Results</h3>
-      <p>Results cover speech quality, accentedness, accent similarity, speaker similarity, and real-time factor. Higher is better except for <strong>RTF↓</strong>.</p>
-      <img src="image/Joycent.png" alt="Joycent accent TTS results" width="100%">
-    </td>
-    <td width="50%" valign="top">
-      <h3>Joycent Demo</h3>
-      <p>
-        <a href="https://huggingface.co/spaces/walston/joycent-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Demo-Hugging%20Face%20Space-blue" alt="Open Joycent Space"></a>
-        <a href="https://huggingface.co/walston/joycent"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-walston%2Fjoycent-yellow" alt="Joycent model repository"></a>
-      </p>
-      <p>Joycent and the Singaporean-accented Mandarin speech data fine-tuned CosyVoice3 model.</p>
-      <a href="https://huggingface.co/spaces/walston/joycent-demo">
-        <img src="image/joycent-demo.gif" alt="Joycent and CosyVoice3 Hugging Face Space demo" width="100%">
-      </a>
-    </td>
-  </tr>
-</table>
-
 ## Installation
 
 The project is tested with Python 3.10 and CUDA-enabled PyTorch.
@@ -71,16 +28,6 @@ cd joycent/model/monotonic_align
 python setup.py build_ext --inplace
 cd ../../..
 ```
-
-## Pretrained Models
-
-| Component | Repository | Description |
-| --- | --- | --- |
-| WhisAID | [walston/whisaid-zh-grl](https://huggingface.co/walston/whisaid-zh-grl) | Mandarin accent classifier and accent encoder |
-| Joycent | [walston/joycent](https://huggingface.co/walston/joycent) | Joycent acoustic checkpoint |
-| Joycent vocoder | [walston/joycent-vocoder](https://huggingface.co/walston/joycent-vocoder) | ParallelWaveGAN checkpoint and configuration |
-| CosyVoice3 SG | [walston/cosyvoice3-sg](https://huggingface.co/walston/cosyvoice3-sg) | SG-only fine-tuned `llm.pt` |
-| CosyVoice3 base | [FunAudioLLM/Fun-CosyVoice3-0.5B-2512](https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512) | Official tokenizer, Flow, HiFT, and auxiliary files |
 
 ## WhisAID
 
@@ -230,17 +177,4 @@ Parts of this repository are adapted from the following open-source projects:
 - [Grad-TTS](https://github.com/huawei-noah/Speech-Backbones/tree/main/Grad-TTS)
   from [Speech-Backbones](https://github.com/huawei-noah/Speech-Backbones)
 
-## Citation
-
-Please cite our work if you find it useful:
-
-```bibtex
-@misc{wang2026joycentdiffusionbasedaccenttts,
-      title={Joycent: Diffusion-based Accent TTS without Accented Phone Prediction},
-      author={Xintong Wang and Ye Wang},
-      year={2026},
-      eprint={2606.16417},
-      archivePrefix={arXiv},
-      primaryClass={cs.SD},
-}
 ```
