@@ -31,9 +31,7 @@ cd ../../..
 
 ## WhisAID
 
-WhisAID identifies Mandarin accents and extracts accent embeddings. The
-released Chinese checkpoint supports **12 accent labels**.
-
+ 
 ### Data
 
 WhisAID training and evaluation filelists are generated locally from the
