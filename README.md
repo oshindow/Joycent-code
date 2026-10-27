@@ -157,5 +157,4 @@ Parts of this repository are adapted from the following open-source projects:
 - [Whisper](https://github.com/openai/whisper)
 - [Grad-TTS](https://github.com/huawei-noah/Speech-Backbones/tree/main/Grad-TTS)
   from [Speech-Backbones](https://github.com/huawei-noah/Speech-Backbones)
-
-```
+ 
