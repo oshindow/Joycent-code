@@ -64,16 +64,9 @@ relative to `--data-root`. Dataset-specific formatting scripts used for this
 conversion contain local filesystem and licensing assumptions, so keep them
 outside the published repository.
 
-### Fine-Tuning
+ 
 
-Set `DATA_ROOT` and the training options at the top of `run_whisAID.sh`, then
-run:
-
-```bash
-bash run_whisAID.sh
-```
-
-### Evaluation
+### Inference
 
 Set `DATA_ROOT` and `TARGET_REFERENCE_AUDIO` at the top of
 `infer_whisAID.sh`, then run:
@@ -144,14 +137,7 @@ ignored as `joycent/lengths.json`, or set `JOYCENT_LENGTHS_PATH` to another
 local JSON file. Local data formatting and statistics scripts should remain in
 your working copy only and should not be pushed.
 
-### Training
-
-Configure the paths and hyperparameters at the top of `run_joycent.sh`, then
-run:
-
-```bash
-bash run_joycent.sh
-```
+ 
 
 ### Inference
 
@@ -164,10 +150,7 @@ bash infer_joycent.sh
 For Joycent, select local or Hugging Face acoustic and vocoder checkpoints with
 `MODEL_SOURCE` and `VOCODER_SOURCE`. The released checkpoints are stored in
 `walston/joycent` and `walston/joycent-vocoder`.
-
-For CosyVoice3, the script loads the official
-`FunAudioLLM/Fun-CosyVoice3-0.5B-2512` base model and replaces its `llm.pt`
-with the SG-only checkpoint from `walston/cosyvoice3-sg`.
+ 
 
 ## Acknowledgements
 
