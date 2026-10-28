@@ -23,6 +23,8 @@ def build_whisaid(args, device):
         checkpoint_repo_id=args.checkpoint_repo_id,
         checkpoint_filename=args.checkpoint_filename,
         checkpoint_revision=args.checkpoint_revision,
+        n_accents=args.n_accents,
+        n_speakers=args.n_speakers,
         n_mels=args.n_mels,
     )
     model = AutoModel.from_config(config)
@@ -82,9 +84,11 @@ def parse_args():
     parser.add_argument("--data-root", "--data_root", default="")
     parser.add_argument("--output-dir-name", "--output_dir_name", default="feat_acc_grl_030326")
     parser.add_argument("--checkpoint-path", "--checkpoint_path", default="")
-    parser.add_argument("--checkpoint-repo-id", "--checkpoint_repo_id", default="walston/whisaid-zh-grl")
-    parser.add_argument("--checkpoint-filename", "--checkpoint_filename", default="checkpoint-epoch=0006.ckpt")
+    parser.add_argument("--checkpoint-repo-id", "--checkpoint_repo_id", default="walston/whisaid-medium-grl")
+    parser.add_argument("--checkpoint-filename", "--checkpoint_filename", default="checkpoint-epoch=0009.ckpt")
     parser.add_argument("--checkpoint-revision", "--checkpoint_revision", default=None)
+    parser.add_argument("--n-accents", "--n_accents", type=int, default=9)
+    parser.add_argument("--n-speakers", "--n_speakers", type=int, default=336)
     parser.add_argument("--n-mels", "--n_mels", type=int, default=80)
     parser.add_argument("--batch-size", "--batch_size", type=int, default=16)
     parser.add_argument("--device", default="cuda:0" if torch.cuda.is_available() else "cpu")

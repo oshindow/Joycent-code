@@ -23,6 +23,9 @@ from joycent.text import text_to_sequence_zh, zhdict
 from joycent.utils import intersperse, write_hdf5
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
 SEEN_SPEAKERS = {
     "SSB1828": "aishell3/train/wav_16k/SSB1828/SSB18280143.wav",
     "G0001": (
@@ -271,7 +274,12 @@ def parse_custom_reference(value, index):
 
 def resolve_reference(path, data_root):
     path = os.path.expanduser(path)
-    if os.path.isabs(path) or not data_root:
+    if os.path.isabs(path) or os.path.exists(path):
+        return path
+    repo_path = REPO_ROOT / path
+    if repo_path.exists():
+        return str(repo_path)
+    if not data_root:
         return path
     return os.path.join(os.path.expanduser(data_root), path)
 

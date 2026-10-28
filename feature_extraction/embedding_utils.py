@@ -33,7 +33,11 @@ def make_embedding_path(wav_path, output_dir_name, keep_wav_suffix=False):
     elif "prompt_acc" in wav_path:
         path = wav_path.replace("prompt_acc", output_dir_name)
     else:
-        raise ValueError(f"Cannot infer embedding path from wav path: {wav_path}")
+        path = os.path.join(
+            os.path.dirname(wav_path),
+            output_dir_name,
+            os.path.basename(wav_path),
+        )
 
     if keep_wav_suffix:
         return path + ".npy"

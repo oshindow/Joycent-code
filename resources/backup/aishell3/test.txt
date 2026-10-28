@@ -1,4 +1,0 @@
-aishell3/test/wav_16k/SSB0863/SSB08630099.wav|sil m a3 j i2 j ve2 d e5 uu ui2 vv ve1 b u2 t ai4 h ao3 sil|107|0
-aishell3/test/wav_16k/SSB0693/SSB06930020.wav|sil m a3 j i2 j ve2 d e5 uu ui2 vv ve1 b u2 t ai4 h ao3 sil|107|0
-aishell3/test/wav_16k/SSB1340/SSB13400036.wav|sil m a3 j i2 j ve2 d e5 uu ui2 vv ve1 b u2 t ai4 h ao3 sil|107|0
-aishell3/test/wav_16k/SSB0623/SSB06230059.wav|sil m a3 j i2 j ve2 d e5 uu ui2 vv ve1 b u2 t ai4 h ao3 sil|107|0

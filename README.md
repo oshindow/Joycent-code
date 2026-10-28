@@ -13,6 +13,7 @@ conda create -n joycent python=3.10 -y
 conda activate joycent
 pip install -r requirements.txt
 pip install pytorch-lightning==2.4.0 --no-deps
+python3 -m pip install "setuptools<81"
 ```
 
 Initialize the third-party submodules:
@@ -29,125 +30,46 @@ python setup.py build_ext --inplace
 cd ../../..
 ```
 
+## Pretrained Models
+
+| Component | Hugging Face repository | Files used for inference |
+| --- | --- | --- |
+| WhisAID accent encoder | [`walston/whisaid-medium-grl`](https://huggingface.co/walston/whisaid-medium-grl) | `checkpoint-epoch=0009.ckpt` |
+| Joycent acoustic model | [`walston/joycent-medium-grl`](https://huggingface.co/walston/joycent-medium-grl) | `grad_100.pt` |
+| ParallelWaveGAN vocoder | [`walston/joycent-vocoder`](https://huggingface.co/walston/joycent-vocoder) | `checkpoint-50000steps.pkl`, `config.yml` |
+
 ## WhisAID
-
  
-### Data
-
-WhisAID training and evaluation filelists are generated locally from the
-licensed source datasets and are not distributed in this repository. Keep them
-under an ignored path such as `resources/whisAID/zh_all/` or point the scripts
-to another local path. Each row contains:
-
-```text
-relative_wav_path|speaker_id|accent_id
-```
-
-The wav path is resolved against `--data-root`, keeping the CSV files
-machine-independent:
-
-```text
---data-root /path/to/data
-/path/to/data/
-  aishell3/
-  magichub_multiaccent/
-    magichub_singapore/
-    ...
-```
-
-To regenerate the local filelists, normalize each source dataset to 16 kHz wav
-files, assign stable speaker IDs and accent IDs, split utterances by speaker
-into train/seen-test/unseen-test subsets, and write the rows above with paths
-relative to `--data-root`. Dataset-specific formatting scripts used for this
-conversion contain local filesystem and licensing assumptions, so keep them
-outside the published repository.
-
- 
-
 ### Inference
 
-Set `DATA_ROOT` and `TARGET_REFERENCE_AUDIO` at the top of
-`infer_whisAID.sh`, then run:
-
 ```bash
-bash infer_whisAID.sh
+PYTHONPATH=. python3 feature_extraction/dump_acc_embeddings.py \
+  --filelist-path resources/inference/filelist.txt \
+  --checkpoint-repo-id walston/whisaid-medium-grl \
+  --output-dir-name feat_acc_grl_030326
 ```
 
-The script reports classification metrics and the accent similarity between
-each test utterance and the target reference audio.
-
-### Accent Embeddings
-
-```python
-import torch
-from transformers import AutoModel
-from whisper import load_audio, log_mel_spectrogram, pad_or_trim
-from whisAID import WhisAIDConfig
-
-model = AutoModel.from_config(
-    WhisAIDConfig(checkpoint_repo_id="walston/whisaid-zh-grl")
-).cuda().eval()
-
-audio = torch.from_numpy(load_audio("/path/to/audio.wav"))
-mel = log_mel_spectrogram(
-    pad_or_trim(audio),
-    n_mels=model.config.n_mels,
-).unsqueeze(0).cuda()
-
-with torch.no_grad():
-    output = model(input_ids=mel)
-
-accent_embedding = output.features[0].cpu().numpy()
-accent_id = output.logits.argmax(dim=-1).item()
-```
 
 ## Joycent
 
-### Data And Features
-
-Joycent training filelists are also local generated artifacts and are ignored by
-Git. The default scripts expect them under `resources/Joycent/zh_all/`, but you
-can set another local path at the top of `run_joycent.sh`. Each row contains
-four fields:
-
-```text
-relative_wav_path|phoneme_sequence|speaker_id|accent_id
-```
-
-The wav path is resolved against `--data-root`. Before training, extract the
-FACodec speaker embeddings and WhisAID accent embeddings:
-
-```bash
-bash feature_extraction/extract_feature.sh
-```
-
-Configure `DATA_ROOT`, `FILELIST`, GPU settings, and `STAGE` at the top of the
-script. Use `STAGE=spk` or `STAGE=acc` to extract only one feature type.
-
-Speaker embeddings are stored under `facodec_spk`, while accent embeddings are
-stored under `feat_acc_grl_030326`.
-
-The Joycent filelists are produced from the same licensed audio roots after
-text normalization, phoneme conversion, speaker/accent ID assignment, and
-train/validation splitting. The bucket sampler also uses a local generated
-length cache. Generate it from the local Joycent training filelist and keep it
-ignored as `joycent/lengths.json`, or set `JOYCENT_LENGTHS_PATH` to another
-local JSON file. Local data formatting and statistics scripts should remain in
-your working copy only and should not be pushed.
-
- 
 
 ### Inference
 
-Set `MODEL=joycent` or `MODEL=cosyvoice` at the top of `infer_joycent.sh`:
-
 ```bash
-bash infer_joycent.sh
+PYTHONPATH=. python3 joycent/inference_joycent.py \
+  --acoustic-repo-id walston/joycent-medium-grl \
+  --acoustic-filename grad_100.pt \
+  --vocoder-repo-id walston/joycent-vocoder \
+  --vocoder-filename checkpoint-50000steps.pkl \
+  --vocoder-config-filename config.yml \
+  --inference-list resources/inference/joycent_infer_list.jsonl \
+  --n-timesteps 10 \
+  --temperature 1.5 \
+  --length-scale 0.91 \
+  --n-spks 393 \
+  --n-accents 9 \
+  --output-dir outputs/joycent
 ```
-
-For Joycent, select local or Hugging Face acoustic and vocoder checkpoints with
-`MODEL_SOURCE` and `VOCODER_SOURCE`. The released checkpoints are stored in
-`walston/joycent` and `walston/joycent-vocoder`.
  
 
 ## Acknowledgements

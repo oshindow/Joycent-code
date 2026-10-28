@@ -1,0 +1,3 @@
+resources/inference/acc_ref/A0002_S0003_0_G0003_G0004_1071.23_1077.28.wav
+resources/inference/acc_ref/A0001_S003_0_G0001_segment_0101.wav
+resources/inference/acc_ref/G0054_S0142.wav
